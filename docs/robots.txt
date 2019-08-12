@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://pages.github.com/sitemap.xml
-Host: https://pages.github.com
+Sitemap: https://luispichio.github.io/sitemap.xml
+Host: https://luispichio.github.io
