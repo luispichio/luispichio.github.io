@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://luispichio.github.io/sitemap.xml
-Host: https://luispichio.github.io
