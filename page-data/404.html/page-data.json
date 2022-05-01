@@ -1,1 +1,5 @@
-{"componentChunkName":"component---src-pages-404-js","path":"/404.html","webpackCompilationHash":"1a12e6e0fae0126ee062","result":{"pageContext":{"isCreatedByStatefulCreatePages":true}}}
+{
+    "componentChunkName": "component---src-pages-404-js",
+    "path": "/404.html",
+    "result": {"pageContext":{}},
+    "staticQueryHashes": ["3115057458"]}
