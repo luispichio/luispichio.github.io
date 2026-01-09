@@ -12,3 +12,5 @@ node_modules/
 vendor
 .idea
 .venv
+_posts.old/
+_projects.old/

@@ -1,13 +1,26 @@
 ---
 layout: page
-title: projects
+title: Proyectos
 permalink: /projects/
 description: A growing collection of your cool projects.
 nav: true
 nav_order: 3
-display_categories: [work, fun]
+display_categories: [featured, work, opensource, fun, old]
 horizontal: false
 ---
+
+<div class="tag-category-list">
+  <ul class="p-0 m-0">
+  {% for category in page.display_categories %}
+    <li>
+      <i class="fa-solid fa-tag fa-sm"></i> <a href="{{ category | slugify | prepend: '/projects/#' | relative_url }}">{{ category }}</a>
+    </li>
+    {% unless forloop.last %}
+      <p>&bull;</p>
+    {% endunless %}
+  {% endfor %}
+  </ul>
+</div>
 
 <!-- pages/projects.md -->
 <div class="projects">
