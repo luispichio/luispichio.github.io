@@ -6,7 +6,7 @@ description: A growing collection of your cool projects.
 nav: true
 nav_order: 3
 display_categories: [featured, work, opensource, fun, old]
-horizontal: false
+horizontal: true
 ---
 
 <div class="tag-category-list">
