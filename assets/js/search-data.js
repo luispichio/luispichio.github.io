@@ -151,27 +151,47 @@ ninja.data = [{
           title: 'Nuevo año -&amp;gt; Nueva web',
           description: "",
           section: "News",handler: () => {
-              window.location.href = "/news/announcement_1/";
+              window.location.href = "/news/new_year_new_web/";
             },},{id: "projects-coriolis",
           title: 'Coriolis',
           description: "Caudalímetro másico de efecto coriolis Sistemas Industriales S.A. Q2/2011 - Q1/2014",
           section: "Projects",handler: () => {
               window.location.href = "/projects/coriolis/";
+            },},{id: "projects-pig",
+          title: 'PIG',
+          description: "Telesupervisión de efluentes pluviales / industriales Sistemas Industriales S.A. Q1/2017 - Q1/2018",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/pig/";
             },},{id: "projects-processing-service",
           title: 'Processing Service',
           description: "Servicio de analítica de borde para Orbcomm IDP/ST Twindimension Q1/2021 - Actualidad",
           section: "Projects",handler: () => {
               window.location.href = "/projects/processing_service/";
+            },},{id: "projects-ptag",
+          title: 'PTAG',
+          description: "Planta de tratamiento de aguas grises Sistemas Industriales S.A. Q4/2015 - Q1/2016",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ptag/";
             },},{id: "projects-mi-430",
           title: 'MI-430',
-          description: "Caudalímetro electromagnético Sistemas Industriales S.A. q4/2006 - q1/2016",
+          description: "Caudalímetro electromagnético Sistemas Industriales S.A. Q4/2006 - Q1/2016",
           section: "Projects",handler: () => {
               window.location.href = "/projects/q7/";
+            },},{id: "projects-ric",
+          title: 'RIC',
+          description: "Sistema de Telecontrol GRPS Tesacom S.A. Q4/2010 - Q2/2012",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ric/";
             },},{id: "projects-t-wizard",
           title: 'T.Wizard',
           description: "Aplicación de configuración para terminales Orbcomm IDP/ST Twindimension Q1/2023 - Actualidad",
           section: "Projects",handler: () => {
               window.location.href = "/projects/t_wizard/";
+            },},{id: "projects-plataforma-iot",
+          title: 'Plataforma IoT',
+          description: "Plataforma de telemetría (front / back-end común) Sistemas Industriales S.A. Q2/2018 - Q4/2020",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/telemetry/";
             },},{id: "projects-vantar",
           title: 'Vantar',
           description: "Vehículo aereo no tripulado Grupo Euro S.A. q2/2017 - q3/2020",
