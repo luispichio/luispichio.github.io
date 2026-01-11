@@ -5,45 +5,47 @@ nav_order: 2
 permalink: /skills/
 title: Skills
 description: Estas son algunas de las habilidades que he adquirido en mis años de experiencia
-tabs: true
+tabs: false
 ---
 
-### Core Skills
+### Competencias clave
+- Real-world testbeds: Design & deployment
+- Cloud-Native: Architectures, tools & application design
+- Large-scale trials: Prototyping, deployment & evaluation
+- Networking: OSI Layers 2-7 & wireless standards
+- AI/ML: ML/FL/GenAI, MLOps, Predictive Analytics
+- Software: Diseño y desarrollo, cliclo de vida.
+- 5G & Beyond, V2X & IoT systems and standards
+- Investigación y desarrolloo
+- Bid Writing (Horizon & UK National)
+- Liderazgo técnico y gestión de equipos
 
-Real-world testbeds: Design & deployment
-Cloud-Native: Architectures, tools & application design
-Large-scale trials: Prototyping, deployment & evaluation
-Networking: OSI Layers 2-7 & wireless standards
-AI/ML: ML/FL/GenAI, MLOps, Predictive Analytics
-Software: Life-cycle, engineering & development
-5G & Beyond, V2X & IoT systems and standards
-R&D: Experience on both Research & Development
-Bid Writing (Horizon & UK National)
-Technical Leadership & Team Management
+### Competencias técnicas
+#### Informática
+- Programación: C / C++, C# (.NET, Mono), Bash, Python, LUA, Java
+    - Web: HTML, CSS, Javascript, Typescript
+        - Frameworks: React.js, Vite.js, Express.js
+    - Maven, Gradle, NPM, NuGet, ...
+- Bases de datos: MongoDB, MySQL, MsSQL, PostgreSQL
+- Virtualización: Docker, Proxmox, OpenStack, Google Cloud Platform (GCP).
+- ?: Amazon Web Services (AWS), Digital Ocean.
+- Automatización: Kubernetes (K8s, K3s, MicroK8s), Docker Compose, Serverless (OpenFaas), Vagrant, Ansible.
+- Monitoreo: Grafana, Prometheus, Elastic, Kibana.
+- Redes: 
+    - LPWAN: WiFi, Sigfox, LoRa/LoRaWAN, LTE-M, NB-IoT, Zigbee, Bluetooth/BLE
+    - Protocolos IoT: MQTT, CoAP, QMQP, HTTP
+    - VPN: OpenVPN, Wireguard
+    - Herramientas: HAProxy, NginX, Wireshark/Tcpdump, Nmap
+- Productividad: Git (Gitlab, Github), Jira (Scrum, Kanban), Trello, MS Office, CI/CD pipelines (TravisCI, Jenkins)
+- Protocolos de campo: Modbus, DNP3, OPC, ANSI C12, DLMS, IEC 101/103/104, Hart
+- Radio: GNU Radio
+- CAD: OpenSCAD, Rhinoceros
+- OS: Linux (Debian, Ubuntu, Fedora, ...), Microsoft Windows.
 
-### Technical Skills
-
-Virtualisation: Docker, Proxmox, OpenStack, Google Cloud Platform (GCP), Amazon Web Services (AWS).
-Automation: Kubernetes (K8s, K3s, MicroK8s), Docker Compose, Serverless (OpenFaas), Vagrant, Ansible.
-Programming: C, C++, MATLAB, Bash, Python, PHP, Java
-Web Programming: HTML, CSS, Javascript, Typescript
-Databases: MongoDB, MySQL, PostgreSQL, InfluxDB, IBM DB2, Redis.
-Networking: HAProxy, NginX, Wireshark/Tcpdump, Iperf3, OpenVPN, DHCP, DNS, FTP, LDAP, Nmap.
-Monitoring: Grafana, Prometheus, Elastic, Kibana, Fluentd/FluentBit.
-Productivity: Git, Jira (Scrum, Kanban), Trello, LaTex, MS Office, CI/CD pipelines (TravisCI, Jenkins).
-SDRs: National Instrument’s LabVIEW, GNU Radio.
-Simulators: OMNeT++ (including Veins), SUMO, NS-2, NS-3, OPNET.
-OSs: Linux-based Distributions (including kernel and driver programming), OS X, MS Windows.
-Video/Image: Adobe software suite (After Effects, Photoshop and Premiere), GIMP, OmniGraffle.
-Protocolos: Modbus. DNP3, IEC 10x, MQTT, Hart
-
-### Old
-
-Programming: Pascal, PHP
-
-5G & 6G Network Technologies: Open5GS, Amarisoft, UERANSIM, OpenAirInterface, O-RAN, Network Slicing & Orchestration, Intent-driven Networking
-Cloud & Virtualization: Kubernetes, Docker, OpenStack, Proxmox, LXC
-DevOps & Automation: Helm, Ansible, Jenkins, Juju, Bash, Git
-Programming:Python, Go, Java, JavaScript, Bash/ZSH
-Open-source Development
-Linux and Security
+#### Electrónica
+- Filtros analógicos / digitales
+- Fuentes switching
+- Display's LCD / TFT Color / OLED
+- Controladores: Expressif ESP32, Raspberry RP2040/2350, Nordic nRF, ...
+    - Antiguos: Motorola HC08, Atmel AVR/Xmega/UC3, Texas MSP430
+- Esquemáticos y PCB: OrCAD, KiCad, Proteus, ...

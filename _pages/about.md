@@ -24,10 +24,10 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-## Diseño, desarrollo (y fabrico) cosas.
+### Diseño, desarrollo (y fabrico) cosas.
 
-#### Soy un desarrollador electrónico y programador (+20 años de experiencia) con base en 25 de Mayo, Buenos Aires, Argentina.
+##### Soy un desarrollador electrónico y programador (+20 años de experiencia) con base en 25 de Mayo, Buenos Aires, Argentina.
 
-#### Me especializo en diseño y desarrollo de plataformas y hardware de instrumentación, control y adquisición de datos para la industria.
+##### Me especializo en diseño y desarrollo de plataformas y hardware de instrumentación, control y adquisición de datos para la industria.
 
-#### Actualmente trabajo en [TwinDimension](https://www.tesacom.net/twindimension) como Desarrollador Fullstack IoT.
+##### Actualmente trabajo en [TwinDimension](https://www.tesacom.net/twindimension) como Desarrollador Fullstack IoT.

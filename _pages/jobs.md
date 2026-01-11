@@ -11,15 +11,16 @@ tabs: true
 ## Desarrollador Fullstack IoT
 #### TwinDimension (unidad de negocios de Tesacom S.A.)
 ##### 1/2023 - Actualidad
-#### https://www.twindimension.com/
+#### [https://www.twindimension.com/](https://www.twindimension.com/)
 #### Remoto | Capital Federal - Buenos Aires - Argentina
 
 ### Tareas
-- Diseño y desarrollo de microservicios de ingesta (intermedio entre dispositivos de borde y bases de datos)
-- Diseño y desarrollo de soluciones para dispositivos de borde (Orbcomm IDP / ST)
-- Diseño y desarrollo de hardware + firmware IoT
-- Soporte a de delivery (implementaciones) y preventa
-- Capacitaciones internas / externas
+- Diseño y desarrollo de microservicios de ingesta (intermedio entre dispositivos de borde y bases de datos).
+- Diseño y desarrollo de soluciones para dispositivos de borde (Orbcomm IDP / ST).
+- Diseño y desarrollo de hardware + firmware IoT.
+- Soporte a de delivery (implementaciones) y preventa.
+- Capacitaciones internas / externas.
+- Despliegue, monitoreo y mantenimiento de soluciones de ingesta.
 
 ### Proyectos
 - T.Platform: Plataforma IIoT
@@ -30,31 +31,36 @@ tabs: true
 - T.Wizard: Plataforma de configuración de terminales Orbcomm IDP / ST
 - Herramientas de diagnóstico y configuración (back-office)
   - Protocol Analizer (analizador de protocolos)
-  - 
+  -  
 
 ## Líder de área | Microservicios de ingesta | Software de embebidos
 #### Tesacom S.A.
 ##### 11/2020 - 1/2023
-#### https://www.tesacom.net/
+#### [https://www.tesacom.net/](https://www.tesacom.net/)
 #### Remoto | Capital Federal - Buenos Aires - Argentina
 
 ### Tareas
-- Diseño y desarrollo de microservicios de ingesta (intermedio entre dispositivos de borde y bases de datos)
-- Diseño y desarrollo de soluciones para dispositivos de borde (Orbcomm IDP / ST)
-- Soporte a de delivery (implementaciones) y preventa
-- Capacitaciones internas / externas"
+- Diseño y desarrollo de microservicios de ingesta (intermedio entre dispositivos de borde y bases de datos).
+- Diseño y desarrollo de soluciones para dispositivos de borde (Orbcomm IDP / ST).
+- Diseño y desarrollo de hardware + firmware IoT.
+- Soporte a de delivery (implementaciones) y preventa.
+- Capacitaciones internas / externas.
+- Despliegue, monitoreo y mantenimiento de soluciones de ingesta.
 
 ### Proyectos
 - Microservicio de ingesta para reconectadores (protocolos DNP3, Modbus, OPA-UA)
 - ProcessingService
+  - Servicio de analítica de borde para Orbcomm IDP / ST (satelital)
+  - Microservicio de procesamiento / ingesta
 - Servicio de analítica de borde para Orbcomm IDP / ST (satelital)
 - Microservicio de procesamiento / ingesta
-- Herramientas de diagnóstico y configuración
+- Herramientas de diagnóstico y configuración (back-office)
+  - Protocol Analizer (analizador de protocolos)
 
 ## Socio responsable
 #### L2M Ingeniería
 ##### 4/2008 - 1/2013
-#### http://l2m-ingenieria.com.ar
+#### [http://l2m-ingenieria.com.ar](http://l2m-ingenieria.com.ar)
 #### La Plata - Buenos Aires - Argentina
 ### Tareas
 - Diseño, especificación y producción de hardware / software
@@ -68,7 +74,7 @@ tabs: true
 ## Líder de área | Diseño electrónico
 #### Sistemas Industriales S.A.
 ##### 5/2003 - 11/2020
-#### https://www.tesacom.net/
+#### [https://www.sistemasindustriales.com](https://www.sistemasindustriales.com)
 #### La Plata - Buenos Aires - Argentina
 
 ### Tareas
