@@ -6,7 +6,7 @@ description: >
     Sistemas Industriales S.A.<br>
     Q4/2015 - Q1/2016
 img: assets/projects/ptag/1.jpg
-importance: 2
+importance: 3
 category: old
 giscus_comments: false
 images:

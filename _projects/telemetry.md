@@ -2,11 +2,11 @@
 layout: page
 title: Plataforma IoT
 description: >
-    Plataforma de telemetría (front / back-end común)<br>
+    Plataforma de IoT<br>
     Sistemas Industriales S.A.<br>
     Q2/2018 - Q4/2020
 img: assets/projects/telemetry/1.png
-importance: 2
+importance: 3
 category: old
 giscus_comments: false
 images:
@@ -24,6 +24,9 @@ images:
 
 ## Clientes
 - Parque Industrial Gualeguaychú
+- Confort Cinco S.A.
+- Grupo Euro S.A.
+- ...
 
 ## Características
 - Generación y notificación de evetos / alarmas
@@ -36,6 +39,8 @@ images:
 ## Skills
 - React.js
 - MySQL
+- Protocolos IoT: MQTT, HTTP
+- 
 
 ## Estado del Proyecto
 - Desarrollo finalizado

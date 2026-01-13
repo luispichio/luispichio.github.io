@@ -6,7 +6,7 @@ description: >
     Sistemas Industriales S.A.<br>
     Q1/2017 - Q1/2018
 img: assets/projects/pig/1.png
-importance: 2
+importance: 3
 category: old
 giscus_comments: false
 images:
