@@ -9,16 +9,12 @@ tabs: false
 ---
 
 ### Competencias clave
-- Real-world testbeds: Design & deployment
-- Cloud-Native: Architectures, tools & application design
-- Large-scale trials: Prototyping, deployment & evaluation
-- Networking: OSI Layers 2-7 & wireless standards
-- AI/ML: ML/FL/GenAI, MLOps, Predictive Analytics
-- Software: Diseño y desarrollo, cliclo de vida.
-- 5G & Beyond, V2X & IoT systems and standards
-- Investigación y desarrolloo
-- Bid Writing (Horizon & UK National)
-- Liderazgo técnico y gestión de equipos
+- Investigación y Desarrollo
+- Software: Diseño y desarrollo, ciclo de vida.
+- Especificaciones técnicas, documentación de producto, propuestas comerciales
+- Liderazgo Técnico / Gestión de equipos
+- Cloud-Native: Arquitecturas, herramientas y diseño de aplicaciones.
+- Hardware: Diseño, desarrollo y producción
 
 ### Competencias técnicas
 #### Informática
@@ -38,7 +34,7 @@ tabs: false
     - Herramientas: HAProxy, NginX, Wireshark/Tcpdump, Nmap
 - Productividad: Git (Gitlab, Github), Jira (Scrum, Kanban), Trello, MS Office, CI/CD pipelines (TravisCI, Jenkins)
 - Protocolos de campo: Modbus, DNP3, OPC, ANSI C12, DLMS, IEC 101/103/104, Hart
-- Radio: GNU Radio
+- Radio: GNU Radio, Modelado de antenas
 - CAD: OpenSCAD, Rhinoceros
 - OS: Linux (Debian, Ubuntu, Fedora, ...), Microsoft Windows.
 
@@ -46,6 +42,9 @@ tabs: false
 - Filtros analógicos / digitales
 - Fuentes switching
 - Display's LCD / TFT Color / OLED
-- Controladores: Expressif ESP32, Raspberry RP2040/2350, Nordic nRF, ...
+- Controladores: Expressif ESP32, Raspberry RP2040/2350, Nordic nRF, STM32, ...
     - Antiguos: Motorola HC08, Atmel AVR/Xmega/UC3, Texas MSP430
 - Esquemáticos y PCB: OrCAD, KiCad, Proteus, ...
+- Instrumentación
+- Lazos de control
+- Buses de campo: CAN, RS-232, RS-485, 4-20mA
