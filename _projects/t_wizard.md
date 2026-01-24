@@ -16,7 +16,7 @@ images:
 ## Description
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        T.WIZARD is a web-based tool to configure ORBCOMM terminals through guided forms. It supports both core services (native to ORBCOMM) and user-developed services included in the device package. Users can version and document changes, then deploy them to one or multiple terminals. Each configuration is fully auditable, enabling visibility and control over field devices with speed, consistency, and no advanced technical knowledge.
+        T.WIZARD es una herramienta basada en web para configurar terminales ORBCOMM a través de formularios guiados. Soporta tanto servicios principales (nativos de ORBCOMM) como servicios desarrollados por el usuario incluidos en el paquete del dispositivo. Los usuarios pueden versionar y documentar cambios, y luego desplegarlos a uno o múltiples terminales. Cada configuración es totalmente auditable, permitiendo visibilidad y control sobre los dispositivos de campo con rapidez, consistencia y sin necesidad de conocimientos técnicos avanzados.
     </div>
     <div class="col-sm mt-3 mt-md-0">
         {% include figure.liquid loading="eager" path="assets/projects/twizard/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
@@ -24,11 +24,11 @@ images:
 </div>
 
 ## Características
-- No Deep ORBCOMM Expertise Needed: Configure services without coding or advanced knowledge of ORBCOMM's ecosystem.
-- Faster Time-to-Deploy: Apply settings to multiple terminals at once, saving time on large rollouts.
-- Error Reduction: Prevent misconfigurations with validation and standardized templates.
-- Full Gateway Integration: Automatically generates .idpmsg files to sync with ORBCOMM portals.
-- Scalable & Secure: Manage multiple gateways, versions, and devices with full traceability.
+- No se requiere experiencia profunda en ORBCOMM: Configure servicios sin programar ni conocimientos avanzados del ecosistema de ORBCOMM.
+- Despliegue más rápido: Aplique configuraciones a múltiples terminales a la vez, ahorrando tiempo en grandes implementaciones.
+- Reducción de errores: Evite configuraciones incorrectas con validaciones y plantillas estandarizadas.
+- Integración completa con Gateway: Genera automáticamente archivos .idpmsg para sincronizar con portales ORBCOMM.
+- Escalable y seguro: Gestione múltiples gateways, versiones y dispositivos con trazabilidad completa.
 
 ## Empresa
 - [https://www.twindimension.com/](https://www.twindimension.com/)
@@ -54,7 +54,7 @@ images:
 ## Estado del Proyecto
 - Desarrollo finalizado
 
-### Referencias
+## Referencias
 - [T.Wizard - SKYWAVE Marketplace](https://vd-skywawe-staging.webflow.io/marketplace/t-wizard---simplified-configuration-for-orbcomm-iot-terminals)
 - [Processing Services - SKYWAVE Marketplace](https://vd-skywawe-staging.webflow.io/marketplace/processing-services---edge-intelligence-for-orbcomm-iot-terminals)
 - [IsatData Pro](https://www.orbcomm.com/en/partners/connectivity/satellite/isatdata-pro)

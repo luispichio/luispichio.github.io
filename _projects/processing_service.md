@@ -11,11 +11,18 @@ category: featured
 giscus_comments: false
 ---
 
-## Características
-Processing Services is embedded software running on ORBCOMM terminals (ST/IDP series).
-It collects data from sources like Modbus, J1939, EIO or AVL Agent, processes it locally using configurable logic, statistics and transformations, and generates optimized output.
-Reports are efficiently sent via satellite or cellular, minimizing bandwidth usage.
-Processing Services also handles alarms, events, and LINs, enabling reliable, traceable, and autonomous edge intelligence for remote IoT deployments.
+## Description
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+      Processing Services es un software embebido que se ejecuta en terminales ORBCOMM (serie ST/IDP).
+      Recopila datos de fuentes como Modbus, J1939, EIO o AVL Agent, los procesa localmente utilizando lógica configurable, estadísticas y transformaciones, y genera una salida optimizada.
+      Los informes se envían de manera eficiente vía satélite o celular, minimizando el uso de ancho de banda.
+      Processing Services también maneja alarmas, eventos y LINs, permitiendo una inteligencia en el borde confiable, trazable y autónoma para despliegues IoT remotos.
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+      {% include figure.liquid loading="eager" path="assets/projects/twizard/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 ## Empresa
 - [https://www.twindimension.com/](https://www.twindimension.com/)
