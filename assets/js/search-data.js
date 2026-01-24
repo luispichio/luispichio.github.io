@@ -152,6 +152,11 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/new_year_new_web/";
+            },},{id: "projects-beacon-ble",
+          title: 'Beacon BLE',
+          description: "Baliza BLE multipropósito Twindimension Q4/2025 - Actualidad",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/beacon_ble/";
             },},{id: "projects-coriolis",
           title: 'Coriolis',
           description: "Caudalímetro másico de efecto coriolis Sistemas Industriales S.A. Q2/2011 - Q1/2014",
@@ -182,6 +187,11 @@ ninja.data = [{
           description: "Sistema de Telecontrol GRPS Tesacom S.A. Q4/2010 - Q2/2012",
           section: "Projects",handler: () => {
               window.location.href = "/projects/ric/";
+            },},{id: "projects-sct-600",
+          title: 'SCT-600',
+          description: "Control de temperatura múltiple Sistemas Industriales S.A. Q2/2016",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/sct600/";
             },},{id: "projects-t-wizard",
           title: 'T.Wizard',
           description: "Aplicación de configuración para terminales Orbcomm IDP/ST Twindimension Q1/2023 - Actualidad",
@@ -189,9 +199,14 @@ ninja.data = [{
               window.location.href = "/projects/t_wizard/";
             },},{id: "projects-plataforma-iot",
           title: 'Plataforma IoT',
-          description: "Plataforma de telemetría (front / back-end común) Sistemas Industriales S.A. Q2/2018 - Q4/2020",
+          description: "Plataforma de IoT Sistemas Industriales S.A. Q2/2018 - Q4/2020",
           section: "Projects",handler: () => {
               window.location.href = "/projects/telemetry/";
+            },},{id: "projects-mnd-txp-500",
+          title: 'MND/TXP-500',
+          description: "Manómetro / Transmisor de presión Sistemas Industriales S.A. Q4/2014",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/txpmnd/";
             },},{id: "projects-vantar",
           title: 'Vantar',
           description: "Vehículo aereo no tripulado Grupo Euro S.A. q2/2017 - q3/2020",
