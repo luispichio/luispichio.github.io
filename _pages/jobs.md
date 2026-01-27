@@ -31,7 +31,7 @@ tabs: true
 - T.Wizard: Plataforma de configuración de terminales Orbcomm IDP / ST
 - Herramientas de diagnóstico y configuración (back-office)
   - Protocol Analizer (analizador de protocolos)
-  -  
+- Beacon BLE | Baliza BLE multipropósito
 
 ## Líder de área | Microservicios de ingesta | Software de embebidos
 #### Tesacom S.A.
@@ -55,7 +55,7 @@ tabs: true
 - Servicio de analítica de borde para Orbcomm IDP / ST (satelital)
 - Microservicio de procesamiento / ingesta
 - Herramientas de diagnóstico y configuración (back-office)
-  - Protocol Analizer (analizador de protocolos)
+- Protocol Analizer (analizador de protocolos)
 
 ## Socio responsable
 #### L2M Ingeniería
@@ -86,9 +86,11 @@ tabs: true
 ### Proyectos
 - Caudalímetro electromagnético / Medición de dosificaciones / Bajo consumo
 - Caudalímetro ultrasónico de tiempo de tránsito
+- Caudalímetro másico de efecto coriolis
+- Manómetros y transmisores de presión
 - Medidor de porcentaje de crudo
 - Sistema de dosificación de productos químicos para la Industria
 - Banco de calibración para caudalímetros electromagnéticos
 - VANTAR: Vehículo no tripulado para aplicación de agroquímicos
 - EuroCerco: Electrificador de cercos para defensa perimetral + Aplicación de Android
-- Telemetría: Planta de tratamientos de aguas, Traqueo de vehículos, Cercos perimetrales, etc
+- Plataforma IoT: Planta de tratamientos de aguas, Traqueo de vehículos, Cercos perimetrales, etc
