@@ -162,6 +162,11 @@ ninja.data = [{
           description: "Caudalímetro másico de efecto coriolis Sistemas Industriales S.A. Q2/2011 - Q1/2014",
           section: "Projects",handler: () => {
               window.location.href = "/projects/coriolis/";
+            },},{id: "projects-tt-data-microservicios-de-ingesta-dataops",
+          title: 'TT.Data - Microservicios de ingesta (Dataops)',
+          description: "Microservicios de ingesta de T.Data: Plataforma de IoT de Twindimension Twindimension Q1/2023 - Actualidad",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ingest_ms/";
             },},{id: "projects-pig",
           title: 'PIG',
           description: "Telesupervisión de efluentes pluviales / industriales Sistemas Industriales S.A. Q1/2017 - Q1/2018",
