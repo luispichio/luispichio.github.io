@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Proyectos | Luis Pichio">
+  <div class="page-shell">
+    <p class="eyebrow">Portfolio</p>
+    <h1>Proyectos</h1>
+    <p class="prose">Una seleccion de desarrollos de hardware, firmware, software industrial, instrumentacion, IoT y herramientas tecnicas.</p>
+    <div class="project-grid" style="margin-top: 28px;">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </div>
+</BaseLayout>

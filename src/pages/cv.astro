@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile, jobs } from '../data/profile';
+import { keySkills, skillGroups } from '../data/skills';
+---
+
+<BaseLayout title="CV | Luis Pichio">
+  <div class="page-shell">
+    <p class="eyebrow">Curriculum Vitae</p>
+    <h1>{profile.name}</h1>
+    <p class="prose">{profile.role} | {profile.location}</p>
+    <div class="actions" style="margin: 22px 0;">
+      <a class="button primary" href={profile.resume}>Descargar PDF</a>
+      {profile.socials.map((social) => <a class="button" href={social.href}>{social.label}</a>)}
+    </div>
+
+    <section id="experiencia">
+      <div class="section-title"><h2>Experiencia</h2></div>
+      {jobs.map((job) => (
+        <article class="job">
+          <p class="eyebrow">{job.period} | {job.place}</p>
+          <h3>{job.role}</h3>
+          <p><a href={job.url}>{job.company}</a></p>
+          <h4>Tareas</h4>
+          <ul>{job.tasks.map((task) => <li>{task}</li>)}</ul>
+          <h4>Proyectos</h4>
+          <ul>{job.projects.map((project) => <li>{project}</li>)}</ul>
+        </article>
+      ))}
+    </section>
+
+    <section id="skills">
+      <div class="section-title"><h2>Skills clave</h2></div>
+      <div class="grid">
+        {keySkills.map((skill) => <div class="card"><h3>{skill.name}</h3><p>{skill.experience} | {skill.level}</p></div>)}
+      </div>
+      <div class="section-title" style="margin-top: 36px;"><h2>Skills tecnicas</h2></div>
+      <div class="skills-list">
+        {Object.entries(skillGroups).map(([group, skills]) => (
+          <div class="skill-group"><h3>{group}</h3><ul>{skills.map((skill) => <li>{skill.name} · {skill.experience} · {skill.level}</li>)}</ul></div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

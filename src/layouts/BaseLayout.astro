@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+
+const { title = profile.name, description = profile.summary } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Luis Pichio</a>
+      <nav aria-label="Principal">
+        <a href="/#experiencia">Experiencia</a>
+        <a href="/#skills">Skills</a>
+        <a href="/projects/">Proyectos</a>
+        <a href="/cv/">CV</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Portfolio estatico, editable en Markdown, desplegable en GitHub Pages.</p>
+      <div class="footer-links">
+        {profile.socials.map((social) => <a href={social.href}>{social.label}</a>)}
+      </div>
+    </footer>
+  </body>
+</html>

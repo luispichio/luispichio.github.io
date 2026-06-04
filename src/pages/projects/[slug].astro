@@ -1,0 +1,29 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { slug: project.id.replace(/\.md$/, '') }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout title={`${project.data.title} | Luis Pichio`} description={project.data.description}>
+  <article class="page-shell">
+    <p class="eyebrow">{project.data.company} {project.data.date ? `| ${project.data.date}` : ''}</p>
+    <h1>{project.data.title}</h1>
+    <p class="prose">{project.data.description}</p>
+    <div class="tags" style="margin: 18px 0;">
+      {project.data.tags.map((tag) => <span>{tag}</span>)}
+    </div>
+    {project.data.cover && <img class="portrait" src={project.data.cover} alt="" />}
+    <div class="prose"><Content /></div>
+    {project.data.external && <p><a class="button" href={project.data.external}>Referencia externa</a></p>}
+    {project.data.images.length > 0 && (
+      <div class="gallery">{project.data.images.map((image) => <img src={image} alt="" loading="lazy" />)}</div>
+    )}
+  </article>
+</BaseLayout>

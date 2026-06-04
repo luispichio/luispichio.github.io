@@ -1,0 +1,15 @@
+---
+const { project } = Astro.props;
+---
+
+<article class="project-card">
+  {project.data.cover && <img src={project.data.cover} alt="" loading="lazy" />}
+  <div>
+    <p class="eyebrow">{project.data.company} {project.data.date ? `| ${project.data.date}` : ''}</p>
+    <h3><a href={`/projects/${project.id.replace(/\.md$/, '')}/`}>{project.data.title}</a></h3>
+    <p>{project.data.description}</p>
+    <div class="tags">
+      {project.data.tags.map((tag) => <span>{tag}</span>)}
+    </div>
+  </div>
+</article>

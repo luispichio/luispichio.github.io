@@ -1,17 +1,68 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { profile, jobs } from '../data/profile';
+import { keySkills, skillGroups } from '../data/skills';
 
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .filter((project) => project.data.featured)
+  .slice(0, 6);
+const visibleSkillGroups = Object.entries(skillGroups).slice(0, 10);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Luis Pichio | Portfolio IoT, firmware y hardware">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">{profile.role} | {profile.location}</p>
+      <h1>{profile.intro}</h1>
+      <p>{profile.summary}</p>
+      <div class="actions">
+        <a class="button primary" href={profile.resume}>Descargar CV</a>
+        <a class="button" href="/projects/">Ver proyectos</a>
+        <a class="button" href={`mailto:${profile.email}`}>Contactar</a>
+      </div>
+    </div>
+    <div class="portrait"><img src={profile.image} alt="Foto de Luis Pichio" /></div>
+  </section>
+
+  <section>
+    <div class="grid">
+      {profile.focus.map((item) => <div class="card"><p class="eyebrow">Foco</p><h3>{item}</h3></div>)}
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <div class="section-title"><h2>Experiencia</h2><a class="button" href="/cv/">CV completo</a></div>
+    {jobs.map((job) => (
+      <article class="job">
+        <p class="eyebrow">{job.period} | {job.place}</p>
+        <h3>{job.role}</h3>
+        <p><a href={job.url}>{job.company}</a>{job.detail ? ` - ${job.detail}` : ''}</p>
+        <ul>{job.tasks.map((task) => <li>{task}</li>)}</ul>
+      </article>
+    ))}
+  </section>
+
+  <section id="skills">
+    <div class="section-title"><h2>Skills</h2><p class="eyebrow">CSV editable</p></div>
+    <div class="grid">
+      {keySkills.map((skill) => (
+        <div class="card"><h3>{skill.name}</h3><p>{skill.experience} | {skill.level}</p></div>
+      ))}
+    </div>
+    <div class="skills-list" style="margin-top: 18px;">
+      {visibleSkillGroups.map(([group, skills]) => (
+        <div class="skill-group"><h3>{group}</h3><ul>{skills.slice(0, 8).map((skill) => <li>{skill.name} · {skill.level}</li>)}</ul></div>
+      ))}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title"><h2>Proyectos destacados</h2><a class="button" href="/projects/">Todos los proyectos</a></div>
+    <div class="project-grid">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+</BaseLayout>

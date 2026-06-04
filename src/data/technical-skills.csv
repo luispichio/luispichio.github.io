@@ -1,0 +1,130 @@
+category,group,name,experience,level
+Programación,Lenguaje,C / C++,+25 años,Experto
+Programación,Lenguaje,"C# (.NET, Mono)",+10 años,Experto
+Programación,Lenguaje,Python,+10 años,Experto
+Programación,Lenguaje,Lua,+5 años,Experto
+Programación,Lenguaje,Java,+10 años,Experto
+Programación,Lenguaje,Bash,+3 años,Intermedio
+Programación,Lenguaje,Pascal/Freepascal/Delphi,+20 años,Experto
+Informática,Desarrollo Web,HTML,+20 años,Avanzado
+Informática,Desarrollo Web,CSS,+10 años,Avanzado
+Programación,Lenguaje,JavaScript,+20 años,Experto
+Programación,Lenguaje,TypeScript,+5 años,Avanzado
+Programación,Framework,React.js,+5 años,Avanzado
+Programación,Framework,Vite.js,+2 años,Intermedio
+Programación,Framework,Express.js,+5 años,Experto
+Informática,Gestión de Paquetes,Maven,+5 años,Avanzado
+Informática,Gestión de Paquetes,Gradle,+5 años,Avanzado
+Informática,Gestión de Paquetes,npm,+5 años,Avanzado
+Informática,Gestión de Paquetes,NuGet,+5 años,Avanzado
+Informática,Bases de datos,MongoDB,+5 años,Avanzado
+Informática,Bases de datos,MySQL,+10 años,Avanzado
+Informática,Bases de datos,Microsoft SQL Server,+10 años,Avanzado
+Informática,Bases de datos,PostgreSQL,+5 años,Avanzado
+Informática,Virtualización,Docker,+2 años,Avanzado
+Informática,Virtualización,VirtualBox,+10 años,Experto
+Informática,Virtualización,Libvirt,+2 años,Intermedio
+Informática,Virtualización,QEMU,+2 años,Intermedio
+Informática,Virtualización,KVM,+2 años,Intermedio
+Informática,Cloud,Amazon Web Services (AWS),+2 años,Intermedio
+Informática,Cloud,DigitalOcean,+2 años,Intermedio
+Informática,Automatización,"Kubernetes (K8s, K3s, MicroK8s)","<1 años",Básico
+Informática,Automatización,Docker Compose,+2 años,Intermedio
+Informática,Automatización,N8N,+1 años,Intermedio
+Informática,Monitoreo,Grafana,+3 años,Avanzado
+Informática,Monitoreo,Prometheus,+3 años,Avanzado
+Informática,Monitoreo,Elastic,+1 años,Intermedio
+Informática,Monitoreo,Kibana,+1 años,Intermedio
+Redes,Inalámbricas,WiFi,+20 años,Experto
+Redes,Inalámbricas,Sigfox,+2 años,Intermedio
+Redes,Inalámbricas,LoRa / LoRaWAN,+5 años,Experto
+Redes,Inalámbricas,LTE-M,+5 años,Experto
+Redes,Inalámbricas,NB-IoT,+5 años,Experto
+Redes,Inalámbricas,Zigbee,+5 años,Experto
+Redes,Inalámbricas,Bluetooth / BLE,+5 años,Experto
+Redes,Satelital,Iridium,+5 años,Experto
+Redes,Satelital,Starlink,+1 años,Avanzado
+Redes,Satelital,Inmarsat,+5 años,Experto
+Redes,Satelital,Myriota,+1 años,Intermedio
+Redes,Protocolos IoT,MQTT,+5 años,Experto
+Redes,Protocolos IoT,CoAP,+2 años,Avanzado
+Redes,Protocolos IoT,AMQP,+2 años,Avanzado
+Redes,Protocolos IoT,HTTP,+20 años,Experto
+Redes,VPN,OpenVPN,+2 años,Avanzado
+Redes,VPN,WireGuard,+2 años,Avanzado
+Redes,Herramientas,HAProxy,+2 años,Avanzado
+Redes,Herramientas,Nginx,+2 años,Avanzado
+Redes,Herramientas,Wireshark / Tcpdump,+10 años,Experto
+Redes,Herramientas,Nmap,+2 años,Avanzado
+Informática,DevOps,"Git (GitLab, GitHub)",+6 años,Avanzado
+Informática,DevOps,"CI/CD pipelines (TravisCI, Jenkins)",+2 años,Intermedio
+Informática,Gestión de Proyectos,"Jira (Scrum, Kanban)",+2 años,Intermedio
+Informática,IDEs,Visual Studio,+5 años,Experto
+Informática,IDEs,Visual Studio Code,+5 años,Experto
+Informática,IDEs,Qt Creator,+3 años,Avanzado
+Informática,IDEs,Android Studio,+5 años,Experto
+Informática,IDEs,Antigravity,"<1 años",Intermedio
+Redes,Protocolos de campo,Modbus,+20 años,Experto
+Redes,Protocolos de campo,DNP3,+5 años,Avanzado
+Redes,Protocolos de campo,OPC,+5 años,Avanzado
+Redes,Protocolos de campo,ANSI C12,+2 años,Intermedio
+Redes,Protocolos de campo,DLMS,+2 años,Intermedio
+Redes,Protocolos de campo,IEC 101/103/104,+5 años,Avanzado
+Redes,Protocolos de campo,Hart,+20 años,Experto
+Redes,Protocolos de campo,J1939,+5 años,Avanzado
+Informática,Sistemas Operativos,"Linux (Debian, Ubuntu, Fedora, ...)",+15 años,Experto
+Informática,Sistemas Operativos,Microsoft Windows,+30 años,Experto
+Electrónica,Analógico/Digital,Filtros analógicos / digitales,+15 años,Experto
+Electrónica,Analógico/Digital,Fuentes switching,+15 años,Experto
+Electrónica,Displays,LCD / TFT Color / OLED,+15 años,Experto
+Electrónica,Microcontroladores,Espressif ESP32,+5 años,Experto
+Electrónica,Microcontroladores,Raspberry RP2040/2350,+3 años,Experto
+Electrónica,Microcontroladores,Nordic nRF,+1 años,Intermedio
+Electrónica,Microcontroladores,STM32,+2 años,Intermedio
+Electrónica,Microcontroladores (Legacy),Motorola HC08,+10 años,Experto
+Electrónica,Microcontroladores (Legacy),Atmel AVR / Xmega / UC3,+15 años,Experto
+Electrónica,Microcontroladores (Legacy),Texas MSP430,+3 años,Intermedio
+Informática,RTOS,FreeRTOS,+5 años,Experto
+Informática,RTOS,Zephyr,+2 años,Intermedio
+Informática,RTOS,NuttX,+2 años,Intermedio
+Informática,RTOS,Mbed,+2 años,Intermedio
+Electrónica,PCB,OrCAD,+15 años,Experto
+Electrónica,PCB,KiCad,+5 años,Experto
+Electrónica,PCB,Altium,+2 años,Intermedio
+Electrónica,PCB,Proteus,+15 años,Experto
+Informática,CAD,OpenSCAD,+5 años,Experto
+Informática,CAD,Fusion 360,+2 años,Intermedio
+Informática,CAD,AutoCAD,+5 años,Básico
+Informática,CAD,Rhinoceros,+5 años,Intermedio
+Redes,Buses de campo,CAN,+5 años,Experto
+Redes,Buses de campo,RS-232,+20 años,Experto
+Redes,Buses de campo,RS-485,+20 años,Experto
+Redes,Buses de campo,4-20mA,+20 años,Experto
+Redes,Buses de campo,Fieldbus,+2 años,Intermedio
+Redes,Buses de campo,Profibus,+2 años,Intermedio
+Electrónica,Instrumentación Industrial,Industrial y Control,+10 años,Experto
+Electrónica,Instrumentación de Laboratorio,Osciloscopios,+20 años,Experto
+Electrónica,Instrumentación de Laboratorio,Analizadores de espectro,+5 años,Avanzado
+Electrónica,Instrumentación de Laboratorio,Generadores de funciones,+10 años,Experto
+Electrónica,Instrumentación de Laboratorio,Multímetros,+20 años,Experto
+Electrónica,Instrumentación de Laboratorio,SDR,+5 años,Avanzado
+Electrónica,Antenas / RF,"Diseño, modelado, medición (GNU Radio, MMANA-GAL)",+5 años,Avanzado
+Informática,LLM,Antigravity,"<1 años",Intermedio
+Informática,LLM,Claude / Gemini / ChatGPT / Grok,+1 años,Intermedio
+Informática,LLM,Ollama / LM Studio,+1 años,Intermedio
+Informática,LLM,OpenAI API,+1 años,Intermedio
+Informática,Ingeniería de Software,Arquitectura de Software,+10 años,Avanzado
+Informática,Ingeniería de Software,Diseño de APIs,+10 años,Avanzado
+Informática,Ingeniería de Software,Spec Driven Development (SDD),+1 años,Intermedio
+Informática,Testing,Unit Testing,+10 años,Avanzado
+Informática,Testing,Integration Testing,+5 años,Avanzado
+Informática,Testing,Hardware-in-the-loop (HIL),+5 años,Avanzado
+Informática,Seguridad,TLS / certificados / PKI,+5 años,Avanzado
+Informática,Seguridad,Hardening Linux,+5 años,Avanzado
+Informática,Almacenamiento,SSD / NVMe,+5 años,Avanzado
+Informática,Almacenamiento,RAID / NAS / Backups,+5 años,Avanzado
+Electrónica,Embedded,Bring-up de hardware,+10 años,Experto
+Electrónica,Embedded,Debug JTAG / SWD,+5 años,Avanzado
+Electrónica,Embedded,Bootloaders / OTA,+5 años,Avanzado
+Electrónica,Protocolos,I2C / SPI / UART,+15 años,Experto
+Electrónica,Protocolos,USB,+5 años,Avanzado
