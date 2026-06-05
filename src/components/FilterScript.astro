@@ -1,0 +1,55 @@
+<script is:inline>
+  document.querySelectorAll('[data-filter-group]').forEach((group) => {
+    const buttons = group.querySelectorAll('[data-filter]');
+    const target = group.getAttribute('data-filter-group');
+    const mode = group.getAttribute('data-filter-mode') || 'single';
+    const items = document.querySelectorAll(`[data-filter-target="${target}"] .filter-item`);
+
+    function applyFilters() {
+      const activeFilters = Array.from(buttons)
+        .filter((button) => button.classList.contains('active'))
+        .map((button) => button.getAttribute('data-filter'))
+        .filter((filter) => filter && filter !== 'todos');
+
+      items.forEach((item) => {
+        const tags = (item.getAttribute('data-tags') || '').split(/\s+/).filter(Boolean);
+        const category = item.getAttribute('data-category') || '';
+        const values = new Set([...tags, category]);
+        const show = activeFilters.length === 0 || activeFilters.some((filter) => values.has(filter));
+        item.hidden = !show;
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        const allButton = group.querySelector('[data-filter="todos"]');
+
+        if (filter === 'todos') {
+          buttons.forEach((item) => item.classList.remove('active'));
+          button.classList.add('active');
+          applyFilters();
+          return;
+        }
+
+        if (mode === 'multi') {
+          allButton?.classList.remove('active');
+          button.classList.toggle('active');
+
+          const hasActiveFilter = Array.from(buttons).some(
+            (item) => item.getAttribute('data-filter') !== 'todos' && item.classList.contains('active'),
+          );
+
+          if (!hasActiveFilter) {
+            allButton?.classList.add('active');
+          }
+        } else {
+          buttons.forEach((item) => item.classList.remove('active'));
+          button.classList.add('active');
+        }
+
+        applyFilters();
+      });
+    });
+  });
+</script>

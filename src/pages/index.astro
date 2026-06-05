@@ -2,14 +2,14 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import SkillCloud from '../components/SkillCloud.astro';
 import { profile, jobs } from '../data/profile';
-import { keySkills, skillGroups } from '../data/skills';
+import { keySkills } from '../data/skills';
 
 const projects = (await getCollection('projects'))
   .sort((a, b) => a.data.order - b.data.order)
   .filter((project) => project.data.featured)
   .slice(0, 6);
-const visibleSkillGroups = Object.entries(skillGroups).slice(0, 10);
 ---
 
 <BaseLayout title="Luis Pichio | Portfolio IoT, firmware y hardware">
@@ -28,8 +28,9 @@ const visibleSkillGroups = Object.entries(skillGroups).slice(0, 10);
   </section>
 
   <section>
-    <div class="grid">
-      {profile.focus.map((item) => <div class="card"><p class="eyebrow">Foco</p><h3>{item}</h3></div>)}
+    <div class="section-title"><h2>Lo que conecto</h2><p class="eyebrow">De la placa al cloud</p></div>
+    <div class="focus-grid">
+      {profile.focusAreas.map((item) => <div class="focus-card"><h3>{item.title}</h3><p>{item.summary}</p></div>)}
     </div>
   </section>
 
@@ -52,11 +53,7 @@ const visibleSkillGroups = Object.entries(skillGroups).slice(0, 10);
         <div class="card"><h3>{skill.name}</h3><p>{skill.experience} | {skill.level}</p></div>
       ))}
     </div>
-    <div class="skills-list" style="margin-top: 18px;">
-      {visibleSkillGroups.map(([group, skills]) => (
-        <div class="skill-group"><h3>{group}</h3><ul>{skills.slice(0, 8).map((skill) => <li>{skill.name} · {skill.level}</li>)}</ul></div>
-      ))}
-    </div>
+    <SkillCloud />
   </section>
 
   <section>

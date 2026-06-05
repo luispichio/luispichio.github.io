@@ -1,0 +1,36 @@
+---
+import FilterScript from './FilterScript.astro';
+import { technicalSkills } from '../data/skills';
+
+const categories = ['todos', ...Array.from(new Set(technicalSkills.map((skill) => skill.category))).sort((a, b) => a.localeCompare(b, 'es'))];
+const sortedSkills = [...technicalSkills].sort((a, b) => a.name.localeCompare(b.name, 'es'));
+
+function experienceWeight(experience: string) {
+  const value = Number(experience.match(/\d+/)?.[0] ?? 1);
+  if (value >= 20) return 5;
+  if (value >= 15) return 4;
+  if (value >= 10) return 3;
+  if (value >= 5) return 2;
+  return 1;
+}
+---
+
+<div class="filter-bar" data-filter-group="skills" data-filter-mode="single">
+  {categories.map((category) => <button class:list={["filter-button", { active: category === 'todos' }]} data-filter={category}>{category}</button>)}
+</div>
+
+<div class="skill-cloud" data-filter-target="skills">
+  {sortedSkills.map((skill) => (
+    <span
+      class={`skill-chip filter-item level-${skill.level.toLowerCase()}`}
+      data-category={skill.category}
+      data-tags={skill.category}
+      data-weight={experienceWeight(skill.experience)}
+      title={`${skill.group} | ${skill.experience} | ${skill.level}`}
+    >
+      {skill.name}
+    </span>
+  ))}
+</div>
+
+<FilterScript />

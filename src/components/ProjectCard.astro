@@ -2,12 +2,13 @@
 const { project } = Astro.props;
 ---
 
-<article class="project-card">
+<article class="project-card filter-item" data-tags={project.data.tags.join(' ')}>
   {project.data.cover && <img src={project.data.cover} alt="" loading="lazy" />}
   <div>
     <p class="eyebrow">{project.data.company} {project.data.date ? `| ${project.data.date}` : ''}</p>
     <h3><a href={`/projects/${project.id.replace(/\.md$/, '')}/`}>{project.data.title}</a></h3>
     <p>{project.data.description}</p>
+    {project.data.featured && <strong class="featured-mark">Destacado</strong>}
     <div class="tags">
       {project.data.tags.map((tag) => <span>{tag}</span>)}
     </div>

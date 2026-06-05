@@ -8,12 +8,30 @@ export const profile = {
   intro: 'Diseño, desarrollo y fabrico cosas.',
   summary:
     'Desarrollador electronico y programador con mas de 20 anos de experiencia. Me especializo en plataformas IoT/IIoT, hardware de instrumentacion, firmware, control y adquisicion de datos para la industria.',
-  focus: ['IIoT', 'Firmware', 'Hardware', 'Microservicios', 'Instrumentacion', 'Edge computing'],
+  focusAreas: [
+    {
+      title: 'Hardware + firmware',
+      summary: 'Diseno electronico, bring-up, firmware embebido, RTOS, buses de campo y produccion.',
+    },
+    {
+      title: 'IoT / IIoT',
+      summary: 'Telemetria, edge computing, conectividad satelital/celular y protocolos industriales.',
+    },
+    {
+      title: 'Software industrial',
+      summary: 'Microservicios, APIs, frontend, monitoreo, herramientas de diagnostico y despliegue.',
+    },
+    {
+      title: 'Instrumentacion',
+      summary: 'Medicion, control, adquisicion de datos, sensores, ensayos y bancos de calibracion.',
+    },
+  ],
   socials: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/luispichio' },
     { label: 'GitHub', href: 'https://github.com/luispichio' },
     { label: 'Blog', href: 'https://luispichio.blogspot.com' },
     { label: 'Email', href: 'mailto:luispichio@gmail.com' },
+    { label: 'Radio', href: 'http://qsl.net/lw6dio' },
   ],
 };
 
