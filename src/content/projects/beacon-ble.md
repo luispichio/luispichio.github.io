@@ -10,11 +10,42 @@ featured: true
 order: 4
 ---
 
-Proyecto de hardware y firmware para una baliza BLE multiproposito, orientada a integracion con plataformas IoT.
+## Description
+- Baliza BLE multipropósito con acelerómetro, entradas analógicas y control de carga.
+- Diseñada para aplicaciones de IoT industrial, permite monitoreo de vibraciones (mantenimiento predictivo), medición de marcha (RPM), carga de baterías, medición de variables externas (vía transductor externo), etc.
+- Alimentación externa o a batería interna, bajo consumo energético y un gabinete IP67.
+
+## Características
+- BLE 5.2
+- Acelerómetro (32kHz) | Detección de movimiento, medición y análisis de vibraciones.
+- Batería de litio + control de carga.
+- Entradas analógicas 4-20mA / 0-20mA / 0-5V / 0-10V (transductores externos)
+- Bajo consumo (control de alimentación de periféricos)
+- Gabinete IP67
+
+## Aplicaciones
+- Monitoreo de carga de batería en Autolevadores.
+- Medición de marcha (RPM) por vibraciónes.
+- Detección de anomalías por vibraciónes (mantenimiento predictivo).
+- Medición de variables externas (ej: temperatura, humedad, presión, etc.) vía transductores externos.
+- Posicionamiento (triangulación)
+
+## Empresa
+- [https://www.twindimension.com/](https://www.twindimension.com/)
+- [https://www.tesacom.net/](https://www.tesacom.net/)
 
 ## Tareas
+- Especificación Técnica.
+- Diseño y desarrollo de hardware / software.
 
-- Investigacion y desarrollo.
-- Diseno de hardware.
-- Desarrollo de firmware.
-- Despliegue, soporte y monitoreo.
+## Tecnologías / skills
+- Nordic nRF52 + nRF Connect SDK
+- BLE 5.2
+- C / C++
+- KiCad
+
+## Estado del Proyecto
+- Desarrollo en curso
+
+### Referencias
+> ToDo

@@ -6,7 +6,7 @@ date: "Q2/2018 - Q4/2020"
 cover: "/assets/projects/telemetry/1.png"
 images: ["/assets/projects/telemetry/1.png", "/assets/projects/telemetry/2.png", "/assets/projects/telemetry/3.png", "/assets/projects/telemetry/4.png", "/assets/projects/telemetry/5.png", "/assets/projects/telemetry/6.png", "/assets/projects/telemetry/7.png"]
 tags: ["iot", "react", "mysql", "mqtt", "industrial"]
-featured: true
+featured: false
 order: 5
 ---
 

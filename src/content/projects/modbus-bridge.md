@@ -4,7 +4,7 @@ description: "Firmware embebido para WIZnet/RP2040 que implementa una pasarela c
 company: "TwinDimension"
 date: "Q2/2026"
 tags: ["firmware", "modbus", "industrial", "rp2040", "ethernet"]
-featured: true
+featured: false
 order: 1
 ---
 
@@ -26,4 +26,3 @@ Modbus Bridge esta orientado a integracion industrial, diagnostico de comunicaci
 - Arduino Core para RP2040.
 - WIZnet W55RP20 / Ethernet cableada.
 - Modbus TCP / RTU.
-- EEPROM, CRC16, shell remoto y scripts de build.
