@@ -1,0 +1,112 @@
+---
+import ProjectCard from './ProjectCard.astro';
+
+const { projects } = Astro.props;
+
+const categoryLabels = {
+  todos: 'Todos',
+  featured: 'Destacados',
+  small_things: 'Herramientas',
+  tools: 'Herramientas',
+  old: 'Historicos',
+  industrial: 'Industrial',
+  general: 'General',
+};
+
+const categories = ['todos', ...Array.from(new Set(projects.map((project) => project.data.category ?? 'general'))).sort()];
+const tags = ['todos', ...Array.from(new Set(projects.flatMap((project) => project.data.tags))).sort((a, b) => a.localeCompare(b, 'es'))];
+---
+
+<div class="filter-panel" data-project-filters>
+  <div>
+    <p class="filter-label">Categoria</p>
+    <div class="filter-bar compact" data-project-categories>
+      {categories.map((category) => (
+        <button class:list={["filter-button", { active: category === 'todos' }]} data-category-filter={category}>
+          {categoryLabels[category] ?? category}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <div>
+    <p class="filter-label">Tags</p>
+    <div class="filter-bar compact" data-project-tags>
+      {tags.map((tag) => <button class:list={["filter-button", { active: tag === 'todos' }]} data-tag-filter={tag}>{tag}</button>)}
+    </div>
+  </div>
+</div>
+
+<div class="project-grid" data-project-list style="margin-top: 28px;">
+  {projects.map((project) => <ProjectCard project={project} />)}
+</div>
+
+<script is:inline>
+  const panel = document.querySelector('[data-project-filters]');
+  const list = document.querySelector('[data-project-list]');
+
+  if (panel && list) {
+    const categoryButtons = panel.querySelectorAll('[data-category-filter]');
+    const tagButtons = panel.querySelectorAll('[data-tag-filter]');
+    const items = list.querySelectorAll('.filter-item');
+
+    function activeCategory() {
+      return panel.querySelector('[data-category-filter].active')?.getAttribute('data-category-filter') || 'todos';
+    }
+
+    function activeTags() {
+      return Array.from(tagButtons)
+        .filter((button) => button.classList.contains('active'))
+        .map((button) => button.getAttribute('data-tag-filter'))
+        .filter((tag) => tag && tag !== 'todos');
+    }
+
+    function applyFilters() {
+      const category = activeCategory();
+      const tags = activeTags();
+
+      items.forEach((item) => {
+        const itemCategory = item.getAttribute('data-category') || 'general';
+        const itemTags = (item.getAttribute('data-tags') || '').split(/\s+/).filter(Boolean);
+        const matchesCategory = category === 'todos' || itemCategory === category;
+        const matchesTags = tags.length === 0 || tags.some((tag) => itemTags.includes(tag));
+        item.hidden = !(matchesCategory && matchesTags);
+      });
+    }
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        categoryButtons.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        applyFilters();
+      });
+    });
+
+    tagButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-tag-filter');
+        const allButton = panel.querySelector('[data-tag-filter="todos"]');
+
+        if (filter === 'todos') {
+          tagButtons.forEach((item) => item.classList.remove('active'));
+          button.classList.add('active');
+          applyFilters();
+          return;
+        }
+
+        allButton?.classList.remove('active');
+        button.classList.toggle('active');
+
+        const hasActiveTag = Array.from(tagButtons).some(
+          (item) => item.getAttribute('data-tag-filter') !== 'todos' && item.classList.contains('active'),
+        );
+
+        if (!hasActiveTag) {
+          allButton?.classList.add('active');
+        }
+
+        applyFilters();
+      });
+    });
+  }
+</script>

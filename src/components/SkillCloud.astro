@@ -1,8 +1,8 @@
 ---
-import FilterScript from './FilterScript.astro';
 import { technicalSkills } from '../data/skills';
 
 const categories = ['todos', ...Array.from(new Set(technicalSkills.map((skill) => skill.category))).sort((a, b) => a.localeCompare(b, 'es'))];
+const groups = Array.from(new Set(technicalSkills.map((skill) => `${skill.category}::${skill.group}`))).sort((a, b) => a.localeCompare(b, 'es'));
 const sortedSkills = [...technicalSkills].sort((a, b) => a.name.localeCompare(b.name, 'es'));
 
 function experienceWeight(experience: string) {
@@ -15,16 +15,32 @@ function experienceWeight(experience: string) {
 }
 ---
 
-<div class="filter-bar" data-filter-group="skills" data-filter-mode="single">
-  {categories.map((category) => <button class:list={["filter-button", { active: category === 'todos' }]} data-filter={category}>{category}</button>)}
+<div class="filter-panel" data-skill-filters>
+  <div>
+    <p class="filter-label">Categoria</p>
+    <div class="filter-bar compact" data-skill-categories>
+      {categories.map((category) => <button class:list={["filter-button", { active: category === 'todos' }]} data-skill-category={category}>{category}</button>)}
+    </div>
+  </div>
+
+  <div>
+    <p class="filter-label">Sub-categoria</p>
+    <div class="filter-bar compact" data-skill-groups>
+      <button class="filter-button active" data-skill-group="todos" data-parent-category="todos">Todas</button>
+      {groups.map((entry) => {
+        const [category, group] = entry.split('::');
+        return <button class="filter-button" data-skill-group={group} data-parent-category={category} hidden>{group}</button>;
+      })}
+    </div>
+  </div>
 </div>
 
-<div class="skill-cloud" data-filter-target="skills">
+<div class="skill-cloud" data-skill-list>
   {sortedSkills.map((skill) => (
     <span
       class={`skill-chip filter-item level-${skill.level.toLowerCase()}`}
       data-category={skill.category}
-      data-tags={skill.category}
+      data-group={skill.group}
       data-weight={experienceWeight(skill.experience)}
       title={`${skill.group} | ${skill.experience} | ${skill.level}`}
     >
@@ -33,4 +49,65 @@ function experienceWeight(experience: string) {
   ))}
 </div>
 
-<FilterScript />
+<script is:inline>
+  const skillPanel = document.querySelector('[data-skill-filters]');
+  const skillList = document.querySelector('[data-skill-list]');
+
+  if (skillPanel && skillList) {
+    const categoryButtons = skillPanel.querySelectorAll('[data-skill-category]');
+    const groupButtons = skillPanel.querySelectorAll('[data-skill-group]');
+    const skills = skillList.querySelectorAll('.filter-item');
+
+    function selectedCategory() {
+      return skillPanel.querySelector('[data-skill-category].active')?.getAttribute('data-skill-category') || 'todos';
+    }
+
+    function selectedGroup() {
+      return skillPanel.querySelector('[data-skill-group].active')?.getAttribute('data-skill-group') || 'todos';
+    }
+
+    function updateGroups() {
+      const category = selectedCategory();
+
+      groupButtons.forEach((button) => {
+        const parent = button.getAttribute('data-parent-category');
+        const isAll = button.getAttribute('data-skill-group') === 'todos';
+        button.hidden = !isAll && (category === 'todos' || parent !== category);
+      });
+
+      groupButtons.forEach((button) => button.classList.remove('active'));
+      skillPanel.querySelector('[data-skill-group="todos"]')?.classList.add('active');
+    }
+
+    function applySkillFilters() {
+      const category = selectedCategory();
+      const group = selectedGroup();
+
+      skills.forEach((skill) => {
+        const matchesCategory = category === 'todos' || skill.getAttribute('data-category') === category;
+        const matchesGroup = group === 'todos' || skill.getAttribute('data-group') === group;
+        skill.hidden = !(matchesCategory && matchesGroup);
+      });
+    }
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        categoryButtons.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        updateGroups();
+        applySkillFilters();
+      });
+    });
+
+    groupButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.hidden) return;
+        groupButtons.forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        applySkillFilters();
+      });
+    });
+
+    updateGroups();
+  }
+</script>

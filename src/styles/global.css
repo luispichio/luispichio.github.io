@@ -146,12 +146,42 @@ section { padding: 42px 0; }
 .project-card > div { padding: 18px; }
 .project-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--panel-2); }
 .featured-mark { display: inline-block; color: var(--accent); font-size: 0.82rem; margin-bottom: 12px; }
+.category-badge {
+  display: inline-block;
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  border-radius: 999px;
+  color: var(--accent-2);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  padding: 4px 9px;
+  text-transform: uppercase;
+}
 
 .skills-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .skill-group h3 { margin-top: 0; }
 .skill-group ul { margin: 0; padding-left: 18px; color: var(--muted); }
 
+.filter-panel {
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(13, 32, 40, 0.56);
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 18px;
+}
+.filter-label {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
 .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
+.filter-bar.compact { margin: 0; }
 .filter-button {
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -163,6 +193,7 @@ section { padding: 42px 0; }
   text-transform: capitalize;
 }
 .filter-button.active { background: rgba(45, 212, 191, 0.16); border-color: var(--accent); color: var(--accent-3); }
+.filter-button[hidden] { display: none; }
 
 .skill-cloud {
   display: flex;

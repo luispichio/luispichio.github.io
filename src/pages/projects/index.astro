@@ -1,11 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
-import FilterScript from '../../components/FilterScript.astro';
+import ProjectFilters from '../../components/ProjectFilters.astro';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
-const tags = ['todos', ...Array.from(new Set(projects.flatMap((project) => project.data.tags))).sort()];
 ---
 
 <BaseLayout title="Proyectos | Luis Pichio">
@@ -13,12 +11,6 @@ const tags = ['todos', ...Array.from(new Set(projects.flatMap((project) => proje
     <p class="eyebrow">Portfolio</p>
     <h1>Proyectos</h1>
     <p class="prose">Una seleccion de desarrollos de hardware, firmware, software industrial, instrumentacion, IoT y herramientas tecnicas.</p>
-    <div class="filter-bar" data-filter-group="projects" data-filter-mode="multi">
-      {tags.map((tag) => <button class:list={["filter-button", { active: tag === 'todos' }]} data-filter={tag}>{tag}</button>)}
-    </div>
-    <div class="project-grid" data-filter-target="projects" style="margin-top: 28px;">
-      {projects.map((project) => <ProjectCard project={project} />)}
-    </div>
-    <FilterScript />
+    <ProjectFilters projects={projects} />
   </div>
 </BaseLayout>
