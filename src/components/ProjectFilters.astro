@@ -8,7 +8,7 @@ const categoryLabels = {
   featured: 'Destacados',
   small_things: 'Herramientas',
   tools: 'Herramientas',
-  old: 'Historicos',
+  old: 'Históricos',
   industrial: 'Industrial',
   general: 'General',
 };
@@ -19,7 +19,7 @@ const tags = ['todos', ...Array.from(new Set(projects.flatMap((project) => proje
 
 <div class="filter-panel" data-project-filters>
   <div>
-    <p class="filter-label">Categoria</p>
+    <p class="filter-label">Categoría</p>
     <div class="filter-bar compact" data-project-categories>
       {categories.map((category) => (
         <button class:list={["filter-button", { active: category === 'todos' }]} data-category-filter={category}>

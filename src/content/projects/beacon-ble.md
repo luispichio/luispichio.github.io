@@ -1,6 +1,6 @@
 ---
 title: "Beacon BLE"
-description: "Baliza BLE multiproposito para soluciones IoT, identificacion, telemetria y monitoreo local."
+description: "Baliza BLE multipropósito para soluciones IoT, identificación, telemetría y monitoreo local."
 company: "TwinDimension"
 date: "Q4/2025 - Actualidad"
 cover: "/assets/projects/beacon_ble/1.png"
@@ -26,8 +26,8 @@ order: 4
 
 ## Aplicaciones
 - Monitoreo de carga de batería en Autolevadores.
-- Medición de marcha (RPM) por vibraciónes.
-- Detección de anomalías por vibraciónes (mantenimiento predictivo).
+- Medición de marcha (RPM) por vibraciones.
+- Detección de anomalías por vibraciones (mantenimiento predictivo).
 - Medición de variables externas (ej: temperatura, humedad, presión, etc.) vía transductores externos.
 - Posicionamiento (triangulación)
 

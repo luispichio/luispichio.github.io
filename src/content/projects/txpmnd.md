@@ -5,7 +5,7 @@ company: "Sistemas Industriales S.A."
 date: "Q4/2014"
 cover: "/assets/projects/txpmnd/3.jpg"
 images: ["/assets/projects/txpmnd/1.jpg", "/assets/projects/txpmnd/2.jpg", "/assets/projects/txpmnd/3.jpg", "/assets/projects/txpmnd/4.jpg", "/assets/projects/txpmnd/5.jpg"]
-tags: ["instrumentacion", "hardware", "firmware", "señales"]
+tags: ["instrumentación", "hardware", "firmware", "señales"]
 featured: false
 category: "Histórico"
 order: 10

@@ -7,23 +7,23 @@ export const profile = {
   resume: '/assets/pdf/luis-pichio-resume.pdf',
   intro: 'Diseño, desarrollo y fabrico cosas.',
   summary:
-    'Desarrollador electronico y programador con mas de 20 anos de experiencia. Me especializo en plataformas IoT/IIoT, hardware de instrumentacion, firmware, control y adquisicion de datos para la industria.',
+    'Desarrollador electrónico y programador con más de 20 años de experiencia. Me especializo en plataformas IoT/IIoT, hardware de instrumentación, firmware, control y adquisición de datos para la industria.',
   focusAreas: [
     {
       title: 'Hardware + firmware',
-      summary: 'Diseno electronico, bring-up, firmware embebido, RTOS, buses de campo y produccion.',
+      summary: 'Diseño electrónico, bring-up, firmware embebido, RTOS, buses de campo y producción.',
     },
     {
       title: 'IoT / IIoT',
-      summary: 'Telemetria, edge computing, conectividad satelital/celular y protocolos industriales.',
+      summary: 'Telemetría, edge computing, conectividad satelital/celular y protocolos industriales.',
     },
     {
       title: 'Software industrial',
-      summary: 'Microservicios, APIs, frontend, monitoreo, herramientas de diagnostico y despliegue.',
+      summary: 'Microservicios, APIs, frontend, monitoreo, herramientas de diagnóstico y despliegue.',
     },
     {
-      title: 'Instrumentacion',
-      summary: 'Medicion, control, adquisicion de datos, sensores, ensayos y bancos de calibracion.',
+      title: 'Instrumentación',
+      summary: 'Medición, control, adquisición de datos, sensores, ensayos y bancos de calibración.',
     },
   ],
   socials: [
@@ -44,9 +44,9 @@ export const jobs = [
     period: '01/2023 - Actualidad',
     place: 'Remoto | Buenos Aires, Argentina',
     tasks: [
-      'Diseno y desarrollo de microservicios de ingesta entre dispositivos de borde y bases de datos.',
-      'Diseno y desarrollo de soluciones para terminales Orbcomm IDP / ST.',
-      'Diseno y desarrollo de hardware y firmware IoT.',
+      'Diseño y desarrollo de microservicios de ingesta entre dispositivos de borde y bases de datos.',
+      'Diseño y desarrollo de soluciones para terminales Orbcomm IDP / ST.',
+      'Diseño y desarrollo de hardware y firmware IoT.',
       'Soporte a delivery, preventa, capacitaciones y monitoreo de soluciones desplegadas.',
     ],
     projects: [
@@ -60,31 +60,31 @@ export const jobs = [
   },
   {
     company: 'Tesacom S.A.',
-    role: 'Lider de area | Microservicios de ingesta | Software de embebidos',
+    role: 'Líder de área | Microservicios de ingesta | Software de embebidos',
     url: 'https://www.tesacom.net/',
     period: '11/2020 - 01/2023',
     place: 'Remoto | Buenos Aires, Argentina',
     tasks: [
       'Arquitectura y desarrollo de microservicios de ingesta.',
       'Soluciones de borde para conectividad satelital/celular.',
-      'Soporte tecnico a implementaciones, preventa y capacitaciones.',
+      'Soporte técnico a implementaciones, preventa y capacitaciones.',
     ],
-    projects: ['Reconectadores', 'Processing Service', 'Herramientas de diagnostico y configuracion'],
+    projects: ['Reconectadores', 'Processing Service', 'Herramientas de diagnóstico y configuración'],
   },
   {
     company: 'Sistemas Industriales S.A.',
-    role: 'Lider de area | Diseno electronico',
+    role: 'Líder de área | Diseño electrónico',
     url: 'https://sistemasindustriales.com',
     period: '05/2003 - 11/2020',
     place: 'La Plata, Buenos Aires, Argentina',
     tasks: [
-      'Diseno, especificacion y produccion de hardware/software.',
-      'Desarrollo de instrumentos de medicion e instrumentacion industrial.',
-      'Capacitacion y soporte tecnico.',
+      'Diseño, especificación y producción de hardware/software.',
+      'Desarrollo de instrumentos de medición e instrumentación industrial.',
+      'Capacitación y soporte técnico.',
     ],
     projects: [
-      'Caudalimetros electromagneticos, ultrasonicos y coriolis',
-      'Manometros y transmisores de presion',
+      'Caudalímetros electromagnéticos, ultrasónicos y coriolis',
+      'Manómetros y transmisores de presión',
       'Medidor de porcentaje de crudo',
       'VANTAR',
       'EuroCerco',
@@ -92,12 +92,12 @@ export const jobs = [
     ],
   },
   {
-    company: 'L2M Ingenieria',
+    company: 'L2M Ingeniería',
     role: 'Socio responsable',
     url: 'http://l2m-ingenieria.com.ar',
     period: '04/2008 - 01/2013',
     place: 'La Plata, Buenos Aires, Argentina',
-    tasks: ['Diseno, especificacion y produccion de hardware/software.'],
-    projects: ['Fuentes switching', 'Tracking satelital', 'Telesupervision GPRS', 'Conversores de medio'],
+    tasks: ['Diseño, especificación y producción de hardware/software.'],
+    projects: ['Fuentes switching', 'Tracking satelital', 'Telesupervisión GPRS', 'Conversores de medio'],
   },
 ];

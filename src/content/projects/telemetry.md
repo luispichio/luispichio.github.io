@@ -1,6 +1,6 @@
 ---
 title: "Plataforma IoT Industrial"
-description: "Plataforma de supervision, control, alarmas, historizacion y reportes para aplicaciones industriales."
+description: "Plataforma de supervisión, control, alarmas, historización y reportes para aplicaciones industriales."
 company: "Sistemas Industriales S.A."
 date: "Q2/2018 - Q4/2020"
 cover: "/assets/projects/telemetry/1.png"
@@ -11,10 +11,10 @@ category: "Histórico"
 order: 15
 ---
 
-## Aplicaciónes
+## Aplicaciones
 - Supervisión / control industrial
 - Plantas de tratamiento de efluentes / agua potable
-- Seguimieto de vehículos
+- Seguimiento de vehículos
 - Cercos perimetrales / seguridad
 
 ## Empresa
@@ -27,7 +27,7 @@ order: 15
 - ...
 
 ## Características
-- Generación y notificación de evetos / alarmas
+- Generación y notificación de eventos / alarmas
 - Historización / generación de reportes
 
 ## Tareas

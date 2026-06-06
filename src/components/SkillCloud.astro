@@ -17,14 +17,14 @@ function experienceWeight(experience: string) {
 
 <div class="filter-panel" data-skill-filters>
   <div>
-    <p class="filter-label">Categoria</p>
+    <p class="filter-label">Categoría</p>
     <div class="filter-bar compact" data-skill-categories>
       {categories.map((category) => <button class:list={["filter-button", { active: category === 'todos' }]} data-skill-category={category}>{category}</button>)}
     </div>
   </div>
 
   <div>
-    <p class="filter-label">Sub-categoria</p>
+    <p class="filter-label">Sub-categoría</p>
     <div class="filter-bar compact" data-skill-groups>
       <button class="filter-button active" data-skill-group="todos" data-parent-category="todos">Todas</button>
       {groups.map((entry) => {
