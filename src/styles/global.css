@@ -146,6 +146,20 @@ section { padding: 42px 0; }
 .project-card > div { padding: 18px; }
 .project-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--panel-2); }
 .featured-mark { display: inline-block; color: var(--accent); font-size: 0.82rem; margin-bottom: 12px; }
+.small-projects-section { margin-top: 54px; padding-top: 34px; border-top: 1px solid var(--line); }
+.small-project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.small-project-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(13, 32, 40, 0.74), rgba(7, 19, 25, 0.72));
+  padding: 16px;
+}
+.small-project-card h3 { margin: 4px 0; font-size: 1.08rem; }
+.small-project-card p { color: var(--muted); margin: 0 0 12px; }
+.small-project-card .eyebrow { margin-bottom: 8px; }
+.small-project-meta { font-size: 0.88rem; }
+.compact-tags { gap: 7px; }
+.compact-tags span { font-size: 0.78rem; padding: 5px 9px; }
 .category-badge {
   display: inline-block;
   border: 1px solid rgba(56, 189, 248, 0.5);
@@ -238,6 +252,7 @@ section { padding: 42px 0; }
   .grid,
   .focus-grid,
   .project-grid,
+  .small-project-grid,
   .skills-list,
   .gallery { grid-template-columns: 1fr; }
 }
