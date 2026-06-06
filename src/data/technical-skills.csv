@@ -96,12 +96,12 @@ Informática,CAD,OpenSCAD,+5 años,Experto
 Informática,CAD,Fusion 360,+2 años,Intermedio
 Informática,CAD,AutoCAD,+5 años,Básico
 Informática,CAD,Rhinoceros,+5 años,Intermedio
-Redes,Buses de campo,CAN,+5 años,Experto
-Redes,Buses de campo,RS-232,+20 años,Experto
-Redes,Buses de campo,RS-485,+20 años,Experto
-Redes,Buses de campo,4-20mA,+20 años,Experto
-Redes,Buses de campo,Fieldbus,+2 años,Intermedio
-Redes,Buses de campo,Profibus,+2 años,Intermedio
+Electrónica,Buses de campo,CAN,+5 años,Experto
+Electrónica,Buses de campo,RS-232,+20 años,Experto
+Electrónica,Buses de campo,RS-485,+20 años,Experto
+Electrónica,Buses de campo,4-20mA,+20 años,Experto
+Electrónica,Buses de campo,Fieldbus,+2 años,Intermedio
+Electrónica,Buses de campo,Profibus,+2 años,Intermedio
 Electrónica,Instrumentación Industrial,Industrial y Control,+10 años,Experto
 Electrónica,Instrumentación de Laboratorio,Osciloscopios,+20 años,Experto
 Electrónica,Instrumentación de Laboratorio,Analizadores de espectro,+5 años,Avanzado

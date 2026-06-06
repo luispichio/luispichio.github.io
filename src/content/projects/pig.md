@@ -7,8 +7,8 @@ cover: "/assets/projects/pig/1.png"
 images: ["/assets/projects/pig/1.png", "/assets/projects/pig/2.png", "/assets/projects/pig/3.png"]
 tags: ["hardware", "firmware", "señales", "iot"]
 featured: false
-category: "old"
-order: 8
+category: "Histórico"
+order: 18
 ---
 
 ## Aplicación

@@ -7,6 +7,7 @@ cover: "/assets/projects/beacon_ble/1.png"
 images: ["/assets/projects/beacon_ble/1.png"]
 tags: ["ble", "hardware", "firmware", "iot"]
 featured: true
+category: "Nuevo"
 order: 4
 ---
 

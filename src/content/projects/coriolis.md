@@ -7,7 +7,7 @@ cover: "/assets/projects/coriolis/1.jpg"
 images: ["/assets/projects/coriolis/1.jpg", "/assets/projects/coriolis/2.jpg", "/assets/projects/coriolis/3.jpg", "/assets/projects/coriolis/4.jpg", "/assets/projects/coriolis/5.jpg"]
 tags: ["instrumentacion", "colioris", "hardware", "firmware", "senales"]
 featured: false
-order: 8
+order: 13
 ---
 
 ## Características

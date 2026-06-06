@@ -11,20 +11,29 @@ order: 2
 external: "https://vd-skywawe-staging.webflow.io/marketplace/processing-services---edge-intelligence-for-orbcomm-iot-terminals"
 ---
 
-Processing Service es un software embebido que se ejecuta en terminales ORBCOMM ST/IDP.
+ProcessingService es un software embebido que se ejecuta en terminales ORBCOMM (serie ST/IDP).
+Recopila datos de fuentes como Modbus, J1939, EIO o AVL Agent, los procesa localmente utilizando lógica configurable, estadísticas y transformaciones, y genera una salida optimizada.
+Los reportes se envían de manera eficiente vía satélite o celular, minimizando el uso de ancho de banda.
+ProcessingService también maneja variables, eventos y alarmas permitiendo una inteligencia en el borde confiable, trazable y autónoma para despliegues IoT remotos.
 
-Recopila datos de fuentes como Modbus, J1939, EIO o AVL Agent, los procesa localmente mediante reglas configurables, estadisticas y transformaciones, y genera salidas optimizadas para enlaces satelitales o celulares.
+## Empresa
+- [https://www.twindimension.com/](https://www.twindimension.com/)
+- [https://www.tesacom.net/](https://www.tesacom.net/)
 
-## Responsabilidades
+## Teareas
+- Especificación Técnica.
+- Diseño y desarrollo de hardware / software.
 
-- Especificacion tecnica.
-- Diseno y desarrollo de software embebido.
-- Integracion con servicios de comunicacion satelital y celular.
-- Alarmas, eventos, historizacion y reportes periodicos.
+## Tecnologías / skills
+- Javascript, [moleculer.services](https://moleculer.services/)
+- Microservices
+- Orbcomm IDP / ST
+- LUA + ODT
 
-## Tecnologias
+## Estado del Proyecto
+- Desarrollo finalizado
 
-- JavaScript.
-- Microservicios.
-- ORBCOMM IDP / ST.
-- Protocolos industriales y telemetria remota.
+### Referencias
+- [T.Wizard - SKYWAVE Marketplace](https://vd-skywawe-staging.webflow.io/marketplace/t-wizard---simplified-configuration-for-orbcomm-iot-terminals)
+- [Processing Services - SKYWAVE Marketplace](https://vd-skywawe-staging.webflow.io/marketplace/processing-services---edge-intelligence-for-orbcomm-iot-terminals)
+- [IsatData Pro](https://www.orbcomm.com/en/partners/connectivity/satellite/isatdata-pro)

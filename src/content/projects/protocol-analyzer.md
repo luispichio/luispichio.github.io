@@ -4,7 +4,7 @@ description: "Herramienta de diagnostico y analisis de protocolos para integraci
 company: "TwinDimension"
 date: "Q1/2024 - Actualidad"
 tags: ["software", "diagnostico", "dnp3", "iec61850", "frontend"]
-featured: true
+featured: false
 order: 3
 ---
 

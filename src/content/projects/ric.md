@@ -7,7 +7,8 @@ cover: "/assets/projects/ric/ric.jpg"
 images: ["/assets/projects/ric/1.jpg", "/assets/projects/ric/2.jpg", "/assets/projects/ric/3.jpg", "/assets/projects/ric/4.jpg", "/assets/projects/ric/5.jpg", "/assets/projects/ric/6.jpg", "/assets/projects/ric/7.jpg", "/assets/projects/ric/8.jpg", "/assets/projects/ric/9.jpg", "/assets/projects/ric/10.jpg"]
 tags: ["hardware", "firmware", "señales", "iot"]
 featured: false
-order: 8
+category: "Histórico"
+order: 28
 ---
 
 ## Aplicación

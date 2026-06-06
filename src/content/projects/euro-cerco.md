@@ -8,6 +8,7 @@ images: ["/assets/projects/cerco/1.jpg", "/assets/projects/cerco/2.jpg", "/asset
 tags: ["hardware", "firmware", "android", "seguridad", "gsm", "ble"]
 featured: false
 order: 7
+category: "Histórico"
 external: "http://www.grupoeuroseguridad.com/"
 ---
 

@@ -7,8 +7,8 @@ cover: "/assets/projects/ptag/1.jpg"
 images: ["/assets/projects/ptag/1.jpg", "/assets/projects/ptag/2.jpg", "/assets/projects/ptag/3.jpg", "/assets/projects/ptag/4.jpg"]
 tags: ["hardware", "firmware", "señales", "iot"]
 featured: false
-category: "old"
-order: 8
+category: "Histórico"
+order: 18
 ---
 
 ## Aplicación

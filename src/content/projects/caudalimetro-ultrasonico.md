@@ -7,7 +7,7 @@ cover: "/assets/projects/utt/13.jpg"
 images: ["/assets/projects/utt/1.jpg", "/assets/projects/utt/2.jpg", "/assets/projects/utt/3.jpg", "/assets/projects/utt/4.jpg", "/assets/projects/utt/5_6.jpg", "/assets/projects/utt/7.jpg", "/assets/projects/utt/8.jpg", "/assets/projects/utt/9.jpg", "/assets/projects/utt/10.jpg", "/assets/projects/utt/11_12.jpg", "/assets/projects/utt/13.jpg", "/assets/projects/utt/14.jpg"]
 tags: ["instrumentacion", "ultrasonido", "hardware", "firmware", "señales"]
 featured: false
-order: 8
+order: 12
 ---
 
 Instrumento industrial para medicion de caudal mediante ultrasonido de tiempo de transito.
