@@ -1,5 +1,7 @@
 ---
 import ProjectCard from './ProjectCard.astro';
+import SmallProjectCard from './SmallProjectCard.astro';
+import { smallProjects } from '../data/small-projects';
 
 const { projects } = Astro.props;
 
@@ -11,10 +13,27 @@ const categoryLabels = {
   old: 'Históricos',
   industrial: 'Industrial',
   general: 'General',
+  small: 'Pequeños',
 };
 
-const categories = ['todos', ...Array.from(new Set(projects.map((project) => project.data.category ?? 'general'))).sort()];
-const tags = ['todos', ...Array.from(new Set(projects.flatMap((project) => project.data.tags))).sort((a, b) => a.localeCompare(b, 'es'))];
+const mixedItems = [];
+const smallQueue = [...smallProjects];
+
+for (let index = 0; index < projects.length; index += 2) {
+  mixedItems.push(...projects.slice(index, index + 2).map((project) => ({ type: 'project', project })));
+  mixedItems.push(...smallQueue.splice(0, 3).map((project) => ({ type: 'small', project })));
+}
+
+mixedItems.push(...smallQueue.map((project) => ({ type: 'small', project })));
+
+const projectCategories = projects.map((project) => project.data.category ?? 'general');
+const categories = ['todos', ...Array.from(new Set([...projectCategories, 'small'])).sort()];
+const tags = [
+  'todos',
+  ...Array.from(new Set([...projects.flatMap((project) => project.data.tags), ...smallProjects.flatMap((project) => project.tags)])).sort((a, b) =>
+    a.localeCompare(b, 'es'),
+  ),
+];
 ---
 
 <div class="filter-panel" data-project-filters>
@@ -38,7 +57,7 @@ const tags = ['todos', ...Array.from(new Set(projects.flatMap((project) => proje
 </div>
 
 <div class="project-grid" data-project-list style="margin-top: 28px;">
-  {projects.map((project) => <ProjectCard project={project} />)}
+  {mixedItems.map((item) => item.type === 'project' ? <ProjectCard project={item.project} /> : <SmallProjectCard project={item.project} />)}
 </div>
 
 <script is:inline>

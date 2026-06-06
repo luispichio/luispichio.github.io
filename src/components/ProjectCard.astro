@@ -12,6 +12,7 @@ const categoryLabels = {
 
 const category = project.data.category ?? 'general';
 const categoryLabel = categoryLabels[category] ?? category;
+const projectUrl = `/projects/${project.id.replace(/\.md$/, '')}/`;
 ---
 
 <article class="project-card filter-item" data-category={category} data-tags={project.data.tags.join(' ')}>
@@ -19,7 +20,14 @@ const categoryLabel = categoryLabels[category] ?? category;
   <div>
     <p class="eyebrow">{project.data.company} {project.data.date ? `| ${project.data.date}` : ''}</p>
     <span class="category-badge">{categoryLabel}</span>
-    <h3><a href={`/projects/${project.id.replace(/\.md$/, '')}/`}>{project.data.title}</a></h3>
+    <div class="card-title-row">
+      <h3><a href={projectUrl}>{project.data.title}</a></h3>
+      {project.data.external && (
+        <a class="external-link" href={project.data.external} target="_blank" rel="noreferrer" aria-label={`Abrir referencia externa de ${project.data.title}`}>
+          <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
     <p>{project.data.description}</p>
     {project.data.featured && <strong class="featured-mark">Destacado</strong>}
     <div class="tags">

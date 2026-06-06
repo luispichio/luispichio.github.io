@@ -1,0 +1,26 @@
+---
+const { project } = Astro.props;
+
+const clients = project.clients?.filter(Boolean) ?? [];
+const isExternal = project.url?.startsWith('http');
+---
+
+<article class="small-project-card filter-item" data-category="small" data-tags={project.tags.join(' ')}>
+  <p class="eyebrow">{project.company}{project.date ? ` | ${project.date}` : ''}</p>
+  <span class="category-badge">Pequeño</span>
+  <div class="card-title-row">
+    <h3>
+      {project.url ? <a href={project.url}>{project.title}</a> : project.title}
+    </h3>
+    {isExternal && (
+      <a class="external-link" href={project.url} target="_blank" rel="noreferrer" aria-label={`Abrir enlace externo de ${project.title}`}>
+        <span aria-hidden="true">↗</span>
+      </a>
+    )}
+  </div>
+  <p>{project.description}</p>
+  {clients.length > 0 && <p class="small-project-meta">Clientes: {clients.join(', ')}</p>}
+  <div class="tags compact-tags">
+    {project.tags.map((tag) => <span>{tag}</span>)}
+  </div>
+</article>

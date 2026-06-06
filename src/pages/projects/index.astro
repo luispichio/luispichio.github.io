@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectFilters from '../../components/ProjectFilters.astro';
-import SmallProjects from '../../components/SmallProjects.astro';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -13,6 +12,5 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     <h1>Proyectos</h1>
     <p class="prose">Una selección de desarrollos de hardware, firmware, software industrial, instrumentación, IoT y herramientas técnicas.</p>
     <ProjectFilters projects={projects} />
-    <SmallProjects />
   </div>
 </BaseLayout>
