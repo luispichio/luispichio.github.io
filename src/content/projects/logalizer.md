@@ -2,12 +2,13 @@
 title: "Logalizer"
 description: "Aplicación de escritorio de alto rendimiento para análisis de logs"
 date: "Q1/2026 - Actualidad"
-cover: "/assets/projects/logalizer/1.jpg"
-images: ["/assets/projects/logalizer/1.jpg", "/assets/projects/logalizer/2.jpg", "/assets/projects/logalizer/3.jpg", "/assets/projects/logalizer/4.jpg", "/assets/projects/logalizer/5.jpg"]
-tags: ["opensource"]
+cover: "/assets/projects/logalizer/1.png"
+images: ["/assets/projects/logalizer/1.png", "/assets/projects/logalizer/2.png", "/assets/projects/logalizer/3.png"]
+tags: ["opensource", "logs", "tool", "devops"]
 featured: true
 category: "Open Source"
 order: 1
+external: "https://github.com/luispichio/Logalizer"
 ---
 
 ## Aplicación  

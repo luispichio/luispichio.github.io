@@ -3,6 +3,8 @@ title: "Modbus Bridge"
 description: "Firmware embebido para WIZnet/RP2040 que implementa una pasarela configurable entre Modbus TCP y Modbus RTU."
 company: "TwinDimension"
 date: "Q2/2026"
+cover: "/assets/projects/modbus-bridge/4.png"
+images: ["/assets/projects/modbus-bridge/1.png", "/assets/projects/modbus-bridge/2.png", "/assets/projects/modbus-bridge/3.png", "/assets/projects/modbus-bridge/4.png"]
 tags: ["firmware", "modbus", "industrial", "rp2040", "ethernet"]
 featured: false
 category: "Nuevo"

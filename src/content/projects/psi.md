@@ -3,12 +3,12 @@ title: "PSI | Presence Signal Inhibitor"
 description: "Aplicación de Android (BLE) para inhibir señal de presencia"
 company: "TwinDimension"
 date: "Q2/2026"
-cover: "/assets/projects/psi/1.jpg"
-images: ["/assets/projects/beacon_ble/1.png"]
+cover: "/assets/projects/psi/1.png"
+images: ["/assets/projects/psi/1.png", "/assets/projects/psi/2.png", "/assets/projects/psi/3.png", "/assets/projects/psi/4.png", "/assets/projects/psi/5.png", "/assets/projects/psi/6.png"]
 tags: ["ble", "android", "iot"]
 featured: true
 category: "Nuevo"
-order: 4
+order: 6
 ---
 
 ## Description

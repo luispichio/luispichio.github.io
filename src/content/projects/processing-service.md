@@ -3,8 +3,8 @@ title: "Processing Service"
 description: "Servicio de analitica de borde para terminales ORBCOMM IDP/ST, con procesamiento local y reportes optimizados."
 company: "TwinDimension / Tesacom"
 date: "Q1/2021 - Actualidad"
-cover: "/assets/projects/twizard/1.jpg"
-images: ["/assets/projects/twizard/1.jpg", "/assets/projects/twizard/2.jpg"]
+cover: "/assets/projects/processing-service/1.png"
+images: ["/assets/projects/processing-service/1.png", "/assets/projects/processing-service/2.png", "/assets/projects/processing-service/3.png", "/assets/projects/processing-service/4.jpg", "/assets/projects/processing-service/5.jpg"]
 tags: ["edge", "iot", "satellite", "microservices", "orbcomm"]
 featured: true
 order: 2

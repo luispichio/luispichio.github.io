@@ -3,7 +3,7 @@
     "id": "modbus_bridge",
     "title": "Modbus Bridge",
     "url": "/projects/modbus-bridge/",
-    "tags": ["integration", "beacon-ble", "iot"],
+    "tags": ["integration", "iot", "modbus", "protocols", "firmware", "ethernet", "wiznet", "rp2040", "tcp"],
     "description": "Firmware para WIZnet / RP2040 de puente Modbus TCP / RTU",
     "company": "Twindimension",
     "date": "Q4/2025 - Actualidad"
@@ -12,7 +12,7 @@
     "id": "estimacion-carga-bateria",
     "title": "MonSoC",
     "url": "/projects/beacon-ble/",
-    "tags": ["integration", "beacon-ble", "iot"],
+    "tags": ["integration", "beacon", "iot", "ble"],
     "description": "Monitoreo / estimación de carga de batería en autoelevadores",
     "company": "Twindimension",
     "tasks": ["i+d", "hardware", "firmware", "despliegue", "soporte", "monitoreo"],
@@ -21,8 +21,7 @@
   {
     "id": "protocol_analyzer",
     "title": "Protocol Analyzer",
-    "url": "/projects/protocol-analyzer/",
-    "tags": ["software", "tool", "frontend"],
+    "tags": ["software", "tool", "frontend", "iot", "dnp3", "iec61850", "protocols", "modbus", "backend", "wireshark"],
     "description": "Analizador de protocolos para reconectadores DNP3 / IEC61850",
     "company": "Twindimension",
     "tasks": ["i+d"],

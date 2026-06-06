@@ -3,12 +3,12 @@ title: "Beacon BLE"
 description: "Baliza BLE multipropósito para soluciones IoT, identificación, telemetría y monitoreo local."
 company: "TwinDimension"
 date: "Q4/2025 - Actualidad"
-cover: "/assets/projects/beacon_ble/1.png"
-images: ["/assets/projects/beacon_ble/1.png"]
+cover: "/assets/projects/beacon_ble/1.jpeg"
+images: ["/assets/projects/beacon_ble/1.jpeg", "/assets/projects/beacon_ble/2.jpeg", "/assets/projects/beacon_ble/3.png"]
 tags: ["ble", "hardware", "firmware", "iot"]
 featured: true
 category: "Nuevo"
-order: 4
+order: 5
 ---
 
 ## Description

@@ -3,11 +3,11 @@ title: "T. Data"
 description: "Plataforma IoT | Microservicios de ingesta"
 company: "TwinDimension / Tesacom"
 date: "Q1/2023 - Actualidad"
-cover: "/assets/projects/tdata/1.jpg"
-images: ["/assets/projects/tdata/1.jpg", "/assets/projects/tdata/2.jpg"]
-tags: ["edge", "iot", "satellite", "microservices", "orbcomm"]
-featured: false
-order: 3
+cover: "/assets/projects/tdata/1.png"
+images: ["/assets/projects/tdata/1.png", "/assets/projects/tdata/2.png", "/assets/projects/tdata/3.png", "/assets/projects/tdata/4.png", "/assets/projects/tdata/5.png"]
+tags: ["edge", "iot", "satellite", "microservices", "orbcomm", "protocols", "modbus", "mqtt", "dnp3"]
+featured: true
+order: 4
 external: "https://tdata.tesacom.net/"
 ---
 
@@ -63,7 +63,7 @@ Los microservicios de ingesta (Dataops) son parte importante de la plataforma, e
 - Desarrollo de nuevas funcionalidades (microservicios) en función de las diferentes soluciones.
 
 ## Referencias
+- [T.Data (producto)](https://www.tesacom.net/plataforma-iot)
+- [T.Data](https://tdata.tesacom.net/)
 - [moleculer.services](https://moleculer.services/)
 - [ETL](https://en.wikipedia.org/wiki/Extract,_transform,_load)
-- [T.Data](https://www.tesacom.net/plataforma-iot)
-- [T.Data](https://tdata.tesacom.net/)
