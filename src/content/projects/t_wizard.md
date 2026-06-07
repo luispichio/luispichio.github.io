@@ -5,7 +5,7 @@ company: "TwinDimension / Tesacom"
 date: "Q1/2023 - Actualidad"
 cover: "/assets/projects/twizard/1.jpg"
 images: ["/assets/projects/twizard/1.jpg", "/assets/projects/twizard/2.jpg"]
-tags: ["edge", "iot", "satellite", "microservices", "orbcomm"]
+tags: ["edge", "iot", "satellite", "microservices", "orbcomm", "backend"]
 featured: true
 order: 2
 external: "https://vd-skywawe-staging.webflow.io/marketplace/processing-services---edge-intelligence-for-orbcomm-iot-terminals"

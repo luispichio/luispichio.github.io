@@ -5,7 +5,7 @@ company: "Sistemas Industriales S.A."
 date: "Q1/2017 - Q1/2018"
 cover: "/assets/projects/pig/1.png"
 images: ["/assets/projects/pig/1.png", "/assets/projects/pig/2.png", "/assets/projects/pig/3.png"]
-tags: ["hardware", "firmware", "señales", "iot"]
+tags: ["hardware", "firmware", "señales", "iot", "frontend", "backend"]
 featured: false
 category: "Histórico"
 order: 18
