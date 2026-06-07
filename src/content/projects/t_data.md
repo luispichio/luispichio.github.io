@@ -5,7 +5,7 @@ company: "TwinDimension / Tesacom"
 date: "Q1/2023 - Actualidad"
 cover: "/assets/projects/tdata/1.png"
 images: ["/assets/projects/tdata/1.png", "/assets/projects/tdata/2.png", "/assets/projects/tdata/3.png", "/assets/projects/tdata/4.png", "/assets/projects/tdata/5.png"]
-tags: ["edge", "iot", "satellite", "microservices", "orbcomm", "protocols", "modbus", "mqtt", "dnp3"]
+tags: ["iot", "microservices", "protocols", "modbus", "mqtt", "dnp3"]
 featured: true
 order: 4
 external: "https://tdata.tesacom.net/"

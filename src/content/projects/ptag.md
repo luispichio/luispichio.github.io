@@ -5,7 +5,7 @@ company: "Sistemas Industriales S.A."
 date: "Q4/2015 - Q1/2016"
 cover: "/assets/projects/ptag/1.jpg"
 images: ["/assets/projects/ptag/1.jpg", "/assets/projects/ptag/2.jpg", "/assets/projects/ptag/3.jpg", "/assets/projects/ptag/4.jpg"]
-tags: ["hardware", "firmware", "señales", "iot"]
+tags: ["hardware", "firmware", "señales", "iot", "control"]
 featured: false
 category: "Histórico"
 order: 18

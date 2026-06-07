@@ -16,7 +16,7 @@ order: 6
 Aplicación Android desarrollada para operadores autorizados que permite controlar dispositivos EP mediante Bluetooth Low Energy, habilitando sesiones temporales de inhibición de señal de presencia durante tareas operativas en campo.
 El sistema evita falsas alarmas en plataformas SCADA mientras se realizan trabajos autorizados, manteniendo trazabilidad, seguridad criptográfica y control centralizado desde backend.
 
-# Características principales
+## Características principales
 - Login y gestión segura de sesión de operador.
 - Escaneo y detección de dispositivos EP cercanos vía BLE.
 - Resolución criptográfica online contra ThingsBoard.
@@ -27,14 +27,14 @@ El sistema evita falsas alarmas en plataformas SCADA mientras se realizan trabaj
 - Telemetría operativa hacia backend.
 - Firmware mock BLE para validar protocolo y expiración de sesiones.
 
-# Aplicaciones
+## Aplicaciones
 - Operación segura en instalaciones industriales.
 - Prevención de falsas alarmas durante mantenimiento.
 - Integración operativa con entornos SCADA.
 - Control temporal de inhibición de señales en campo.
 - Auditoría de acciones por operador y dispositivo.
 
-# Tecnologías utilizadas
+## Tecnologías utilizadas
 - Kotlin
 - Android
 - Jetpack Compose
@@ -51,7 +51,7 @@ El sistema evita falsas alarmas en plataformas SCADA mientras se realizan trabaj
 - AES-CTR
 - Gradle Kotlin DSL
 
-# Skills aplicadas
+## Skills aplicadas
 - Arquitectura Android MVVM.
 - Integración BLE real con GATT.
 - Seguridad aplicada a comunicación local.
@@ -65,5 +65,3 @@ El sistema evita falsas alarmas en plataformas SCADA mientras se realizan trabaj
 
 ## Estado del Proyecto
 - Desarrollo finalizado
-
-### Referencias

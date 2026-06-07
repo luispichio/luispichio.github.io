@@ -5,7 +5,7 @@ company: "Sistemas Industriales S.A. / Grupo Euro S.A."
 date: "Q2/2017 - Q3/2020"
 cover: "/assets/projects/vantar/3.jpg"
 images: ["/assets/projects/vantar/1.jpg", "/assets/projects/vantar/2.jpg", "/assets/projects/vantar/3.jpg", "/assets/projects/vantar/4.jpg", "/assets/projects/vantar/5.jpg", "/assets/projects/vantar/6.jpg", "/assets/projects/vantar/7.jpg", "/assets/projects/vantar/8.jpg"]
-tags: ["investigación", "control", "hardware", "firmware", "uav"]
+tags: ["i+d", "control", "hardware", "firmware", "uav"]
 featured: false
 category: "Histórico"
 order: 6
