@@ -20,7 +20,7 @@ const isExternal = project.url?.startsWith('http');
   </div>
   <p>{project.description}</p>
   {clients.length > 0 && <p class="small-project-meta">Clientes: {clients.join(', ')}</p>}
-  <div class="tags compact-tags">
+  <div class="tags project-tags compact-tags">
     {project.tags.map((tag) => <span>{tag}</span>)}
   </div>
 </article>

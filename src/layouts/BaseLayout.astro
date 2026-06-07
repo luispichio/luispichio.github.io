@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { profile } from '../data/profile';
 
 const { title = profile.name, description = profile.summary } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -28,7 +29,7 @@ const { title = profile.name, description = profile.summary } = Astro.props;
       <slot />
     </main>
     <footer class="site-footer">
-      <p>Portfolio estatico, editable en Markdown, desplegable en GitHub Pages.</p>
+      <p>© {year} Luis Pichio · <a href="https://github.com/luispichio/luispichio.github.io">Proyecto en GitHub</a></p>
       <div class="footer-links">
         {profile.socials.map((social) => <a href={social.href}>{social.label}</a>)}
       </div>

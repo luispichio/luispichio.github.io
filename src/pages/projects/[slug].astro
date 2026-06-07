@@ -16,7 +16,7 @@ const { Content } = await render(project);
     <p class="eyebrow">{project.data.company} {project.data.date ? `| ${project.data.date}` : ''}</p>
     <h1>{project.data.title}</h1>
     <p class="prose">{project.data.description}</p>
-    <div class="tags" style="margin: 18px 0;">
+    <div class="tags project-tags project-detail-tags" style="margin: 18px 0;">
       {project.data.tags.map((tag) => <span>{tag}</span>)}
     </div>
     {project.data.cover && <img class="portrait" src={project.data.cover} alt="" />}

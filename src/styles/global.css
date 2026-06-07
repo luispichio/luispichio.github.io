@@ -58,7 +58,14 @@ nav,
 
 nav a,
 .footer-links a,
-.button,
+.button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  padding: 8px 13px;
+  text-decoration: none;
+  background: rgba(27, 25, 20, 0.8);
+}
 .tags span {
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -182,17 +189,26 @@ section { padding: 42px 0; }
 .small-project-card .eyebrow { margin-bottom: 8px; }
 .small-project-meta { font-size: 0.88rem; }
 .compact-tags { gap: 7px; }
-.compact-tags span { font-size: 0.78rem; padding: 5px 9px; }
+.project-tags { justify-content: flex-start; }
+.project-detail-tags { justify-content: flex-start; }
+.project-tags span {
+  background: rgba(13, 32, 40, 0.56);
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.1;
+  padding: 4px 8px;
+}
+.compact-tags span { font-size: 0.72rem; padding: 3px 7px; }
 .category-badge {
   display: inline-block;
   border: 1px solid rgba(56, 189, 248, 0.5);
   border-radius: 999px;
   color: var(--accent-2);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   margin-bottom: 10px;
-  padding: 4px 9px;
+  padding: 5px 10px;
   text-transform: uppercase;
 }
 
@@ -245,14 +261,14 @@ section { padding: 42px 0; }
   border-radius: 999px;
   background: rgba(13, 32, 40, 0.78);
   color: var(--text);
-  padding: 0.38em 0.72em;
+  padding: 0.36em 0.68em;
   line-height: 1.1;
 }
 .skill-chip[data-weight='1'] { font-size: 0.82rem; opacity: 0.72; }
-.skill-chip[data-weight='2'] { font-size: 0.96rem; }
-.skill-chip[data-weight='3'] { font-size: 1.12rem; }
-.skill-chip[data-weight='4'] { font-size: 1.28rem; }
-.skill-chip[data-weight='5'] { font-size: 1.46rem; }
+.skill-chip[data-weight='2'] { font-size: 0.94rem; }
+.skill-chip[data-weight='3'] { font-size: 1.08rem; }
+.skill-chip[data-weight='4'] { font-size: 1.22rem; }
+.skill-chip[data-weight='5'] { font-size: 1.38rem; }
 .skill-chip.level-experto { border-color: rgba(45, 212, 191, 0.9); color: var(--accent-3); }
 .skill-chip.level-avanzado { border-color: rgba(56, 189, 248, 0.8); }
 .skill-chip.level-intermedio { border-color: rgba(143, 179, 173, 0.65); color: var(--muted); }
@@ -278,4 +294,5 @@ section { padding: 42px 0; }
   .gallery { grid-template-columns: 1fr; }
   .project-card,
   .small-project-card { grid-column: 1 / -1; }
+  .project-tags { justify-content: flex-start; }
 }

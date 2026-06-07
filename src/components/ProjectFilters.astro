@@ -27,6 +27,21 @@ for (let index = 0; index < projects.length; index += 2) {
 mixedItems.push(...smallQueue.map((project) => ({ type: 'small', project })));
 
 const projectCategories = projects.map((project) => project.data.category ?? 'general');
+const tagCategories = new Map();
+
+projects.forEach((project) => {
+  const category = project.data.category ?? 'general';
+  project.data.tags.forEach((tag) => {
+    tagCategories.set(tag, [...(tagCategories.get(tag) ?? []), category]);
+  });
+});
+
+smallProjects.forEach((project) => {
+  project.tags.forEach((tag) => {
+    tagCategories.set(tag, [...(tagCategories.get(tag) ?? []), 'small']);
+  });
+});
+
 const categories = ['todos', ...Array.from(new Set([...projectCategories, 'small'])).sort()];
 const tags = [
   'todos',
@@ -51,7 +66,15 @@ const tags = [
   <div>
     <p class="filter-label">Tags</p>
     <div class="filter-bar compact" data-project-tags>
-      {tags.map((tag) => <button class:list={["filter-button", { active: tag === 'todos' }]} data-tag-filter={tag}>{tag}</button>)}
+      {tags.map((tag) => (
+        <button
+          class:list={["filter-button", { active: tag === 'todos' }]}
+          data-tag-filter={tag}
+          data-tag-categories={tag === 'todos' ? 'todos' : [...new Set(tagCategories.get(tag) ?? [])].join(' ')}
+        >
+          {tag}
+        </button>
+      ))}
     </div>
   </div>
 </div>
@@ -80,6 +103,28 @@ const tags = [
         .filter((tag) => tag && tag !== 'todos');
     }
 
+    function updateTagButtons() {
+      const category = activeCategory();
+      const allButton = panel.querySelector('[data-tag-filter="todos"]');
+
+      tagButtons.forEach((button) => {
+        const filter = button.getAttribute('data-tag-filter');
+        const categories = (button.getAttribute('data-tag-categories') || '').split(/\s+/).filter(Boolean);
+        const visible = filter === 'todos' || category === 'todos' || categories.includes(category);
+
+        button.hidden = !visible;
+        if (!visible) button.classList.remove('active');
+      });
+
+      const hasActiveTag = Array.from(tagButtons).some(
+        (button) => button.getAttribute('data-tag-filter') !== 'todos' && button.classList.contains('active'),
+      );
+
+      if (!hasActiveTag) {
+        allButton?.classList.add('active');
+      }
+    }
+
     function applyFilters() {
       const category = activeCategory();
       const tags = activeTags();
@@ -97,12 +142,17 @@ const tags = [
       button.addEventListener('click', () => {
         categoryButtons.forEach((item) => item.classList.remove('active'));
         button.classList.add('active');
+        updateTagButtons();
         applyFilters();
       });
     });
 
+    updateTagButtons();
+
     tagButtons.forEach((button) => {
       button.addEventListener('click', () => {
+        if (button.hidden) return;
+
         const filter = button.getAttribute('data-tag-filter');
         const allButton = panel.querySelector('[data-tag-filter="todos"]');
 

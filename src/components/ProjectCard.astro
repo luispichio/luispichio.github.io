@@ -30,7 +30,7 @@ const projectUrl = `/projects/${project.id.replace(/\.md$/, '')}/`;
     </div>
     <p>{project.data.description}</p>
     {project.data.featured && <strong class="featured-mark">Destacado</strong>}
-    <div class="tags">
+    <div class="tags project-tags">
       {project.data.tags.map((tag) => <span>{tag}</span>)}
     </div>
   </div>
