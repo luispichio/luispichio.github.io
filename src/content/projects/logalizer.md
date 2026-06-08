@@ -4,7 +4,7 @@ description: "Aplicación de escritorio de alto rendimiento para análisis de lo
 date: "Q1/2026 - Actualidad"
 cover: "/assets/projects/logalizer/1.png"
 images: ["/assets/projects/logalizer/1.png", "/assets/projects/logalizer/2.png", "/assets/projects/logalizer/3.png"]
-tags: ["opensource", "logs", "tool", "devops"]
+tags: ["opensource", "logs", "tool", "devops", "sdd"]
 featured: true
 category: "Open Source"
 order: 1

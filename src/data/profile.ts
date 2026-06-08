@@ -31,7 +31,7 @@ export const profile = {
     { label: 'GitHub', href: 'https://github.com/luispichio' },
     { label: 'Blog', href: 'https://luispichio.blogspot.com' },
     { label: 'Email', href: 'mailto:luispichio@gmail.com' },
-    { label: 'Radio', href: 'http://qsl.net/lw6dio' },
+    { label: 'LW6DIO', href: 'http://qsl.net/lw6dio' },
   ],
 };
 
