@@ -28,14 +28,20 @@ const projects = (await getCollection('projects'))
   </section>
 
   <section>
-    <div class="section-title"><h2>Lo que conecto</h2><p class="eyebrow">De la placa al cloud</p></div>
+    <div class="section-title">
+      <h2>Lo que conecto</h2>
+      <div class="section-actions"><p class="eyebrow">De la placa al cloud</p><a class="button" href="#top">Subir</a></div>
+    </div>
     <div class="focus-grid">
       {profile.focusAreas.map((item) => <div class="focus-card"><h3>{item.title}</h3><p>{item.summary}</p></div>)}
     </div>
   </section>
 
   <section id="experiencia">
-    <div class="section-title"><h2>Experiencia</h2><a class="button" href="/cv/">CV completo</a></div>
+    <div class="section-title">
+      <h2>Experiencia</h2>
+      <div class="section-actions"><a class="button" href="/cv/">CV completo</a><a class="button" href="#top">Subir</a></div>
+    </div>
     {jobs.map((job) => (
       <article class="job">
         <p class="eyebrow">{job.period} | {job.place}</p>
@@ -47,7 +53,7 @@ const projects = (await getCollection('projects'))
   </section>
 
   <section id="skills">
-    <div class="section-title"><h2>Skills</h2></div>
+    <div class="section-title"><h2>Skills</h2><a class="button" href="#top">Subir</a></div>
     <div class="grid">
       {keySkills.map((skill) => (
         <div class="card"><h3>{skill.name}</h3><p>{skill.experience} | {skill.level}</p></div>
@@ -57,7 +63,10 @@ const projects = (await getCollection('projects'))
   </section>
 
   <section>
-    <div class="section-title"><h2>Proyectos destacados</h2><a class="button" href="/projects/">Todos los proyectos</a></div>
+    <div class="section-title">
+      <h2>Proyectos destacados</h2>
+      <div class="section-actions"><a class="button" href="/projects/">Todos los proyectos</a><a class="button" href="#top">Subir</a></div>
+    </div>
     <div class="project-grid">
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>

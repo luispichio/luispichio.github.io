@@ -13,17 +13,44 @@ const { Content } = await render(project);
 
 <BaseLayout title={`${project.data.title} | Luis Pichio`} description={project.data.description}>
   <article class="page-shell">
-    <p class="eyebrow">{project.data.company} {project.data.date ? `| ${project.data.date}` : ''}</p>
-    <h1>{project.data.title}</h1>
-    <p class="prose">{project.data.description}</p>
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">{project.data.company} {project.data.date ? `| ${project.data.date}` : ''}</p>
+        <h1>{project.data.title}</h1>
+        <p class="prose">{project.data.description}</p>
+      </div>
+      <a class="button back-home" href="/">Inicio</a>
+    </div>
     <div class="tags project-tags project-detail-tags" style="margin: 18px 0;">
       {project.data.tags.map((tag) => <span>{tag}</span>)}
     </div>
-    {project.data.cover && <img class="portrait" src={project.data.cover} alt="" />}
+    {project.data.cover && <button class="image-open" type="button" data-full-image={project.data.cover} aria-label="Ver imagen principal a tamaño completo"><img class="portrait" src={project.data.cover} alt="" /></button>}
     <div class="prose"><Content /></div>
-    {project.data.external && <p><a class="button" href={project.data.external}>Referencia externa</a></p>}
+    {project.data.external && <p><a class="button" href={project.data.external} target="_blank" rel="noreferrer">Referencia externa</a></p>}
     {project.data.images.length > 0 && (
-      <div class="gallery">{project.data.images.map((image) => <img src={image} alt="" loading="lazy" />)}</div>
+      <div class="gallery">{project.data.images.map((image) => <button class="image-open" type="button" data-full-image={image} aria-label="Ver imagen a tamaño completo"><img src={image} alt="" loading="lazy" /></button>)}</div>
     )}
+    <dialog class="image-modal" aria-label="Imagen a tamaño completo">
+      <button class="modal-close" type="button" aria-label="Cerrar imagen">x</button>
+      <img src="" alt="" />
+    </dialog>
   </article>
+  <script>
+    const modal = document.querySelector<HTMLDialogElement>('.image-modal');
+    const modalImage = modal?.querySelector('img');
+    const closeButton = modal?.querySelector<HTMLButtonElement>('.modal-close');
+
+    document.querySelectorAll<HTMLButtonElement>('[data-full-image]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!modal || !modalImage) return;
+        modalImage.src = button.dataset.fullImage ?? '';
+        modal.showModal();
+      });
+    });
+
+    closeButton?.addEventListener('click', () => modal?.close());
+    modal?.addEventListener('click', (event) => {
+      if (event.target === modal) modal.close();
+    });
+  </script>
 </BaseLayout>

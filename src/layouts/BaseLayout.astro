@@ -4,6 +4,7 @@ import { profile } from '../data/profile';
 
 const { title = profile.name, description = profile.summary } = Astro.props;
 const year = new Date().getFullYear();
+const isExternal = (href: string) => href.startsWith('http');
 ---
 
 <!doctype html>
@@ -16,7 +17,7 @@ const year = new Date().getFullYear();
     <title>{title}</title>
   </head>
   <body>
-    <header class="site-header">
+    <header id="top" class="site-header">
       <a class="brand" href="/">Luis Pichio</a>
       <nav aria-label="Principal">
         <a href="/#experiencia">Experiencia</a>
@@ -29,10 +30,14 @@ const year = new Date().getFullYear();
       <slot />
     </main>
     <footer class="site-footer">
-      <p>© {year} Luis Pichio · <a href="https://github.com/luispichio/luispichio.github.io">Proyecto en GitHub</a></p>
       <div class="footer-links">
-        {profile.socials.map((social) => <a href={social.href}>{social.label}</a>)}
+        {profile.socials.map((social) => (
+          <a href={social.href} target={isExternal(social.href) ? '_blank' : undefined} rel={isExternal(social.href) ? 'noreferrer' : undefined}>
+            {social.label}
+          </a>
+        ))}
       </div>
+      <p>© {year} Luis Pichio · <a href="https://github.com/luispichio/luispichio.github.io" target="_blank" rel="noreferrer">Proyecto en GitHub</a></p>
     </footer>
   </body>
 </html>

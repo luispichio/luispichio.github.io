@@ -2,16 +2,27 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile, jobs } from '../data/profile';
 import { keySkills, skillGroups } from '../data/skills';
+
+const isExternal = (href: string) => href.startsWith('http');
 ---
 
 <BaseLayout title="CV | Luis Pichio">
   <div class="page-shell">
-    <p class="eyebrow">Curriculum Vitae</p>
-    <h1>{profile.name}</h1>
-    <p class="prose">{profile.role} | {profile.location}</p>
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">Curriculum Vitae</p>
+        <h1>{profile.name}</h1>
+        <p class="prose">{profile.role} | {profile.location}</p>
+      </div>
+      <a class="button back-home" href="/">Inicio</a>
+    </div>
     <div class="actions" style="margin: 22px 0;">
       <a class="button primary" href={profile.resume}>Descargar PDF</a>
-      {profile.socials.map((social) => <a class="button" href={social.href}>{social.label}</a>)}
+      {profile.socials.map((social) => (
+        <a class="button" href={social.href} target={isExternal(social.href) ? '_blank' : undefined} rel={isExternal(social.href) ? 'noreferrer' : undefined}>
+          {social.label}
+        </a>
+      ))}
     </div>
 
     <section id="experiencia">
@@ -20,7 +31,7 @@ import { keySkills, skillGroups } from '../data/skills';
         <article class="job">
           <p class="eyebrow">{job.period} | {job.place}</p>
           <h3>{job.role}</h3>
-          <p><a href={job.url}>{job.company}</a></p>
+          <p><a href={job.url} target="_blank" rel="noreferrer">{job.company}</a></p>
           <h4>Tareas</h4>
           <ul>{job.tasks.map((task) => <li>{task}</li>)}</ul>
           <h4>Proyectos</h4>

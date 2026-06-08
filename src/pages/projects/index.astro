@@ -8,9 +8,14 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
 <BaseLayout title="Proyectos | Luis Pichio">
   <div class="page-shell">
-    <p class="eyebrow">Portfolio</p>
-    <h1>Proyectos</h1>
-    <p class="prose">Una selección de desarrollos de hardware, firmware, software industrial, instrumentación, IoT y herramientas técnicas.</p>
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">Portfolio</p>
+        <h1>Proyectos</h1>
+        <p class="prose">Una selección de desarrollos de hardware, firmware, software industrial, instrumentación, IoT y herramientas técnicas.</p>
+      </div>
+      <a class="button back-home" href="/">Inicio</a>
+    </div>
     <ProjectFilters projects={projects} />
   </div>
 </BaseLayout>
