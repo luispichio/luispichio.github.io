@@ -35,117 +35,42 @@ function experienceWeight(experience: string) {
   </div>
 </div>
 
-<div class="skill-cloud skill-cloud-3d" data-skill-list data-skill-cloud-3d>
-  {sortedSkills.map((skill) => (
-    <span
-      class={`skill-chip filter-item level-${skill.level.toLowerCase()}`}
-      data-category={skill.category}
-      data-group={skill.group}
-      data-weight={experienceWeight(skill.experience)}
-      title={`${skill.group} | ${skill.experience} | ${skill.level}`}
-    >
-      {skill.name}
-    </span>
-  ))}
+<div class="skill-map" data-skill-map>
+  <svg class="skill-map-svg" data-skill-map-svg role="img" aria-label="Mapa radial de skills por categoría y sub-categoría">
+    <g data-skill-map-viewport>
+      <g data-skill-map-links></g>
+      <g data-skill-map-nodes></g>
+    </g>
+  </svg>
 </div>
 
+<script type="application/json" data-skill-data set:html={JSON.stringify(sortedSkills.map((skill) => ({ ...skill, weight: experienceWeight(skill.experience) })))} />
+
 <script>
-  import * as THREE from 'three';
-
   const skillPanel = document.querySelector('[data-skill-filters]');
-  const skillList = document.querySelector('[data-skill-list]');
+  const skillMap = document.querySelector<HTMLElement>('[data-skill-map]');
+  const skillData = document.querySelector<HTMLScriptElement>('[data-skill-data]');
 
-  if (skillPanel && skillList) {
+  if (skillPanel && skillMap && skillData) {
     const categoryButtons = skillPanel.querySelectorAll('[data-skill-category]');
     const groupButtons = skillPanel.querySelectorAll('[data-skill-group]');
-    const skills = Array.from(skillList.querySelectorAll<HTMLElement>('.filter-item'));
+    const svg = skillMap.querySelector<SVGSVGElement>('[data-skill-map-svg]');
+    const viewport = skillMap.querySelector<SVGGElement>('[data-skill-map-viewport]');
+    const linkLayer = skillMap.querySelector<SVGGElement>('[data-skill-map-links]');
+    const nodeLayer = skillMap.querySelector<SVGGElement>('[data-skill-map-nodes]');
+    const skills = JSON.parse(skillData.textContent || '[]') as Array<{ category: string; group: string; name: string; experience: string; level: string; weight: number }>;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const cloud = skillList as HTMLElement;
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    const group = new THREE.Group();
-    const isMobile = window.matchMedia('(max-width: 780px)').matches;
-    const nodes = skills.map((element) => ({ element, point: new THREE.Vector3(), visible: true }));
+    const ns = 'http://www.w3.org/2000/svg';
+    const nodes: Array<{ id: string; parent?: string; type: string; label: string; level?: string; weight?: number; angle: number; radius: number; x: number; y: number; baseX: number; baseY: number; element?: SVGGElement }> = [];
+    const links: Array<{ source: string; target: string; element?: SVGPathElement }> = [];
     let animationId = 0;
-    let active = true;
-    let isAnimating = false;
-    let dragging = false;
+    let panX = 0;
+    let panY = 0;
+    let zoom = 1;
+    let isPanning = false;
     let lastPointerX = 0;
     let lastPointerY = 0;
-    let targetRotationX = 0;
-    let targetRotationY = 0;
-
-    scene.add(group);
-    camera.position.z = 7;
-
-    function fibonacciPoint(index: number, total: number, radius: number) {
-      const offset = 2 / total;
-      const increment = Math.PI * (3 - Math.sqrt(5));
-      const y = index * offset - 1 + offset / 2;
-      const distance = Math.sqrt(1 - y * y);
-      const phi = index * increment;
-
-      return new THREE.Vector3(
-        Math.cos(phi) * distance * radius * 1.72,
-        y * radius * 0.68,
-        Math.sin(phi) * distance * radius * 0.92,
-      );
-    }
-
-    function layoutNodes() {
-      const visibleNodes = nodes.filter((node) => node.visible);
-      const visibleCount = visibleNodes.length;
-      const radius = THREE.MathUtils.clamp(1.15 + Math.sqrt(Math.max(visibleCount, 1)) * 0.23, 1.35, isMobile ? 2.35 : 2.85);
-      const height = THREE.MathUtils.clamp(190 + visibleCount * (isMobile ? 5.2 : 4.1), isMobile ? 250 : 280, isMobile ? 340 : 390);
-
-      cloud.style.setProperty('--cloud-height', `${Math.round(height)}px`);
-
-      visibleNodes.forEach((node, index) => {
-        node.point.copy(fibonacciPoint(index, visibleCount, radius));
-      });
-    }
-
-    function projectNodes() {
-      const width = cloud.clientWidth;
-      const height = cloud.clientHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      camera.updateMatrixWorld();
-      group.updateMatrixWorld();
-
-      nodes.forEach((node) => {
-        const projected = node.point.clone().applyMatrix4(group.matrixWorld).project(camera);
-        const x = (projected.x * 0.5 + 0.5) * width;
-        const y = (-projected.y * 0.5 + 0.5) * height;
-        const depth = THREE.MathUtils.clamp(1 - projected.z, 0, 1);
-        const scale = THREE.MathUtils.clamp(0.78 + depth * 0.32, 0.72, 1.2);
-        const opacity = node.visible ? THREE.MathUtils.clamp(0.62 + depth * 0.38, 0.62, 1) : 0;
-
-        node.element.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${scale})`;
-        node.element.style.opacity = `${opacity}`;
-        node.element.style.pointerEvents = node.visible ? 'auto' : 'none';
-        node.element.style.zIndex = `${Math.round((1 - projected.z) * 1000)}`;
-      });
-    }
-
-    function animate() {
-      if (!active || reduceMotion) {
-        isAnimating = false;
-        return;
-      }
-      isAnimating = true;
-      if (!dragging) targetRotationY += 0.0032;
-      group.rotation.y += (targetRotationY - group.rotation.y) * 0.08;
-      group.rotation.x += (targetRotationX - group.rotation.x) * 0.08;
-      projectNodes();
-      animationId = requestAnimationFrame(animate);
-    }
-
-    function setCloudMode() {
-      cloud.classList.add('is-3d-ready');
-      projectNodes();
-      if (!reduceMotion && !isAnimating) animate();
-    }
+    let time = 0;
 
     function selectedCategory() {
       return skillPanel.querySelector('[data-skill-category].active')?.getAttribute('data-skill-category') || 'todos';
@@ -171,19 +96,173 @@ function experienceWeight(experience: string) {
     function applySkillFilters() {
       const category = selectedCategory();
       const group = selectedGroup();
-
-      skills.forEach((skill, index) => {
-        const matchesCategory = category === 'todos' || skill.getAttribute('data-category') === category;
-        const matchesGroup = group === 'todos' || skill.getAttribute('data-group') === group;
-        const isVisible = matchesCategory && matchesGroup;
-
-        nodes[index].visible = isVisible;
-        skill.hidden = false;
-        skill.toggleAttribute('aria-hidden', !isVisible);
+      const visibleSkills = skills.filter((skill) => {
+        const matchesCategory = category === 'todos' || skill.category === category;
+        const matchesGroup = group === 'todos' || skill.group === group;
+        return matchesCategory && matchesGroup;
       });
 
-      layoutNodes();
-      projectNodes();
+      drawMap(visibleSkills);
+    }
+
+    function polar(angle: number, radius: number) {
+      return { x: Math.cos(angle) * radius, y: Math.sin(angle) * radius };
+    }
+
+    function clamp(value: number, min: number, max: number) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function groupBy<T>(items: T[], key: (item: T) => string) {
+      return items.reduce<Record<string, T[]>>((result, item) => {
+        const entry = key(item);
+        result[entry] = result[entry] ?? [];
+        result[entry].push(item);
+        return result;
+      }, {});
+    }
+
+    function clearMap() {
+      nodes.length = 0;
+      links.length = 0;
+      linkLayer?.replaceChildren();
+      nodeLayer?.replaceChildren();
+    }
+
+    function addNode(node: (typeof nodes)[number]) {
+      nodes.push(node);
+      const item = document.createElementNS(ns, 'g');
+      const shape = document.createElementNS(ns, 'rect');
+      const label = document.createElementNS(ns, 'text');
+
+      item.classList.add('skill-map-node', `is-${node.type}`);
+      if (node.level) item.classList.add(`level-${node.level.toLowerCase()}`);
+      item.dataset.nodeId = node.id;
+      label.textContent = node.type === 'skill' && node.label.length > 24 ? `${node.label.slice(0, 22)}...` : node.label;
+      label.classList.add('skill-map-label');
+
+      const nodeHeight = node.type === 'root' ? 42 : node.type === 'category' ? 36 : node.type === 'group' ? 31 : 26;
+      const minWidth = node.type === 'root' ? 96 : node.type === 'category' ? 104 : node.type === 'group' ? 86 : 56;
+      const maxWidth = node.type === 'skill' ? 190 : 220;
+      const width = clamp(node.label.length * 7.4 + 28, minWidth, maxWidth);
+
+      shape.setAttribute('x', `${-width / 2}`);
+      shape.setAttribute('y', `${-nodeHeight / 2}`);
+      shape.setAttribute('width', `${width}`);
+      shape.setAttribute('height', `${nodeHeight}`);
+      shape.setAttribute('rx', `${nodeHeight / 2}`);
+      label.setAttribute('y', '4');
+
+      item.append(shape, label);
+      item.addEventListener('mouseenter', () => highlightBranch(node.id));
+      item.addEventListener('mouseleave', clearHighlight);
+      nodeLayer?.append(item);
+      node.element = item;
+    }
+
+    function addLink(source: string, target: string) {
+      const link = document.createElementNS(ns, 'path');
+      link.classList.add('skill-map-link');
+      link.dataset.source = source;
+      link.dataset.target = target;
+      linkLayer?.append(link);
+      links.push({ source, target, element: link });
+    }
+
+    function drawMap(visibleSkills: typeof skills) {
+      cancelAnimationFrame(animationId);
+      clearMap();
+      const width = skillMap.clientWidth;
+      const height = clamp(460 + visibleSkills.length * 6, 520, 900);
+      const categoryRadius = clamp(Math.min(width, height) * 0.22, 128, 190);
+      const groupRadius = clamp(Math.min(width, height) * 0.4, 230, 340);
+      const skillRadius = clamp(Math.min(width, height) * 0.62, 360, 560);
+      const categories = Object.entries(groupBy(visibleSkills, (skill) => skill.category)).sort(([a], [b]) => a.localeCompare(b, 'es'));
+      const selectedCategoryValue = selectedCategory();
+      const selectedGroupValue = selectedGroup();
+      const mode = selectedGroupValue !== 'todos' ? 'group' : selectedCategoryValue !== 'todos' ? 'category' : 'all';
+
+      skillMap.style.setProperty('--skill-map-height', `${Math.round(height)}px`);
+      svg?.setAttribute('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`);
+
+      if (mode === 'group') {
+        const groupLabel = selectedGroupValue;
+        const rootId = `group-root:${groupLabel}`;
+        const rootSkills = visibleSkills.sort((a, b) => a.name.localeCompare(b.name, 'es'));
+
+        addNode({ id: rootId, type: 'group', label: groupLabel, angle: 0, radius: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
+        rootSkills.forEach((skill, skillIndex) => {
+          const skillAngle = -Math.PI / 2 + (Math.PI * 2 * skillIndex) / Math.max(rootSkills.length, 1);
+          const skillPoint = polar(skillAngle, categoryRadius + (skillIndex % 3) * 34);
+          const skillId = `${rootId}:skill:${skill.name}`;
+
+          addNode({ id: skillId, parent: rootId, type: 'skill', label: skill.name, level: skill.level, weight: skill.weight, angle: skillAngle, radius: categoryRadius, x: skillPoint.x, y: skillPoint.y, baseX: skillPoint.x, baseY: skillPoint.y });
+          addLink(rootId, skillId);
+        });
+      } else if (mode === 'category') {
+        const categoryLabel = selectedCategoryValue;
+        const rootId = `category-root:${categoryLabel}`;
+        const groups = Object.entries(groupBy(visibleSkills, (skill) => skill.group)).sort(([a], [b]) => a.localeCompare(b, 'es'));
+
+        addNode({ id: rootId, type: 'category', label: categoryLabel, angle: 0, radius: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
+        groups.forEach(([group, groupSkills], groupIndex) => {
+          const groupAngle = -Math.PI / 2 + (Math.PI * 2 * groupIndex) / Math.max(groups.length, 1);
+          const groupPoint = polar(groupAngle, categoryRadius);
+          const groupId = `${rootId}:group:${group}`;
+
+          addNode({ id: groupId, parent: rootId, type: 'group', label: group, angle: groupAngle, radius: categoryRadius, x: groupPoint.x, y: groupPoint.y, baseX: groupPoint.x, baseY: groupPoint.y });
+          addLink(rootId, groupId);
+
+          groupSkills.sort((a, b) => a.name.localeCompare(b.name, 'es')).forEach((skill, skillIndex) => {
+            const skillSpread = Math.PI / Math.max(2.2, groups.length * 0.62);
+            const skillAngle = groupAngle - skillSpread / 2 + skillSpread * ((skillIndex + 0.5) / groupSkills.length);
+            const skillPoint = polar(skillAngle, groupRadius + (skillIndex % 3) * 34);
+            const skillId = `${groupId}:skill:${skill.name}`;
+
+            addNode({ id: skillId, parent: groupId, type: 'skill', label: skill.name, level: skill.level, weight: skill.weight, angle: skillAngle, radius: groupRadius, x: skillPoint.x, y: skillPoint.y, baseX: skillPoint.x, baseY: skillPoint.y });
+            addLink(groupId, skillId);
+          });
+        });
+      } else {
+        addNode({ id: 'root', type: 'root', label: 'Skills', angle: 0, radius: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
+
+        categories.forEach(([category, categorySkills], categoryIndex) => {
+          const sector = (Math.PI * 2) / Math.max(categories.length, 1);
+          const angle = -Math.PI / 2 + categoryIndex * sector;
+          const categoryPoint = polar(angle, categoryRadius);
+          const categoryId = `category:${category}`;
+          const groups = Object.entries(groupBy(categorySkills, (skill) => skill.group)).sort(([a], [b]) => a.localeCompare(b, 'es'));
+
+          addNode({ id: categoryId, parent: 'root', type: 'category', label: category, angle, radius: categoryRadius, x: categoryPoint.x, y: categoryPoint.y, baseX: categoryPoint.x, baseY: categoryPoint.y });
+          addLink('root', categoryId);
+
+          groups.forEach(([group, groupSkills], groupIndex) => {
+            const spread = Math.min(sector * 0.9, Math.PI / 1.35);
+            const groupAngle = angle - spread / 2 + spread * ((groupIndex + 0.5) / groups.length);
+            const groupPoint = polar(groupAngle, groupRadius);
+            const groupId = `${categoryId}:group:${group}`;
+
+            addNode({ id: groupId, parent: categoryId, type: 'group', label: group, angle: groupAngle, radius: groupRadius, x: groupPoint.x, y: groupPoint.y, baseX: groupPoint.x, baseY: groupPoint.y });
+            addLink(categoryId, groupId);
+
+            groupSkills.sort((a, b) => a.name.localeCompare(b.name, 'es')).forEach((skill, skillIndex) => {
+              const skillSpread = Math.min(spread / Math.max(groups.length, 1), Math.PI / 2.9);
+              const skillAngle = groupAngle - skillSpread / 2 + skillSpread * ((skillIndex + 0.5) / groupSkills.length);
+              const skillPoint = polar(skillAngle, skillRadius + (skillIndex % 3) * 34);
+              const skillId = `${groupId}:skill:${skill.name}`;
+
+              addNode({ id: skillId, parent: groupId, type: 'skill', label: skill.name, level: skill.level, weight: skill.weight, angle: skillAngle, radius: skillRadius, x: skillPoint.x, y: skillPoint.y, baseX: skillPoint.x, baseY: skillPoint.y });
+              addLink(groupId, skillId);
+            });
+          });
+        });
+      }
+
+      panX = 0;
+      panY = 0;
+      zoom = 1;
+      updateViewport();
+      renderFrame();
     }
 
     categoryButtons.forEach((button) => {
@@ -207,47 +286,113 @@ function experienceWeight(experience: string) {
     updateGroups();
     applySkillFilters();
 
-    const observer = new IntersectionObserver(([entry]) => {
-      active = entry.isIntersecting;
-      if (active && !reduceMotion && !isAnimating) animate();
-      if (!active) {
-        cancelAnimationFrame(animationId);
-        isAnimating = false;
-      }
-    });
+    function updateViewport() {
+      viewport?.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`);
+    }
 
-    cloud.addEventListener('pointerdown', (event) => {
-      dragging = true;
+    function renderFrame() {
+      time += reduceMotion ? 0 : 0.012;
+      const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
+
+      nodes.forEach((node, index) => {
+        const drift = reduceMotion || node.type === 'root' ? 0 : Math.sin(time + index * 0.7) * (node.type === 'skill' ? 5 : 2.4);
+        node.x = node.baseX + Math.cos(node.angle + Math.PI / 2) * drift;
+        node.y = node.baseY + Math.sin(node.angle + Math.PI / 2) * drift;
+        node.element?.setAttribute('transform', `translate(${node.x} ${node.y})`);
+      });
+
+      links.forEach((link) => {
+        const source = byId[link.source];
+        const target = byId[link.target];
+        if (!source || !target) return;
+        const midX = (source.x + target.x) / 2;
+        const midY = (source.y + target.y) / 2;
+        link.element?.setAttribute('d', `M ${source.x} ${source.y} Q ${midX * 0.92} ${midY * 0.92} ${target.x} ${target.y}`);
+      });
+
+      animationId = requestAnimationFrame(renderFrame);
+    }
+
+    function branchIds(nodeId: string) {
+      const ids = new Set([nodeId]);
+      let changed = true;
+
+      while (changed) {
+        changed = false;
+        nodes.forEach((node) => {
+          if (node.parent && ids.has(node.parent) && !ids.has(node.id)) {
+            ids.add(node.id);
+            changed = true;
+          }
+        });
+      }
+
+      let parent = nodes.find((node) => node.id === nodeId)?.parent;
+      while (parent) {
+        ids.add(parent);
+        parent = nodes.find((node) => node.id === parent)?.parent;
+      }
+
+      return ids;
+    }
+
+    function highlightBranch(nodeId: string) {
+      const ids = branchIds(nodeId);
+      skillMap.classList.add('is-dimmed');
+      nodes.forEach((node) => node.element?.classList.toggle('is-active', ids.has(node.id)));
+      links.forEach((link) => link.element?.classList.toggle('is-active', ids.has(link.source) && ids.has(link.target)));
+    }
+
+    function clearHighlight() {
+      skillMap.classList.remove('is-dimmed');
+      nodes.forEach((node) => node.element?.classList.remove('is-active'));
+      links.forEach((link) => link.element?.classList.remove('is-active'));
+    }
+
+    skillMap.addEventListener('pointerdown', (event) => {
+      isPanning = true;
       lastPointerX = event.clientX;
       lastPointerY = event.clientY;
-      cloud.setPointerCapture(event.pointerId);
+      skillMap.setPointerCapture(event.pointerId);
     });
 
-    cloud.addEventListener('pointermove', (event) => {
-      if (!dragging) return;
+    skillMap.addEventListener('pointermove', (event) => {
+      if (!isPanning) return;
       const deltaX = event.clientX - lastPointerX;
       const deltaY = event.clientY - lastPointerY;
 
-      targetRotationY += deltaX * 0.008;
-      targetRotationX = THREE.MathUtils.clamp(targetRotationX + deltaY * 0.008, -1.1, 1.1);
+      panX += deltaX;
+      panY += deltaY;
       lastPointerX = event.clientX;
       lastPointerY = event.clientY;
+      updateViewport();
     }, { passive: true });
 
-    cloud.addEventListener('pointerup', (event) => {
-      dragging = false;
-      cloud.releasePointerCapture(event.pointerId);
+    skillMap.addEventListener('pointerup', (event) => {
+      isPanning = false;
+      skillMap.releasePointerCapture(event.pointerId);
     });
 
-    cloud.addEventListener('pointerleave', () => {
-      dragging = false;
+    skillMap.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      const previousZoom = zoom;
+      const nextZoom = clamp(zoom * (event.deltaY > 0 ? 0.9 : 1.1), 0.48, 2.35);
+      const rect = skillMap.getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+
+      zoom = nextZoom;
+      panX = x - (x - panX) * (zoom / previousZoom);
+      panY = y - (y - panY) * (zoom / previousZoom);
+      updateViewport();
+    }, { passive: false });
+
+    skillMap.addEventListener('pointerleave', () => {
+      isPanning = false;
     });
 
     window.addEventListener('resize', () => {
-      layoutNodes();
-      projectNodes();
+      applySkillFilters();
     });
-    observer.observe(cloud);
-    setCloudMode();
   }
 </script>

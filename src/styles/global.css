@@ -273,46 +273,67 @@ section { padding: 42px 0; }
 .filter-button.active { background: rgba(45, 212, 191, 0.16); border-color: var(--accent); color: var(--accent-3); }
 .filter-button[hidden] { display: none; }
 
-.skill-cloud {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
-}
-.skill-cloud-3d {
+.skill-map {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.12), rgba(13, 32, 40, 0.28) 42%, rgba(7, 19, 25, 0.66));
   cursor: grab;
-  height: var(--cloud-height, clamp(280px, 34vw, 390px));
-  min-height: 0;
-  position: relative;
-  width: 100%;
-}
-.skill-cloud-3d:active {
-  cursor: grabbing;
-}
-.skill-cloud-3d.is-3d-ready {
-  display: block;
+  height: var(--skill-map-height, 560px);
+  margin-top: 18px;
   overflow: hidden;
+  position: relative;
+  touch-action: none;
 }
-.skill-cloud-3d.is-3d-ready .skill-chip {
-  background: rgba(13, 32, 40, 0.92);
-  box-shadow: 0 0 18px rgba(45, 212, 191, 0.14), inset 0 0 0 1px rgba(139, 255, 218, 0.05);
-  left: 0;
-  position: absolute;
-  top: 0;
-  transition: border-color 160ms ease, color 160ms ease, opacity 180ms ease;
-  white-space: nowrap;
-  will-change: transform, opacity;
+.skill-map:active { cursor: grabbing; }
+.skill-map-svg { display: block; height: 100%; width: 100%; }
+.skill-map-link {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.26);
+  stroke-linecap: round;
+  stroke-width: 1.3;
+  transition: opacity 180ms ease, stroke 180ms ease, stroke-width 180ms ease;
 }
-.skill-cloud-3d.is-3d-ready .skill-chip.level-experto {
-  box-shadow: 0 0 24px rgba(45, 212, 191, 0.22), inset 0 0 0 1px rgba(139, 255, 218, 0.12);
-  text-shadow: 0 0 12px rgba(139, 255, 218, 0.45);
+.skill-map-node { transition: opacity 180ms ease; }
+.skill-map-node rect {
+  fill: rgba(13, 32, 40, 0.9);
+  stroke: rgba(56, 189, 248, 0.62);
+  stroke-width: 1.2;
 }
-.skill-cloud-3d.is-3d-ready .skill-chip.level-básico,
-.skill-cloud-3d.is-3d-ready .skill-chip.level-basico {
-  color: var(--muted);
+.skill-map-node.is-root rect {
+  fill: rgba(45, 212, 191, 0.22);
+  stroke: var(--accent-3);
+  filter: drop-shadow(0 0 18px rgba(45, 212, 191, 0.28));
 }
+.skill-map-node.is-category rect {
+  fill: rgba(45, 212, 191, 0.14);
+  stroke: rgba(139, 255, 218, 0.78);
+}
+.skill-map-node.is-group rect {
+  fill: rgba(56, 189, 248, 0.12);
+}
+.skill-map-node.is-skill rect {
+  fill: rgba(13, 32, 40, 0.94);
+}
+.skill-map-node.level-experto rect {
+  stroke: rgba(139, 255, 218, 0.9);
+  filter: drop-shadow(0 0 10px rgba(45, 212, 191, 0.22));
+}
+.skill-map-label {
+  fill: var(--text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  pointer-events: none;
+  text-anchor: middle;
+}
+.skill-map-node.is-root .skill-map-label,
+.skill-map-node.is-category .skill-map-label { font-size: 0.86rem; font-weight: 800; }
+.skill-map-node.is-group .skill-map-label { fill: var(--accent-2); font-size: 0.76rem; }
+.skill-map-node.is-skill .skill-map-label { fill: var(--muted); font-size: 0.68rem; }
+.skill-map.is-dimmed .skill-map-node,
+.skill-map.is-dimmed .skill-map-link { opacity: 0.18; }
+.skill-map.is-dimmed .skill-map-node.is-active,
+.skill-map.is-dimmed .skill-map-link.is-active { opacity: 1; }
+.skill-map-link.is-active { stroke: var(--accent-3); stroke-width: 2.1; }
 .skill-chip {
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -381,7 +402,7 @@ section { padding: 42px 0; }
   .skills-list,
   .gallery { grid-template-columns: 1fr; }
   .animated-bg { opacity: 0.38; }
-  .skill-cloud-3d { height: var(--cloud-height, clamp(250px, 78vw, 340px)); }
+  .skill-map { height: var(--skill-map-height, 520px); }
   .project-card,
   .small-project-card { grid-column: 1 / -1; }
   .project-tags { justify-content: flex-start; }
@@ -389,14 +410,6 @@ section { padding: 42px 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .animated-bg { display: none; }
-  .skill-cloud-3d.is-3d-ready {
-    display: flex;
-    min-height: 0;
-    overflow: visible;
-  }
-  .skill-cloud-3d.is-3d-ready .skill-chip {
-    position: static;
-    transform: none !important;
-    white-space: normal;
-  }
+  .skill-map-link,
+  .skill-map-node { transition: none; }
 }
