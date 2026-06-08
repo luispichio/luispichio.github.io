@@ -293,6 +293,7 @@ section { padding: 42px 0; }
 
 .page-shell { padding: 48px 0; }
 .page-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 22px; }
+.page-heading > div { flex: 1 1 auto; min-width: 0; }
 .page-heading .prose { margin-bottom: 0; }
 .prose { max-width: 78ch; color: var(--muted); }
 .prose h2,
@@ -325,11 +326,13 @@ section { padding: 42px 0; }
 .site-footer p { margin: 0; }
 
 @media (max-width: 780px) {
-  .site-header { align-items: flex-start; flex-direction: column; }
-  .page-heading,
-  .section-title { align-items: flex-start; flex-direction: column; }
-  .back-home { margin-left: 0; }
-  .section-actions { justify-content: flex-start; }
+  .site-header { align-items: center; flex-wrap: wrap; }
+  .site-header nav { justify-content: flex-end; margin-left: auto; }
+  .page-heading { flex-wrap: nowrap; gap: 12px; }
+  .section-title { align-items: flex-end; flex-wrap: wrap; }
+  .back-home { flex: 0 0 auto; margin-left: auto; }
+  .section-title > :last-child,
+  .section-actions { justify-content: flex-end; margin-left: auto; }
   .hero,
   .grid,
   .focus-grid,
