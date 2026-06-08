@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import AnimatedBackground from '../components/AnimatedBackground.astro';
 import { profile } from '../data/profile';
 
 const { title = profile.name, description = profile.summary } = Astro.props;
@@ -17,6 +18,7 @@ const isExternal = (href: string) => href.startsWith('http');
     <title>{title}</title>
   </head>
   <body>
+    <AnimatedBackground />
     <header id="top" class="site-header">
       <a class="brand" href="/">Luis Pichio</a>
       <nav aria-label="Principal">

@@ -29,6 +29,16 @@ body {
   line-height: 1.6;
 }
 
+.animated-bg {
+  height: 100vh;
+  inset: 0;
+  opacity: 0.52;
+  pointer-events: none;
+  position: fixed;
+  width: 100vw;
+  z-index: -1;
+}
+
 a { color: inherit; }
 
 img { max-width: 100%; display: block; }
@@ -271,6 +281,38 @@ section { padding: 42px 0; }
   gap: 10px;
   margin-top: 18px;
 }
+.skill-cloud-3d {
+  cursor: grab;
+  height: var(--cloud-height, clamp(280px, 34vw, 390px));
+  min-height: 0;
+  position: relative;
+  width: 100%;
+}
+.skill-cloud-3d:active {
+  cursor: grabbing;
+}
+.skill-cloud-3d.is-3d-ready {
+  display: block;
+  overflow: hidden;
+}
+.skill-cloud-3d.is-3d-ready .skill-chip {
+  background: rgba(13, 32, 40, 0.92);
+  box-shadow: 0 0 18px rgba(45, 212, 191, 0.14), inset 0 0 0 1px rgba(139, 255, 218, 0.05);
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: border-color 160ms ease, color 160ms ease, opacity 180ms ease;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+.skill-cloud-3d.is-3d-ready .skill-chip.level-experto {
+  box-shadow: 0 0 24px rgba(45, 212, 191, 0.22), inset 0 0 0 1px rgba(139, 255, 218, 0.12);
+  text-shadow: 0 0 12px rgba(139, 255, 218, 0.45);
+}
+.skill-cloud-3d.is-3d-ready .skill-chip.level-básico,
+.skill-cloud-3d.is-3d-ready .skill-chip.level-basico {
+  color: var(--muted);
+}
 .skill-chip {
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -338,7 +380,23 @@ section { padding: 42px 0; }
   .focus-grid,
   .skills-list,
   .gallery { grid-template-columns: 1fr; }
+  .animated-bg { opacity: 0.38; }
+  .skill-cloud-3d { height: var(--cloud-height, clamp(250px, 78vw, 340px)); }
   .project-card,
   .small-project-card { grid-column: 1 / -1; }
   .project-tags { justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg { display: none; }
+  .skill-cloud-3d.is-3d-ready {
+    display: flex;
+    min-height: 0;
+    overflow: visible;
+  }
+  .skill-cloud-3d.is-3d-ready .skill-chip {
+    position: static;
+    transform: none !important;
+    white-space: normal;
+  }
 }

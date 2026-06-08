@@ -1,0 +1,96 @@
+<canvas class="animated-bg" data-animated-bg aria-hidden="true"></canvas>
+
+<script>
+  import * as THREE from 'three';
+
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-animated-bg]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (canvas && !reduceMotion) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 120);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    const pointer = new THREE.Vector2(0, 0);
+    const isSmall = window.matchMedia('(max-width: 780px)').matches;
+    const count = isSmall ? 42 : 78;
+    const range = isSmall ? 7 : 9;
+    const positions = new Float32Array(count * 3);
+    const velocities = Array.from({ length: count }, () => new THREE.Vector3(
+      (Math.random() - 0.5) * 0.004,
+      (Math.random() - 0.5) * 0.004,
+      (Math.random() - 0.5) * 0.004,
+    ));
+    const points = Array.from({ length: count }, (_, index) => {
+      const base = index * 3;
+      positions[base] = (Math.random() - 0.5) * range;
+      positions[base + 1] = (Math.random() - 0.5) * range;
+      positions[base + 2] = (Math.random() - 0.5) * range;
+      return new THREE.Vector3(positions[base], positions[base + 1], positions[base + 2]);
+    });
+
+    const pointGeometry = new THREE.BufferGeometry();
+    pointGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    scene.add(new THREE.Points(pointGeometry, new THREE.PointsMaterial({ color: 0x8bffda, size: 0.035, transparent: true, opacity: 0.7 })));
+
+    const lineGeometry = new THREE.BufferGeometry();
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.16 });
+    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(lines);
+
+    camera.position.z = 6.8;
+
+    function resize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      renderer.setSize(width, height, false);
+    }
+
+    function updateLines() {
+      const linePositions: number[] = [];
+      const limit = isSmall ? 1.45 : 1.75;
+
+      for (let a = 0; a < points.length; a += 1) {
+        for (let b = a + 1; b < points.length; b += 1) {
+          if (points[a].distanceTo(points[b]) < limit) {
+            linePositions.push(points[a].x, points[a].y, points[a].z, points[b].x, points[b].y, points[b].z);
+          }
+        }
+      }
+
+      lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+    }
+
+    function animate() {
+      points.forEach((point, index) => {
+        const velocity = velocities[index];
+        point.add(velocity);
+        ['x', 'y', 'z'].forEach((axis) => {
+          if (Math.abs(point[axis as 'x' | 'y' | 'z']) > range / 2) velocity[axis as 'x' | 'y' | 'z'] *= -1;
+        });
+        const base = index * 3;
+        positions[base] = point.x;
+        positions[base + 1] = point.y;
+        positions[base + 2] = point.z;
+      });
+
+      pointGeometry.attributes.position.needsUpdate = true;
+      updateLines();
+      scene.rotation.x += (pointer.y * 0.06 - scene.rotation.x) * 0.012;
+      scene.rotation.y += (pointer.x * 0.08 - scene.rotation.y) * 0.012;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('pointermove', (event) => {
+      pointer.x = event.clientX / window.innerWidth - 0.5;
+      pointer.y = event.clientY / window.innerHeight - 0.5;
+    }, { passive: true });
+
+    resize();
+    animate();
+  }
+</script>

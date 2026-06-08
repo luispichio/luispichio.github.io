@@ -35,7 +35,7 @@ function experienceWeight(experience: string) {
   </div>
 </div>
 
-<div class="skill-cloud" data-skill-list>
+<div class="skill-cloud skill-cloud-3d" data-skill-list data-skill-cloud-3d>
   {sortedSkills.map((skill) => (
     <span
       class={`skill-chip filter-item level-${skill.level.toLowerCase()}`}
@@ -49,14 +49,103 @@ function experienceWeight(experience: string) {
   ))}
 </div>
 
-<script is:inline>
+<script>
+  import * as THREE from 'three';
+
   const skillPanel = document.querySelector('[data-skill-filters]');
   const skillList = document.querySelector('[data-skill-list]');
 
   if (skillPanel && skillList) {
     const categoryButtons = skillPanel.querySelectorAll('[data-skill-category]');
     const groupButtons = skillPanel.querySelectorAll('[data-skill-group]');
-    const skills = skillList.querySelectorAll('.filter-item');
+    const skills = Array.from(skillList.querySelectorAll<HTMLElement>('.filter-item'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cloud = skillList as HTMLElement;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    const group = new THREE.Group();
+    const isMobile = window.matchMedia('(max-width: 780px)').matches;
+    const nodes = skills.map((element) => ({ element, point: new THREE.Vector3(), visible: true }));
+    let animationId = 0;
+    let active = true;
+    let isAnimating = false;
+    let dragging = false;
+    let lastPointerX = 0;
+    let lastPointerY = 0;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+
+    scene.add(group);
+    camera.position.z = 7;
+
+    function fibonacciPoint(index: number, total: number, radius: number) {
+      const offset = 2 / total;
+      const increment = Math.PI * (3 - Math.sqrt(5));
+      const y = index * offset - 1 + offset / 2;
+      const distance = Math.sqrt(1 - y * y);
+      const phi = index * increment;
+
+      return new THREE.Vector3(
+        Math.cos(phi) * distance * radius * 1.72,
+        y * radius * 0.68,
+        Math.sin(phi) * distance * radius * 0.92,
+      );
+    }
+
+    function layoutNodes() {
+      const visibleNodes = nodes.filter((node) => node.visible);
+      const visibleCount = visibleNodes.length;
+      const radius = THREE.MathUtils.clamp(1.15 + Math.sqrt(Math.max(visibleCount, 1)) * 0.23, 1.35, isMobile ? 2.35 : 2.85);
+      const height = THREE.MathUtils.clamp(190 + visibleCount * (isMobile ? 5.2 : 4.1), isMobile ? 250 : 280, isMobile ? 340 : 390);
+
+      cloud.style.setProperty('--cloud-height', `${Math.round(height)}px`);
+
+      visibleNodes.forEach((node, index) => {
+        node.point.copy(fibonacciPoint(index, visibleCount, radius));
+      });
+    }
+
+    function projectNodes() {
+      const width = cloud.clientWidth;
+      const height = cloud.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      camera.updateMatrixWorld();
+      group.updateMatrixWorld();
+
+      nodes.forEach((node) => {
+        const projected = node.point.clone().applyMatrix4(group.matrixWorld).project(camera);
+        const x = (projected.x * 0.5 + 0.5) * width;
+        const y = (-projected.y * 0.5 + 0.5) * height;
+        const depth = THREE.MathUtils.clamp(1 - projected.z, 0, 1);
+        const scale = THREE.MathUtils.clamp(0.78 + depth * 0.32, 0.72, 1.2);
+        const opacity = node.visible ? THREE.MathUtils.clamp(0.62 + depth * 0.38, 0.62, 1) : 0;
+
+        node.element.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${scale})`;
+        node.element.style.opacity = `${opacity}`;
+        node.element.style.pointerEvents = node.visible ? 'auto' : 'none';
+        node.element.style.zIndex = `${Math.round((1 - projected.z) * 1000)}`;
+      });
+    }
+
+    function animate() {
+      if (!active || reduceMotion) {
+        isAnimating = false;
+        return;
+      }
+      isAnimating = true;
+      if (!dragging) targetRotationY += 0.0032;
+      group.rotation.y += (targetRotationY - group.rotation.y) * 0.08;
+      group.rotation.x += (targetRotationX - group.rotation.x) * 0.08;
+      projectNodes();
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function setCloudMode() {
+      cloud.classList.add('is-3d-ready');
+      projectNodes();
+      if (!reduceMotion && !isAnimating) animate();
+    }
 
     function selectedCategory() {
       return skillPanel.querySelector('[data-skill-category].active')?.getAttribute('data-skill-category') || 'todos';
@@ -83,11 +172,18 @@ function experienceWeight(experience: string) {
       const category = selectedCategory();
       const group = selectedGroup();
 
-      skills.forEach((skill) => {
+      skills.forEach((skill, index) => {
         const matchesCategory = category === 'todos' || skill.getAttribute('data-category') === category;
         const matchesGroup = group === 'todos' || skill.getAttribute('data-group') === group;
-        skill.hidden = !(matchesCategory && matchesGroup);
+        const isVisible = matchesCategory && matchesGroup;
+
+        nodes[index].visible = isVisible;
+        skill.hidden = false;
+        skill.toggleAttribute('aria-hidden', !isVisible);
       });
+
+      layoutNodes();
+      projectNodes();
     }
 
     categoryButtons.forEach((button) => {
@@ -109,5 +205,49 @@ function experienceWeight(experience: string) {
     });
 
     updateGroups();
+    applySkillFilters();
+
+    const observer = new IntersectionObserver(([entry]) => {
+      active = entry.isIntersecting;
+      if (active && !reduceMotion && !isAnimating) animate();
+      if (!active) {
+        cancelAnimationFrame(animationId);
+        isAnimating = false;
+      }
+    });
+
+    cloud.addEventListener('pointerdown', (event) => {
+      dragging = true;
+      lastPointerX = event.clientX;
+      lastPointerY = event.clientY;
+      cloud.setPointerCapture(event.pointerId);
+    });
+
+    cloud.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      const deltaX = event.clientX - lastPointerX;
+      const deltaY = event.clientY - lastPointerY;
+
+      targetRotationY += deltaX * 0.008;
+      targetRotationX = THREE.MathUtils.clamp(targetRotationX + deltaY * 0.008, -1.1, 1.1);
+      lastPointerX = event.clientX;
+      lastPointerY = event.clientY;
+    }, { passive: true });
+
+    cloud.addEventListener('pointerup', (event) => {
+      dragging = false;
+      cloud.releasePointerCapture(event.pointerId);
+    });
+
+    cloud.addEventListener('pointerleave', () => {
+      dragging = false;
+    });
+
+    window.addEventListener('resize', () => {
+      layoutNodes();
+      projectNodes();
+    });
+    observer.observe(cloud);
+    setCloudMode();
   }
 </script>
