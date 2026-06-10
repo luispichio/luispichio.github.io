@@ -511,7 +511,7 @@ function experienceWeight(experience: string) {
       const distance = Math.hypot(dx, dy) || 1;
       const start = nodeEdgePoint(source, target);
       const end = nodeEdgePoint(target, source);
-      const bend = Math.min(distance * 0.32, 120);
+      const bend = Math.min(distance * 0.18, 72);
       const sourceAngle = Math.atan2(source.y, source.x);
       const targetAngle = Math.atan2(target.y, target.x);
       const control1 = {
