@@ -47,7 +47,7 @@ img { max-width: 100%; display: block; }
 .site-footer,
 main > section,
 .page-shell {
-  width: min(1536px, calc(100% - 32px));
+  width: min(1536px, calc(100% - 64px));
   margin-inline: auto;
 }
 
@@ -328,6 +328,50 @@ section { padding: 42px 0; }
   min-width: 34px;
   padding-inline: 10px;
 }
+.skill-map-search {
+  align-items: center;
+  background: rgba(7, 19, 25, 0.86);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  border-radius: 999px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  color: var(--muted);
+  display: grid;
+  font-size: 0.76rem;
+  gap: 8px;
+  grid-template-columns: auto minmax(160px, 240px) auto;
+  left: 14px;
+  padding: 7px 10px 7px 13px;
+  position: absolute;
+  top: 14px;
+  z-index: 2;
+}
+.skill-map-search span { color: var(--accent-2); font-weight: 800; }
+.skill-map-search input {
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  font: inherit;
+  min-width: 0;
+  outline: none;
+  width: 100%;
+}
+.skill-map-search input::placeholder { color: rgba(143, 179, 173, 0.76); }
+.skill-map-search:focus-within { border-color: var(--accent); }
+.skill-map-search button {
+  background: rgba(13, 32, 40, 0.86);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  height: 24px;
+  line-height: 1;
+  padding: 0;
+  width: 24px;
+}
+.skill-map-search button:hover { border-color: var(--accent); color: var(--accent-3); }
+.skill-map-search button[hidden] { display: none; }
 .skill-map-filter-strip {
   align-items: center;
   background: rgba(7, 19, 25, 0.82);
@@ -503,6 +547,7 @@ section { padding: 42px 0; }
   .skill-map { height: var(--skill-map-height, 680px); }
   .skill-map-help,
   .skill-map-controls,
+  .skill-map-search,
   .skill-map-filter-strip { position: absolute; }
   .skill-map-help {
     font-size: 0.72rem;
@@ -513,6 +558,13 @@ section { padding: 42px 0; }
   .skill-map-controls {
     justify-content: flex-end;
     left: 10px;
+    right: 10px;
+    top: 58px;
+  }
+  .skill-map-search {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    left: 10px;
+    max-width: calc(100% - 20px);
     right: 10px;
     top: 10px;
   }

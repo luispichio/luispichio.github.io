@@ -27,6 +27,11 @@ function experienceWeight(experience: string) {
     <button class="filter-button map-control" type="button" data-skill-reset-view>Reset vista</button>
     <button class="filter-button map-control icon-control" type="button" data-skill-toggle-help title="Cómo explorar" aria-label="Cómo explorar">?</button>
   </div>
+  <label class="skill-map-search" aria-label="Buscar en el mapa de skills">
+    <span>Buscar</span>
+    <input type="search" placeholder="Skill, grupo o categoría" autocomplete="off" spellcheck="false" data-skill-text-filter />
+    <button type="button" title="Limpiar búsqueda" aria-label="Limpiar búsqueda" data-skill-clear-text hidden>×</button>
+  </label>
   <div class="skill-map-filter-strip" aria-label="Filtros de experiencia y nivel">
     <small data-skill-filter-summary>Filtro: todos</small>
     <label class="range-control">
@@ -51,7 +56,7 @@ function experienceWeight(experience: string) {
 
   if (skillMap && skillData) {
     type Skill = { category: string; group: string; name: string; experience: string; level: string; weight: number; years: number };
-    type FilterState = { category: string; group: string; minExperience: number };
+    type FilterState = { category: string; group: string; minExperience: number; query: string };
     type MapNode = { id: string; parent?: string; type: string; label: string; category?: string; group?: string; experience?: string; level?: string; weight?: number; angle: number; radius: number; offsetX: number; offsetY: number; x: number; y: number; baseX: number; baseY: number; width?: number; height?: number; element?: SVGGElement };
 
     const svg = skillMap.querySelector<SVGSVGElement>('[data-skill-map-svg]');
@@ -64,6 +69,8 @@ function experienceWeight(experience: string) {
     const zoomOutButton = skillMap.querySelector<HTMLButtonElement>('[data-skill-zoom-out]');
     const toggleHelpButton = skillMap.querySelector<HTMLButtonElement>('[data-skill-toggle-help]');
     const helpPanel = skillMap.querySelector<HTMLElement>('[data-skill-help]');
+    const textFilter = skillMap.querySelector<HTMLInputElement>('[data-skill-text-filter]');
+    const clearTextButton = skillMap.querySelector<HTMLButtonElement>('[data-skill-clear-text]');
     const experienceFilter = skillMap.querySelector<HTMLInputElement>('[data-skill-experience-filter]');
     const experienceValue = skillMap.querySelector<HTMLElement>('[data-skill-experience-value]');
     const filterSummary = skillMap.querySelector<HTMLElement>('[data-skill-filter-summary]');
@@ -87,14 +94,20 @@ function experienceWeight(experience: string) {
     let activeCategory = 'todos';
     let activeGroup = 'todos';
     let minExperience = 0;
+    let textQuery = '';
     let filterHistory: FilterState[] = [];
     let sliderHistoryArmed = false;
+    let textHistoryArmed = false;
     let ellipseScaleX = 1;
     let ellipseScaleY = 1;
 
     function experienceYears(experience: string) {
       if (experience.includes('<')) return 0;
       return Number(experience.match(/\d+/)?.[0] ?? 0);
+    }
+
+    function normalizeText(value: string) {
+      return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
     }
 
     function updateResetFilterButton() {
@@ -108,22 +121,25 @@ function experienceWeight(experience: string) {
       if (activeCategory !== 'todos') parts.push(activeCategory);
       if (activeGroup !== 'todos') parts.push(activeGroup);
       if (minExperience > 0) parts.push(`+${minExperience} años`);
+      if (textQuery) parts.push(`"${textQuery}"`);
       filterSummary.textContent = `Filtro: ${parts.length > 0 ? parts.join(' / ') : 'todos'}`;
     }
 
     function updateFilterUi() {
       if (experienceFilter) experienceFilter.value = `${experienceSteps.indexOf(minExperience)}`;
       if (experienceValue) experienceValue.textContent = minExperience === 0 ? '0 años' : `+${minExperience} años`;
+      if (textFilter && textFilter.value !== textQuery) textFilter.value = textQuery;
+      if (clearTextButton) clearTextButton.hidden = textQuery.length === 0;
       updateResetFilterButton();
       updateFilterSummary();
     }
 
     function currentFilterState(): FilterState {
-      return { category: activeCategory, group: activeGroup, minExperience };
+      return { category: activeCategory, group: activeGroup, minExperience, query: textQuery };
     }
 
     function sameFilterState(a: FilterState, b: FilterState) {
-      return a.category === b.category && a.group === b.group && a.minExperience === b.minExperience;
+      return a.category === b.category && a.group === b.group && a.minExperience === b.minExperience && a.query === b.query;
     }
 
     function pushFilterState() {
@@ -137,6 +153,7 @@ function experienceWeight(experience: string) {
       activeCategory = state.category;
       activeGroup = state.group;
       minExperience = state.minExperience;
+      textQuery = state.query;
       applySkillFilters();
     }
 
@@ -154,11 +171,13 @@ function experienceWeight(experience: string) {
     }
 
     function applySkillFilters() {
+      const normalizedQuery = normalizeText(textQuery);
       const visibleSkills = skills.filter((skill) => {
         const matchesCategory = activeCategory === 'todos' || skill.category === activeCategory;
         const matchesGroup = activeGroup === 'todos' || skill.group === activeGroup;
         const matchesExperience = skill.years >= minExperience;
-        return matchesCategory && matchesGroup && matchesExperience;
+        const matchesText = normalizedQuery.length === 0 || [skill.name, skill.group, skill.category, skill.level, skill.experience].some((value) => normalizeText(value).includes(normalizedQuery));
+        return matchesCategory && matchesGroup && matchesExperience && matchesText;
       });
 
       drawMap(visibleSkills);
@@ -479,6 +498,27 @@ function experienceWeight(experience: string) {
     experienceFilter?.addEventListener('change', () => {
       sliderHistoryArmed = false;
     });
+    textFilter?.addEventListener('input', () => {
+      if (!textHistoryArmed) {
+        pushFilterState();
+        textHistoryArmed = true;
+      }
+
+      textQuery = textFilter.value.trim();
+      applySkillFilters();
+    });
+    textFilter?.addEventListener('change', () => {
+      textHistoryArmed = false;
+    });
+    textFilter?.addEventListener('blur', () => {
+      textHistoryArmed = false;
+    });
+    clearTextButton?.addEventListener('click', () => {
+      if (!textQuery) return;
+      applyFilterChange(() => {
+        textQuery = '';
+      });
+    });
 
     resetViewButton?.addEventListener('click', resetView);
     backFilterButton?.addEventListener('click', goBackFilter);
@@ -491,6 +531,8 @@ function experienceWeight(experience: string) {
     zoomOutButton?.addEventListener('pointerdown', (event) => event.stopPropagation());
     toggleHelpButton?.addEventListener('pointerdown', (event) => event.stopPropagation());
     experienceFilter?.addEventListener('pointerdown', (event) => event.stopPropagation());
+    textFilter?.addEventListener('pointerdown', (event) => event.stopPropagation());
+    clearTextButton?.addEventListener('pointerdown', (event) => event.stopPropagation());
 
     window.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape' || !helpPanel || helpPanel.hidden) return;
