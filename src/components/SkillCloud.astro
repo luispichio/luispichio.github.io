@@ -52,7 +52,7 @@ function experienceWeight(experience: string) {
   if (skillMap && skillData) {
     type Skill = { category: string; group: string; name: string; experience: string; level: string; weight: number; years: number };
     type FilterState = { category: string; group: string; minExperience: number };
-    type MapNode = { id: string; parent?: string; type: string; label: string; category?: string; group?: string; experience?: string; level?: string; weight?: number; angle: number; radius: number; offsetX: number; offsetY: number; x: number; y: number; baseX: number; baseY: number; element?: SVGGElement };
+    type MapNode = { id: string; parent?: string; type: string; label: string; category?: string; group?: string; experience?: string; level?: string; weight?: number; angle: number; radius: number; offsetX: number; offsetY: number; x: number; y: number; baseX: number; baseY: number; width?: number; height?: number; element?: SVGGElement };
 
     const svg = skillMap.querySelector<SVGSVGElement>('[data-skill-map-svg]');
     const viewport = skillMap.querySelector<SVGGElement>('[data-skill-map-viewport]');
@@ -89,6 +89,8 @@ function experienceWeight(experience: string) {
     let minExperience = 0;
     let filterHistory: FilterState[] = [];
     let sliderHistoryArmed = false;
+    let ellipseScaleX = 1;
+    let ellipseScaleY = 1;
 
     function experienceYears(experience: string) {
       if (experience.includes('<')) return 0;
@@ -168,7 +170,7 @@ function experienceWeight(experience: string) {
     }
 
     function ellipsePoint(angle: number, radius: number) {
-      return { x: Math.cos(angle) * radius * 1.34, y: Math.sin(angle) * radius * 0.68 };
+      return { x: Math.cos(angle) * radius * ellipseScaleX, y: Math.sin(angle) * radius * ellipseScaleY };
     }
 
     function clamp(value: number, min: number, max: number) {
@@ -182,6 +184,23 @@ function experienceWeight(experience: string) {
         result[entry].push(item);
         return result;
       }, {});
+    }
+
+    function sectorAngle(start: number, span: number, index: number, total: number) {
+      if (total <= 1) return start + span / 2;
+      return start + span * ((index + 0.5) / total);
+    }
+
+    function childSectors<T>(items: T[], weight: (item: T) => number, start = -Math.PI / 2, span = Math.PI * 2) {
+      const totalWeight = items.reduce((sum, item) => sum + Math.max(1, weight(item)), 0) || 1;
+      let cursor = start;
+
+      return items.map((item) => {
+        const itemSpan = span * (Math.max(1, weight(item)) / totalWeight);
+        const sector = { item, start: cursor, span: itemSpan, center: cursor + itemSpan / 2 };
+        cursor += itemSpan;
+        return sector;
+      });
     }
 
     function interleavedPoint(angle: number, radius: number, index: number, intensity = 1) {
@@ -300,6 +319,8 @@ function experienceWeight(experience: string) {
       const minWidth = node.type === 'root' ? 96 : node.type === 'category' ? 104 : node.type === 'group' ? 86 : 56;
       const maxWidth = node.type === 'skill' ? 190 : 220;
       const width = clamp(node.label.length * 7.4 + 28, minWidth, maxWidth);
+      node.width = width;
+      node.height = nodeHeight;
 
       shape.setAttribute('x', `${-width / 2}`);
       shape.setAttribute('y', `${-nodeHeight / 2}`);
@@ -360,10 +381,17 @@ function experienceWeight(experience: string) {
       cancelAnimationFrame(animationId);
       clearMap();
       const width = skillMap.clientWidth;
-      const height = 780;
-      const layoutBase = Math.min(width / 1.34, height / 0.68);
-      const categoryRadius = clamp(layoutBase * 0.18, 128, 210);
-      const groupRadius = clamp(layoutBase * 0.31, 230, 380);
+      const height = clamp(width * 0.72, 620, 860);
+      const horizontalPadding = 180;
+      const verticalPadding = 130;
+      const ellipseWidth = Math.max(width - horizontalPadding, width * 0.58);
+      const ellipseHeight = Math.max(height - verticalPadding, height * 0.58);
+      const aspect = clamp(ellipseWidth / ellipseHeight, 0.86, 1.9);
+      ellipseScaleX = Math.sqrt(aspect);
+      ellipseScaleY = 1 / ellipseScaleX;
+      const layoutBase = Math.min(ellipseWidth / ellipseScaleX, ellipseHeight / ellipseScaleY);
+      const categoryRadius = clamp(layoutBase * 0.13, 92, 154);
+      const groupRadius = clamp(layoutBase * 0.28, 230, 380);
       const skillRadius = clamp(layoutBase * 0.43, 360, 610);
       const categories = Object.entries(groupBy(visibleSkills, (skill) => skill.category)).sort(([a], [b]) => a.localeCompare(b, 'es'));
       const selectedCategoryValue = activeCategory;
@@ -380,7 +408,7 @@ function experienceWeight(experience: string) {
 
         addNode({ id: rootId, type: 'group', label: groupLabel, category: selectedCategoryValue, group: groupLabel, angle: 0, radius: 0, offsetX: 0, offsetY: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
         rootSkills.forEach((skill, skillIndex) => {
-          const skillAngle = -Math.PI / 2 + (Math.PI * 2 * skillIndex) / Math.max(rootSkills.length, 1);
+          const skillAngle = sectorAngle(-Math.PI / 2, Math.PI * 2, skillIndex, rootSkills.length);
           const skillPoint = interleavedPoint(skillAngle, categoryRadius + (skillIndex % 3) * 34, skillIndex, 1.15);
           addSkillNode(skill, `${rootId}:skill:${skill.name}`, rootId, skillAngle, skillPoint, categoryRadius);
         });
@@ -390,8 +418,8 @@ function experienceWeight(experience: string) {
         const groups = Object.entries(groupBy(visibleSkills, (skill) => skill.group)).sort(([a], [b]) => a.localeCompare(b, 'es'));
 
         addNode({ id: rootId, type: 'category', label: categoryLabel, category: categoryLabel, angle: 0, radius: 0, offsetX: 0, offsetY: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
-        groups.forEach(([group, groupSkills], groupIndex) => {
-          const groupAngle = -Math.PI / 2 + (Math.PI * 2 * groupIndex) / Math.max(groups.length, 1);
+        childSectors(groups, ([, groupSkills]) => groupSkills.length).forEach(({ item: [group, groupSkills], start, span, center }, groupIndex) => {
+          const groupAngle = center;
           const groupPoint = interleavedPoint(groupAngle, categoryRadius, groupIndex, 0.8);
           const groupId = `${rootId}:group:${group}`;
 
@@ -399,8 +427,8 @@ function experienceWeight(experience: string) {
           addLink(rootId, groupId);
 
           groupSkills.sort((a, b) => a.name.localeCompare(b.name, 'es')).forEach((skill, skillIndex) => {
-            const skillSpread = Math.PI / Math.max(2.2, groups.length * 0.62);
-            const skillAngle = groupAngle - skillSpread / 2 + skillSpread * ((skillIndex + 0.5) / groupSkills.length);
+            const skillPadding = Math.min(span * 0.12, 0.18);
+            const skillAngle = sectorAngle(start + skillPadding, Math.max(0, span - skillPadding * 2), skillIndex, groupSkills.length);
             const skillPoint = interleavedPoint(skillAngle, groupRadius + (skillIndex % 3) * 34, skillIndex, 1.15);
             addSkillNode(skill, `${groupId}:skill:${skill.name}`, groupId, skillAngle, skillPoint, groupRadius);
           });
@@ -408,9 +436,7 @@ function experienceWeight(experience: string) {
       } else {
         addNode({ id: 'root', type: 'root', label: 'Skills', angle: 0, radius: 0, offsetX: 0, offsetY: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
 
-        categories.forEach(([category, categorySkills], categoryIndex) => {
-          const sector = (Math.PI * 2) / Math.max(categories.length, 1);
-          const angle = -Math.PI / 2 + categoryIndex * sector;
+        childSectors(categories, ([, categorySkills]) => categorySkills.length).forEach(({ item: [category, categorySkills], start: categoryStart, span: categorySpan, center: angle }, categoryIndex) => {
           const categoryPoint = interleavedPoint(angle, categoryRadius, categoryIndex, 0.65);
           const categoryId = `category:${category}`;
           const groups = Object.entries(groupBy(categorySkills, (skill) => skill.group)).sort(([a], [b]) => a.localeCompare(b, 'es'));
@@ -418,9 +444,8 @@ function experienceWeight(experience: string) {
           addNode({ id: categoryId, parent: 'root', type: 'category', label: category, category, angle, radius: categoryRadius, offsetX: categoryPoint.offsetX, offsetY: categoryPoint.offsetY, x: categoryPoint.x, y: categoryPoint.y, baseX: categoryPoint.x, baseY: categoryPoint.y });
           addLink('root', categoryId);
 
-          groups.forEach(([group, groupSkills], groupIndex) => {
-            const spread = Math.min(sector * 0.9, Math.PI / 1.35);
-            const groupAngle = angle - spread / 2 + spread * ((groupIndex + 0.5) / groups.length);
+          const categoryPadding = Math.min(categorySpan * 0.08, 0.16);
+          childSectors(groups, ([, groupSkills]) => groupSkills.length, categoryStart + categoryPadding, Math.max(0, categorySpan - categoryPadding * 2)).forEach(({ item: [group, groupSkills], start: groupStart, span: groupSpan, center: groupAngle }, groupIndex) => {
             const groupPoint = interleavedPoint(groupAngle, groupRadius, groupIndex, 0.9);
             const groupId = `${categoryId}:group:${group}`;
 
@@ -428,8 +453,8 @@ function experienceWeight(experience: string) {
             addLink(categoryId, groupId);
 
             groupSkills.sort((a, b) => a.name.localeCompare(b.name, 'es')).forEach((skill, skillIndex) => {
-              const skillSpread = Math.min(spread / Math.max(groups.length, 1), Math.PI / 2.9);
-              const skillAngle = groupAngle - skillSpread / 2 + skillSpread * ((skillIndex + 0.5) / groupSkills.length);
+              const skillPadding = Math.min(groupSpan * 0.12, 0.12);
+              const skillAngle = sectorAngle(groupStart + skillPadding, Math.max(0, groupSpan - skillPadding * 2), skillIndex, groupSkills.length);
               const skillPoint = interleavedPoint(skillAngle, skillRadius + (skillIndex % 3) * 34, skillIndex, 1.2);
               addSkillNode(skill, `${groupId}:skill:${skill.name}`, groupId, skillAngle, skillPoint, skillRadius);
             });
@@ -484,15 +509,34 @@ function experienceWeight(experience: string) {
       const dx = target.x - source.x;
       const dy = target.y - source.y;
       const distance = Math.hypot(dx, dy) || 1;
-      const sourceInset = source.type === 'root' ? 34 : source.type === 'category' ? 42 : 36;
-      const targetInset = target.type === 'skill' ? 58 : target.type === 'category' ? 48 : 42;
-      const startX = source.x + (dx / distance) * sourceInset;
-      const startY = source.y + (dy / distance) * sourceInset;
-      const endX = target.x - (dx / distance) * targetInset;
-      const endY = target.y - (dy / distance) * targetInset;
-      const midX = (startX + endX) / 2;
-      const midY = (startY + endY) / 2;
-      return `M ${startX} ${startY} Q ${midX * 0.92} ${midY * 0.92} ${endX} ${endY}`;
+      const start = nodeEdgePoint(source, target);
+      const end = nodeEdgePoint(target, source);
+      const bend = Math.min(distance * 0.32, 120);
+      const sourceAngle = Math.atan2(source.y, source.x);
+      const targetAngle = Math.atan2(target.y, target.x);
+      const control1 = {
+        x: start.x + Math.cos(source.radius === 0 ? Math.atan2(dy, dx) : sourceAngle) * bend,
+        y: start.y + Math.sin(source.radius === 0 ? Math.atan2(dy, dx) : sourceAngle) * bend,
+      };
+      const control2 = {
+        x: end.x - Math.cos(target.radius === 0 ? Math.atan2(dy, dx) : targetAngle) * bend,
+        y: end.y - Math.sin(target.radius === 0 ? Math.atan2(dy, dx) : targetAngle) * bend,
+      };
+
+      return `M ${start.x} ${start.y} C ${control1.x} ${control1.y} ${control2.x} ${control2.y} ${end.x} ${end.y}`;
+    }
+
+    function nodeEdgePoint(node: MapNode, toward: MapNode) {
+      const dx = toward.x - node.x;
+      const dy = toward.y - node.y;
+      const halfWidth = (node.width ?? 80) / 2 + 3;
+      const halfHeight = (node.height ?? 28) / 2 + 3;
+      const scale = Math.min(halfWidth / Math.max(Math.abs(dx), 0.001), halfHeight / Math.max(Math.abs(dy), 0.001));
+
+      return {
+        x: node.x + dx * scale,
+        y: node.y + dy * scale,
+      };
     }
 
     function renderFrame() {

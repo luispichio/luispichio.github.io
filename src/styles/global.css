@@ -364,9 +364,9 @@ section { padding: 42px 0; }
 .skill-map-link {
   fill: none;
   pointer-events: none;
-  stroke: rgba(56, 189, 248, 0.26);
+  stroke: rgba(56, 189, 248, 0.22);
   stroke-linecap: round;
-  stroke-width: 1.3;
+  stroke-width: 1.15;
   transition: opacity 180ms ease, stroke 180ms ease, stroke-width 180ms ease;
 }
 .skill-map-node { transition: opacity 180ms ease; }
@@ -379,16 +379,16 @@ section { padding: 42px 0; }
   stroke-width: 1.2;
 }
 .skill-map-node.is-root rect {
-  fill: rgba(45, 212, 191, 0.22);
+  fill: rgb(15, 55, 55);
   stroke: var(--accent-3);
   filter: drop-shadow(0 0 18px rgba(45, 212, 191, 0.28));
 }
 .skill-map-node.is-category rect {
-  fill: rgba(45, 212, 191, 0.14);
+  fill: rgb(12, 58, 55);
   stroke: rgba(139, 255, 218, 0.78);
 }
 .skill-map-node.is-group rect {
-  fill: rgba(56, 189, 248, 0.12);
+  fill: rgb(11, 45, 59);
 }
 .skill-map-node.is-skill rect {
   fill: rgba(13, 32, 40, 0.94);
