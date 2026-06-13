@@ -27,11 +27,11 @@ export const profile = {
     },
   ],
   socials: [
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/luispichio' },
-    { label: 'GitHub', href: 'https://github.com/luispichio' },
-    { label: 'Blog', href: 'https://luispichio.blogspot.com' },
-    { label: 'Email', href: 'mailto:luispichio@gmail.com' },
-    { label: 'LW6DIO', href: 'http://qsl.net/lw6dio' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/luispichio', icon: 'linkedin' },
+    { label: 'GitHub', href: 'https://github.com/luispichio', icon: 'github' },
+    { label: 'Blog', href: 'https://luispichio.blogspot.com', icon: 'blog' },
+    { label: 'Email', href: 'mailto:luispichio@gmail.com', icon: 'email' },
+    { label: 'LW6DIO', href: 'http://qsl.net/lw6dio', icon: 'radio' },
   ],
 };
 

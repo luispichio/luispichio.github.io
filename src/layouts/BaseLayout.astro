@@ -6,6 +6,14 @@ import { profile } from '../data/profile';
 const { title = profile.name, description = profile.summary } = Astro.props;
 const year = new Date().getFullYear();
 const isExternal = (href: string) => href.startsWith('http');
+const iconPaths: Record<string, string> = {
+  linkedin: '<path d="M5.8 8.6h3.1V19H5.8V8.6Zm1.6-5A1.8 1.8 0 1 1 7.3 7a1.8 1.8 0 0 1 .1-3.5ZM10.8 8.6h3v1.5h.1c.4-.8 1.5-1.8 3-1.8 3.2 0 3.8 2.1 3.8 4.8V19h-3.1v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V19h-3.1V8.6Z" />',
+  github: '<path d="M12 2.7a9.3 9.3 0 0 0-2.9 18.2c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7c-.1-.3-.5-1.3.1-2.7 0 0 .9-.3 2.8 1a9.7 9.7 0 0 1 5.1 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5A9.3 9.3 0 0 0 12 2.7Z" />',
+  blog: '<path d="M5 4.8A2.8 2.8 0 0 1 7.8 2h5.5L19 7.7v8.5a2.8 2.8 0 0 1-2.8 2.8H7.8A2.8 2.8 0 0 1 5 16.2V4.8Zm8 0V8h3.2L13 4.8ZM8 11h8v-1.8H8V11Zm0 3.2h8v-1.8H8v1.8Zm0 3.2h5.4v-1.8H8v1.8Z" />',
+  email: '<path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm8 7.6L4.8 7H4v.7l8 6.1 8-6.1V7h-.8L12 12.6Z" />',
+  radio: '<path d="M5 11.2 18.5 5l.7 1.5-8 3.7H18a3 3 0 0 1 3 3V17a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.8a3 3 0 0 1 2-2.9Zm1 1.6a1.4 1.4 0 0 0-1.4 1.4V17A1.4 1.4 0 0 0 6 18.4h12a1.4 1.4 0 0 0 1.4-1.4v-3.8a1.4 1.4 0 0 0-1.4-1.4H6Zm1.5 1.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm5-.3h5v1.3h-5V14Zm0 2.4h3.6v1.3h-3.6v-1.3Z" />',
+};
+const socialIcon = (icon: string) => iconPaths[icon] ?? iconPaths.blog;
 ---
 
 <!doctype html>
@@ -21,25 +29,30 @@ const isExternal = (href: string) => href.startsWith('http');
     <AnimatedBackground />
     <header id="top" class="site-header">
       <a class="brand" href="/">Luis Pichio</a>
-      <nav aria-label="Principal">
-        <a href="/#experiencia">Experiencia</a>
-        <a href="/#skills">Skills</a>
-        <a href="/projects/">Proyectos</a>
-        <a href="/cv/">CV</a>
-      </nav>
+      <div class="site-header-actions">
+        <nav aria-label="Principal">
+          <a href="/#experiencia">Experiencia</a>
+          <a href="/#skills">Skills</a>
+          <a href="/projects/">Proyectos</a>
+          <a href="/cv/">CV</a>
+        </nav>
+      </div>
     </header>
     <main>
       <slot />
     </main>
     <footer class="site-footer">
-      <div class="footer-links">
-        {profile.socials.map((social) => (
-          <a href={social.href} target={isExternal(social.href) ? '_blank' : undefined} rel={isExternal(social.href) ? 'noreferrer' : undefined}>
-            {social.label}
-          </a>
-        ))}
+      <div class="footer-main">
+        <div class="social-links footer-links" aria-label="Redes sociales">
+          {profile.socials.map((social) => (
+            <a class="social-link" href={social.href} target={isExternal(social.href) ? '_blank' : undefined} rel={isExternal(social.href) ? 'noreferrer' : undefined}>
+              <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" set:html={socialIcon(social.icon)} />
+              <span>{social.label}</span>
+            </a>
+          ))}
+        </div>
       </div>
-      <p>© {year} Luis Pichio · <a href="https://github.com/luispichio/luispichio.github.io" target="_blank" rel="noreferrer">Proyecto en GitHub</a></p>
+      <p class="footer-bottom">© {year} Luis Pichio · <a href="https://github.com/luispichio/luispichio.github.io" target="_blank" rel="noreferrer">Proyecto en GitHub</a></p>
     </footer>
   </body>
 </html>
