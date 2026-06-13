@@ -7,12 +7,17 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run resume:pdf && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "resume:pdf": "tsx scripts/generate-resume-pdf.ts"
   },
   "dependencies": {
     "astro": "^6.4.4",
     "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0",
+    "tsx": "^4.22.4"
   }
 }
