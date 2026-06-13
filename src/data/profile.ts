@@ -18,8 +18,8 @@ export const profile = {
       summary: 'Telemetría, edge computing, conectividad satelital/celular y protocolos industriales.',
     },
     {
-      title: 'Software industrial',
-      summary: 'Microservicios, APIs, frontend, monitoreo, herramientas de diagnóstico y despliegue.',
+      title: 'Ingesta / data-ops',
+      summary: 'Microservicios, APIs, back/frontend, monitoreo, herramientas de diagnóstico y despliegue.',
     },
     {
       title: 'Instrumentación',
