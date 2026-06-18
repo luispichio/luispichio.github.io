@@ -3,9 +3,11 @@ Electrónica,Analógico / Digital,Filtros analógicos / digitales,+15 años,Expe
 Electrónica,Analógico / Digital,Fuentes switching,+15 años,Experto
 Electrónica,Displays,LCD / TFT Color / OLED,+20 años,Experto
 Electrónica,Displays,E-ink,+5 años,Experto
-Electrónica,Microcontroladores,Espressif ESP32,+5 años,Experto
-Electrónica,Microcontroladores,Raspberry RP2040/2350,+3 años,Experto
-Electrónica,Microcontroladores,Nordic nRF,+1 años,Intermedio
+Electrónica,Displays,Touch Screen,+5 años,Experto
+Electrónica,Microcontroladores / SOCs,Espressif ESP32,+5 años,Experto
+Electrónica,Microcontroladores / SOCs,Raspberry RP2040/2350,+5 años,Experto
+Electrónica,Microcontroladores / SOCs,Nordic nRF,+1 años,Intermedio
+Electrónica,Microcontroladores / SOCs,Rockchip RV110X,+1 años,Intermedio
 Electrónica,Microcontroladores,STM32,+2 años,Intermedio
 Electrónica,Microcontroladores (Legacy),Motorola HC08,+10 años,Experto
 Electrónica,Microcontroladores (Legacy),Atmel AVR / Xmega / UC3,+15 años,Experto
@@ -20,14 +22,15 @@ Electrónica,Buses de campo,RS-485,+20 años,Experto
 Electrónica,Buses de campo,4-20mA,+20 años,Experto
 Electrónica,Buses de campo,Fieldbus,+2 años,Intermedio
 Electrónica,Buses de campo,Profibus,+2 años,Intermedio
-Electrónica,Instrumentación Industrial,Instrumentación,+20 años,Experto
-Electrónica,Instrumentación Industrial,Control,+20 años,Experto
+Electrónica,Instrumentación de Campo,Instrumentos de medición,+20 años,Experto
+Electrónica,Instrumentación de Campo,Sensores / transmisores,+20 años,Experto
+Electrónica,Automatización Industrial,PLCs / SCADA / HMI,+10 años,Avanzado
+Electrónica,Automatización Industrial,Lazos de control / PID,+10 años,Experto
 Electrónica,Instrumentación de Laboratorio,Osciloscopios,+20 años,Experto
 Electrónica,Instrumentación de Laboratorio,Analizadores de red,+5 años,Avanzado
-Electrónica,Instrumentación de Laboratorio,Generadores de funciones,+10 años,Experto
-Electrónica,Instrumentación de Laboratorio,Multímetros,+20 años,Experto
+Electrónica,Instrumentación de Laboratorio,Multímetros / LCR,+20 años,Experto
 Electrónica,Instrumentación de Laboratorio,SDR,+5 años,Avanzado
-Electrónica,Antenas / RF,"Diseño, modelado, medición (GNU Radio, MMANA-GAL)",+5 años,Avanzado
+Electrónica,Antenas / RF,"Diseño & modelado (GNU Radio, MMANA-GAL)",+5 años,Avanzado
 Electrónica,Embedded,Bring-up de hardware,+10 años,Experto
 Electrónica,Embedded,Debug JTAG / SWD,+5 años,Avanzado
 Electrónica,Embedded,Bootloaders / OTA,+5 años,Avanzado
@@ -65,6 +68,10 @@ Informática,IDEs,Visual Studio Code,+5 años,Experto
 Informática,IDEs,Qt Creator,+3 años,Avanzado
 Informática,IDEs,Android Studio,+5 años,Experto
 Informática,IDEs,Antigravity,<1 años,Intermedio
+Informática,Sistemas de Build,Make,+5 años,Avanzado
+Informática,Sistemas de Build,CMake,+5 años,Avanzado
+Informática,Sistemas de Build,Buildroot,+3 años,Avanzado
+Informática,Linux Embebido,GCC / compilación cruzada,+5 años,Avanzado
 Informática,Sistemas Operativos,"Linux (Debian, Ubuntu, Fedora, ...)",+15 años,Experto
 Informática,Sistemas Operativos,Microsoft Windows,+30 años,Experto
 Informática,RTOS,FreeRTOS,+5 años,Experto
@@ -107,7 +114,10 @@ Programación,SDK,Orbcomm Developer Toolkit,+5 años,Experto
 Redes,Inalámbricas,WiFi,+20 años,Experto
 Redes,Inalámbricas,Sigfox,+2 años,Intermedio
 Redes,Inalámbricas,LoRa / LoRaWAN,+5 años,Experto
+Redes,Inalámbricas,LTE,+10 años,Avanzado
 Redes,Inalámbricas,LTE-M,+5 años,Experto
+Redes,Inalámbricas,3G / UMTS,+10 años,Avanzado
+Redes,Inalámbricas,GPRS,+10 años,Avanzado
 Redes,Inalámbricas,NB-IoT,+5 años,Experto
 Redes,Inalámbricas,Zigbee,+5 años,Experto
 Redes,Inalámbricas,Bluetooth / BLE,+5 años,Experto
