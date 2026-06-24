@@ -4,6 +4,7 @@ import AnimatedBackground from '../components/AnimatedBackground.astro';
 import { profile } from '../data/profile';
 
 const { title = profile.name, description = profile.summary } = Astro.props;
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const buildDate = new Date();
 const year = buildDate.getFullYear();
 const updatedAt = new Intl.DateTimeFormat('es-AR', {
@@ -33,6 +34,17 @@ const socialIcon = (icon: string) => iconPaths[icon] ?? iconPaths.blog;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
+    {gaMeasurementId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+        <script define:vars={{ gaMeasurementId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaMeasurementId);
+        </script>
+      </>
+    )}
   </head>
   <body>
     <AnimatedBackground />

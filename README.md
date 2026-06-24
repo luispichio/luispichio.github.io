@@ -51,6 +51,14 @@ Si Playwright no encuentra Chromium localmente, instalarlo con:
 
 El workflow `.github/workflows/deploy.yml` compila el sitio y publica `dist/` en GitHub Pages.
 
+Para habilitar Google Analytics, configurar la variable pública de build:
+
+- Nombre: `PUBLIC_GA_MEASUREMENT_ID`.
+- Valor: Measurement ID de GA4, por ejemplo `G-XXXXXXXXXX`.
+
+En GitHub Actions conviene crearla como repository variable en `Settings` → `Secrets and variables` → `Actions` → `Variables`.
+Para desarrollo local, copiar `.env.example` a `.env` y completar el valor real.
+
 El build de deploy ejecuta:
 
 - `npm ci`.
