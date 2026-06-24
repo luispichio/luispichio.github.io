@@ -47,7 +47,7 @@ img { max-width: 100%; display: block; }
 .site-footer,
 main > section,
 .page-shell {
-  width: min(1536px, calc(100% - 168px));
+  width: min(1536px, calc(100% - clamp(32px, 8vw, 168px)));
   margin-inline: auto;
 }
 
@@ -561,11 +561,11 @@ section { padding: 42px 0; }
 
 @media (max-width: 780px) {
   .site-header { align-items: center; flex-wrap: wrap; }
-  .site-header-actions { justify-content: flex-end; margin-left: auto; }
-  .site-header nav { justify-content: flex-end; }
-  .page-heading { flex-wrap: nowrap; gap: 12px; }
+  .site-header-actions { justify-content: flex-start; margin-left: 0; width: 100%; }
+  .site-header nav { justify-content: flex-start; width: 100%; }
+  .page-heading { flex-wrap: wrap; gap: 12px; }
   .section-title { align-items: flex-end; flex-wrap: wrap; }
-  .back-home { flex: 0 0 auto; margin-left: auto; }
+  .back-home { flex: 0 0 auto; margin-left: 0; }
   .section-title > :last-child,
   .section-actions { justify-content: flex-end; margin-left: auto; }
   .hero,
@@ -573,7 +573,9 @@ section { padding: 42px 0; }
   .focus-grid,
   .skills-list,
   .gallery { grid-template-columns: 1fr; }
+  .hero { padding: 40px 0 28px; }
   .animated-bg { opacity: 0.38; }
+  .page-shell { padding: 36px 0; }
   .skill-map { height: var(--skill-map-height, 680px); }
   .skill-map-help,
   .skill-map-controls,
