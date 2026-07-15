@@ -75,5 +75,15 @@
     "company": "Tesacom",
     "tasks": ["i+d", "firmware"],
     "date": "Q1/2022"
+  },
+  {
+    "id": "whatsapp-export-to-html",
+    "title": "WhatsApp Export to HTML",
+    "url": "https://github.com/luispichio/WhatsApp-Export-to-HTML",
+    "tags": ["python", "cli", "gui", "tkinter", "html", "markdown", "open-source"],
+    "description": "Convierte exports ZIP de WhatsApp en archivos HTML privados y navegables, con media y Markdown.",
+    "company": "Personal",
+    "tasks": ["software", "tool", "open-source"],
+    "date": "2026"
   }
 ]
