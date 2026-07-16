@@ -3,6 +3,7 @@ title: "Arduino Remote Display"
 description: "Librería liviana para enviar comandos gráficos desde sketches Arduino a un viewer remoto por TCP o Serial."
 company: "Personal"
 date: "2026"
+cover: "/assets/img/coming_soon.jpeg"
 tags: ["arduino", "firmware", "cpp", "python", "tcp", "serial", "display", "open-source"]
 featured: false
 category: "Open Source"
