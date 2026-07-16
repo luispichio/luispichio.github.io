@@ -101,6 +101,7 @@ function experienceWeight(experience: string) {
     let textHistoryArmed = false;
     let ellipseScaleX = 1;
     let ellipseScaleY = 1;
+    let mapMode = 'all';
 
     function experienceYears(experience: string) {
       if (experience.includes('<')) return 0;
@@ -327,18 +328,22 @@ function experienceWeight(experience: string) {
       const label = document.createElementNS(ns, 'text');
 
       item.classList.add('skill-map-node', `is-${node.type}`);
+      if (node.radius === 0) item.classList.add('is-center');
       if (node.type === 'category' || node.type === 'group') item.classList.add('is-filterable');
       if (node.level) item.classList.add(`level-${node.level.toLowerCase()}`);
       item.dataset.nodeId = node.id;
       item.setAttribute('tabindex', node.type === 'skill' || node.type === 'category' || node.type === 'group' ? '0' : '-1');
       if (node.type === 'category' || node.type === 'group') item.setAttribute('role', 'button');
-      label.textContent = node.type === 'skill' && node.label.length > 24 ? `${node.label.slice(0, 22)}...` : node.label;
+      const maxSkillLabelLength = mapMode === 'all' ? 22 : mapMode === 'category' ? 30 : 38;
+      label.textContent = node.type === 'skill' && node.label.length > maxSkillLabelLength ? `${node.label.slice(0, maxSkillLabelLength - 2)}...` : node.label;
       label.classList.add('skill-map-label');
 
-      const nodeHeight = node.type === 'root' ? 42 : node.type === 'category' ? 36 : node.type === 'group' ? 31 : 26;
-      const minWidth = node.type === 'root' ? 96 : node.type === 'category' ? 104 : node.type === 'group' ? 86 : 56;
-      const maxWidth = node.type === 'skill' ? 190 : 220;
-      const width = clamp(node.label.length * 7.4 + 28, minWidth, maxWidth);
+      const isCenter = node.radius === 0;
+      const nodeHeight = isCenter ? 48 : node.type === 'category' ? 40 : node.type === 'group' ? 34 : 25;
+      const minWidth = isCenter ? 138 : node.type === 'category' ? 122 : node.type === 'group' ? 94 : 62;
+      const maxWidth = node.type === 'skill' ? (mapMode === 'all' ? 160 : 210) : 240;
+      const labelScale = isCenter ? 8.2 : node.type === 'category' ? 7.8 : node.type === 'group' ? 7.1 : 6.6;
+      const width = clamp(node.label.length * labelScale + 30, minWidth, maxWidth);
       node.width = width;
       node.height = nodeHeight;
 
@@ -383,9 +388,9 @@ function experienceWeight(experience: string) {
       node.element = item;
     }
 
-    function addLink(source: string, target: string) {
+    function addLink(source: string, target: string, level: 'primary' | 'secondary' | 'skill') {
       const link = document.createElementNS(ns, 'path');
-      link.classList.add('skill-map-link');
+      link.classList.add('skill-map-link', `is-${level}-link`);
       link.dataset.source = source;
       link.dataset.target = target;
       linkLayer?.append(link);
@@ -394,30 +399,36 @@ function experienceWeight(experience: string) {
 
     function addSkillNode(skill: Skill, id: string, parent: string, angle: number, point: { x: number; y: number; offsetX: number; offsetY: number }, radius: number) {
       addNode({ id, parent, type: 'skill', label: skill.name, category: skill.category, group: skill.group, experience: skill.experience, level: skill.level, weight: skill.weight, angle, radius, offsetX: point.offsetX, offsetY: point.offsetY, x: point.x, y: point.y, baseX: point.x, baseY: point.y });
-      addLink(parent, id);
+      addLink(parent, id, 'skill');
     }
 
     function drawMap(visibleSkills: Skill[]) {
       cancelAnimationFrame(animationId);
       clearMap();
       const width = skillMap.clientWidth;
-      const height = clamp(width * 0.72, 620, 860);
-      const horizontalPadding = 180;
-      const verticalPadding = 130;
+      const height = clamp(width * 0.82, 680, 1000);
+      const horizontalPadding = 210;
+      const verticalPadding = 190;
       const ellipseWidth = Math.max(width - horizontalPadding, width * 0.58);
       const ellipseHeight = Math.max(height - verticalPadding, height * 0.58);
       const aspect = clamp(ellipseWidth / ellipseHeight, 0.86, 1.9);
       ellipseScaleX = Math.sqrt(aspect);
       ellipseScaleY = 1 / ellipseScaleX;
       const layoutBase = Math.min(ellipseWidth / ellipseScaleX, ellipseHeight / ellipseScaleY);
-      const categoryRadius = clamp(layoutBase * 0.13, 92, 154);
-      const groupRadius = clamp(layoutBase * 0.28, 230, 380);
-      const skillRadius = clamp(layoutBase * 0.43, 360, 610);
+      const radialLimit = Math.max(110, Math.min((width / 2 - 54) / ellipseScaleX, (height / 2 - 96) / ellipseScaleY));
+      const skillRadius = Math.min(clamp(layoutBase * 0.56, 120, 640), radialLimit);
+      const groupRadius = Math.min(clamp(layoutBase * 0.34, 80, 420), skillRadius * 0.62);
+      const categoryRadius = Math.min(clamp(layoutBase * 0.15, 58, 172), groupRadius * 0.55);
       const categories = Object.entries(groupBy(visibleSkills, (skill) => skill.category)).sort(([a], [b]) => a.localeCompare(b, 'es'));
       const selectedCategoryValue = activeCategory;
       const selectedGroupValue = activeGroup;
       const mode = selectedGroupValue !== 'todos' ? 'group' : selectedCategoryValue !== 'todos' ? 'category' : 'all';
+      const focusedSkillRadius = Math.min(clamp(layoutBase * 0.57, 130, 610), radialLimit);
+      const focusedGroupRadius = Math.min(clamp(layoutBase * 0.24, 72, 280), focusedSkillRadius * 0.48);
+      const groupSkillRadius = Math.min(clamp(layoutBase * 0.48, 120, 520), radialLimit * 0.9);
 
+      mapMode = mode;
+      skillMap.dataset.layout = mode;
       skillMap.style.setProperty('--skill-map-height', `${Math.round(height)}px`);
       svg?.setAttribute('viewBox', `${-width / 2} ${-height / 2} ${width} ${height}`);
 
@@ -429,8 +440,8 @@ function experienceWeight(experience: string) {
         addNode({ id: rootId, type: 'group', label: groupLabel, category: selectedCategoryValue, group: groupLabel, angle: 0, radius: 0, offsetX: 0, offsetY: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
         rootSkills.forEach((skill, skillIndex) => {
           const skillAngle = sectorAngle(-Math.PI / 2, Math.PI * 2, skillIndex, rootSkills.length);
-          const skillPoint = interleavedPoint(skillAngle, categoryRadius + (skillIndex % 3) * 34, skillIndex, 1.15);
-          addSkillNode(skill, `${rootId}:skill:${skill.name}`, rootId, skillAngle, skillPoint, categoryRadius);
+          const skillPoint = interleavedPoint(skillAngle, groupSkillRadius + (skillIndex % 3) * 32, skillIndex, 0.75);
+          addSkillNode(skill, `${rootId}:skill:${skill.name}`, rootId, skillAngle, skillPoint, groupSkillRadius);
         });
       } else if (mode === 'category') {
         const categoryLabel = selectedCategoryValue;
@@ -440,17 +451,17 @@ function experienceWeight(experience: string) {
         addNode({ id: rootId, type: 'category', label: categoryLabel, category: categoryLabel, angle: 0, radius: 0, offsetX: 0, offsetY: 0, x: 0, y: 0, baseX: 0, baseY: 0 });
         childSectors(groups, ([, groupSkills]) => groupSkills.length).forEach(({ item: [group, groupSkills], start, span, center }, groupIndex) => {
           const groupAngle = center;
-          const groupPoint = interleavedPoint(groupAngle, categoryRadius, groupIndex, 0.8);
+          const groupPoint = interleavedPoint(groupAngle, focusedGroupRadius, groupIndex, 0.68);
           const groupId = `${rootId}:group:${group}`;
 
-          addNode({ id: groupId, parent: rootId, type: 'group', label: group, category: categoryLabel, group, angle: groupAngle, radius: categoryRadius, offsetX: groupPoint.offsetX, offsetY: groupPoint.offsetY, x: groupPoint.x, y: groupPoint.y, baseX: groupPoint.x, baseY: groupPoint.y });
-          addLink(rootId, groupId);
+          addNode({ id: groupId, parent: rootId, type: 'group', label: group, category: categoryLabel, group, angle: groupAngle, radius: focusedGroupRadius, offsetX: groupPoint.offsetX, offsetY: groupPoint.offsetY, x: groupPoint.x, y: groupPoint.y, baseX: groupPoint.x, baseY: groupPoint.y });
+          addLink(rootId, groupId, 'primary');
 
           groupSkills.sort((a, b) => a.name.localeCompare(b.name, 'es')).forEach((skill, skillIndex) => {
             const skillPadding = Math.min(span * 0.12, 0.18);
             const skillAngle = sectorAngle(start + skillPadding, Math.max(0, span - skillPadding * 2), skillIndex, groupSkills.length);
-            const skillPoint = interleavedPoint(skillAngle, groupRadius + (skillIndex % 3) * 34, skillIndex, 1.15);
-            addSkillNode(skill, `${groupId}:skill:${skill.name}`, groupId, skillAngle, skillPoint, groupRadius);
+            const skillPoint = interleavedPoint(skillAngle, focusedSkillRadius + (skillIndex % 3) * 32, skillIndex, 0.78);
+            addSkillNode(skill, `${groupId}:skill:${skill.name}`, groupId, skillAngle, skillPoint, focusedSkillRadius);
           });
         });
       } else {
@@ -462,7 +473,7 @@ function experienceWeight(experience: string) {
           const groups = Object.entries(groupBy(categorySkills, (skill) => skill.group)).sort(([a], [b]) => a.localeCompare(b, 'es'));
 
           addNode({ id: categoryId, parent: 'root', type: 'category', label: category, category, angle, radius: categoryRadius, offsetX: categoryPoint.offsetX, offsetY: categoryPoint.offsetY, x: categoryPoint.x, y: categoryPoint.y, baseX: categoryPoint.x, baseY: categoryPoint.y });
-          addLink('root', categoryId);
+          addLink('root', categoryId, 'primary');
 
           const categoryPadding = Math.min(categorySpan * 0.08, 0.16);
           childSectors(groups, ([, groupSkills]) => groupSkills.length, categoryStart + categoryPadding, Math.max(0, categorySpan - categoryPadding * 2)).forEach(({ item: [group, groupSkills], start: groupStart, span: groupSpan, center: groupAngle }, groupIndex) => {
@@ -470,7 +481,7 @@ function experienceWeight(experience: string) {
             const groupId = `${categoryId}:group:${group}`;
 
             addNode({ id: groupId, parent: categoryId, type: 'group', label: group, category, group, angle: groupAngle, radius: groupRadius, offsetX: groupPoint.offsetX, offsetY: groupPoint.offsetY, x: groupPoint.x, y: groupPoint.y, baseX: groupPoint.x, baseY: groupPoint.y });
-            addLink(categoryId, groupId);
+            addLink(categoryId, groupId, 'secondary');
 
             groupSkills.sort((a, b) => a.name.localeCompare(b.name, 'es')).forEach((skill, skillIndex) => {
               const skillPadding = Math.min(groupSpan * 0.12, 0.12);
@@ -584,7 +595,7 @@ function experienceWeight(experience: string) {
 
     function renderFrame() {
       time += reduceMotion ? 0 : 0.012;
-      rotation += reduceMotion ? 0 : 0.00035;
+      rotation += reduceMotion ? 0 : mapMode === 'all' ? 0.00035 : 0.00016;
       const byId = Object.fromEntries(nodes.map((node) => [node.id, node]));
 
       nodes.forEach((node, index) => {
