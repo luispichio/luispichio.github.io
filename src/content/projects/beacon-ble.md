@@ -6,7 +6,7 @@ date: "Q4/2025 - Actualidad"
 cover: "/assets/projects/beacon_ble/1.jpeg"
 images: ["/assets/projects/beacon_ble/1.jpeg", "/assets/projects/beacon_ble/2.jpeg", "/assets/projects/beacon_ble/3.png"]
 tags: ["ble", "hardware", "firmware", "iot"]
-featured: true
+featured: false
 category: "Nuevo"
 order: 5
 ---
