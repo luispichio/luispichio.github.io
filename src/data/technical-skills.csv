@@ -42,6 +42,7 @@ Informática,Gestión de Paquetes,Maven,+5 años,Avanzado
 Informática,Gestión de Paquetes,Gradle,+5 años,Avanzado
 Informática,Gestión de Paquetes,npm,+5 años,Avanzado
 Informática,Gestión de Paquetes,NuGet,+5 años,Avanzado
+Informática,Gestión de Paquetes,PyPi,+5 años,Avanzado
 Informática,Bases de datos,MongoDB,+5 años,Avanzado
 Informática,Bases de datos,MySQL,+10 años,Avanzado
 Informática,Bases de datos,Microsoft SQL Server,+10 años,Avanzado
@@ -105,12 +106,17 @@ Programación,Lenguaje,JavaScript,+20 años,Experto
 Programación,Lenguaje,TypeScript,+5 años,Avanzado
 Programación,Lenguaje,CircutPython / MicroPython,+5 años,Experto
 Programación,Framework,React.js,+5 años,Avanzado
-Programación,Framework,Vite.js,+2 años,Intermedio
 Programación,Framework,Express.js,+5 años,Experto
+Programación,Framework,Vite.js,+2 años,Intermedio
 Programación,Framework,Arduino,+10 años,Experto
+Programación,Framework,QT,+3 años,Avanzado
+Programación,Framework,JavaFX,+5 años,Experto
 Programación,SDK,Espressif SDK,+5 años,Experto
 Programación,SDK,Raspberry Pi Pico C/C++ SDK,+5 años,Experto
 Programación,SDK,Orbcomm Developer Toolkit,+5 años,Experto
+Programación,SDK,nRF Connect,+2 años,Intermedio
+Programación,SDK,Espressif SDK,+5 años,Experto
+Programación,SDK,Android,+5 años,Avanzado
 Redes,Inalámbricas,WiFi,+20 años,Experto
 Redes,Inalámbricas,Sigfox,+2 años,Intermedio
 Redes,Inalámbricas,LoRa / LoRaWAN,+5 años,Experto
